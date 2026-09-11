@@ -67,6 +67,12 @@ button{
   width:100%;
 }
 
+.whatsapp{
+  background:#128c4a;
+  color:white;
+  width:100%;
+}
+
 .light{
   background:#eaf1fb;
   color:#17457f;
@@ -206,6 +212,26 @@ video{
   border-radius:5px;
 }
 
+.photo-frame{
+  position:absolute;
+  left:5%;
+  right:5%;
+  top:35%;
+  height:30%;
+  border:2px solid #31d78c;
+  border-radius:8px;
+  pointer-events:none;
+}
+
+.photo-frame span{
+  position:absolute;
+  bottom:-28px;
+  left:0;
+  right:0;
+  font-size:12px;
+  color:#31d78c;
+}
+
 .status{
   padding:10px;
   border-radius:10px;
@@ -218,25 +244,6 @@ video{
 .processing{
   background:#fff8e6;
   color:#805b00;
-}
-
-.photo-box{
-  margin-top:14px;
-  padding:14px;
-  background:#f4f8fd;
-  border:1px solid #dce6f2;
-  border-radius:14px;
-}
-
-.photo-title{
-  font-weight:700;
-  margin-bottom:7px;
-}
-
-.photo-help{
-  color:#68758a;
-  font-size:13px;
-  line-height:1.4;
 }
 
 .photo-preview{
@@ -259,10 +266,11 @@ video{
   margin:10px 0;
 }
 
-hr{
-  border:0;
-  border-top:1px solid #e3e8ef;
-  margin:18px 0;
+.step{
+  font-size:13px;
+  color:#68758a;
+  margin:14px 0 6px;
+  font-weight:700;
 }
 
 .code-number{
@@ -271,10 +279,16 @@ hr{
   letter-spacing:1px;
 }
 
-.step{
-  font-size:13px;
-  color:#68758a;
-  margin-bottom:6px;
+hr{
+  border:0;
+  border-top:1px solid #e3e8ef;
+  margin:18px 0;
+}
+
+.report-actions{
+  display:grid;
+  gap:8px;
+  margin-top:12px;
 }
 
 @media(max-width:480px){
@@ -310,10 +324,10 @@ hr{
 <script>
 
 /* =====================================================
-   BANCO LOCAL
+   BANCO
 ===================================================== */
 
-const KEY = "validade_app_v3";
+const KEY = "validade_app_v4";
 
 let db = {
   lists:[]
@@ -322,6 +336,7 @@ let db = {
 let current = null;
 let stream = null;
 let scanTimer = null;
+let cameraMode = "barcode";
 let currentPhoto = "";
 
 
@@ -354,10 +369,7 @@ function loadData(){
 
   }catch(error){
 
-    console.log(
-      "Erro ao carregar:",
-      error
-    );
+    console.log(error);
 
     db = {
       lists:[]
@@ -383,13 +395,10 @@ function save(){
 
   }catch(error){
 
-    console.log(
-      "Erro ao salvar:",
-      error
-    );
+    console.log(error);
 
     alert(
-      "Não foi possível salvar os dados neste aparelho."
+      "Não foi possível salvar. O armazenamento do aparelho está cheio."
     );
 
   }
@@ -456,25 +465,33 @@ function home(){
         <button
           class="primary"
           onclick="newList()">
+
           ➕ Criar nova lista
+
         </button>
 
         <button
           class="light"
           onclick="lists()">
+
           📋 Minhas listas
+
         </button>
 
         <button
           class="light"
           onclick="reports()">
+
           📄 Relatório final
+
         </button>
 
         <button
           class="danger"
           onclick="clearData()">
+
           🗑 Limpar dados
+
         </button>
 
       </div>
@@ -483,16 +500,13 @@ function home(){
 
     <section class="card">
 
-      <b>Fluxo do aplicativo</b>
+      <b>Como funciona</b>
 
       <p class="muted">
 
-        Criar lista →
-        código de barras →
-        foto do produto →
-        validade →
-        quantidade →
-        salvar.
+        A câmera abre para ler o código.
+        Depois muda automaticamente para
+        fotografar o produto.
 
       </p>
 
@@ -520,7 +534,9 @@ function newList(){
         <button
           class="back"
           onclick="home()">
+
           ← Voltar
+
         </button>
 
       </div>
@@ -538,7 +554,9 @@ function newList(){
       <button
         class="primary"
         onclick="createList()">
+
         Criar lista
+
       </button>
 
     </section>
@@ -557,11 +575,8 @@ function createList(){
   const input =
     document.getElementById("lname");
 
-  if(!input)
-    return;
-
   const name =
-    input.value.trim();
+    input?.value.trim();
 
   if(!name){
 
@@ -624,8 +639,10 @@ function editor(){
           </h2>
 
           <span class="badge">
+
             ${current.products.length}
             produto(s)
+
           </span>
 
         </div>
@@ -633,16 +650,22 @@ function editor(){
         <button
           class="back"
           onclick="home()">
+
           ← Início
+
         </button>
 
       </div>
 
       <hr>
 
+
       <div class="step">
-        ETAPA 1 — Código de barras
+
+        ETAPA 1 — ESCANEANDO CÓDIGO
+
       </div>
+
 
       <div class="camera">
 
@@ -650,7 +673,7 @@ function editor(){
           id="cammsg"
           class="camera-title">
 
-          Aponte a câmera para o código de barras.
+          Abrindo câmera...
 
         </div>
 
@@ -660,43 +683,47 @@ function editor(){
             id="video"
             autoplay
             playsinline
-            muted
-            class="hidden">
+            muted>
           </video>
 
           <div
             id="scanarea"
-            class="scan-area hidden">
+            class="scan-area">
 
             <span>
-              Posicione o código nesta área
+              Posicione o código de barras aqui
             </span>
 
           </div>
 
           <div
             id="scanline"
-            class="scanline hidden">
+            class="scanline">
+          </div>
+
+          <div
+            id="photoframe"
+            class="photo-frame hidden">
+
+            <span>
+              Enquadre o produto aqui
+            </span>
+
           </div>
 
         </div>
 
       </div>
 
-      <button
-        id="scanbutton"
-        class="primary"
-        style="margin-top:10px"
-        onclick="startScan()">
-
-        📷 Ler código de barras
-
-      </button>
 
       <div
         id="scanstatus"
-        class="status hidden">
+        class="status">
+
+        📷 Preparando câmera...
+
       </div>
+
 
       <label>
 
@@ -706,48 +733,27 @@ function editor(){
           id="pbar"
           inputmode="numeric"
           pattern="[0-9]*"
-          placeholder="Somente números">
+          placeholder="O código será preenchido automaticamente">
 
       </label>
 
 
-      <div class="step">
-        ETAPA 2 — Foto do produto
-      </div>
+      <div
+        id="photoSection"
+        class="hidden">
 
-      <div class="photo-box">
+        <div class="step">
 
-        <div class="photo-title">
-          📸 Foto do produto
-        </div>
-
-        <div class="photo-help">
-
-          Depois de ler o código, fotografe
-          o produto/embalagem.
-
-          <br><br>
-
-          A foto será ajustada automaticamente
-          para o formato horizontal de
-          <b>60 × 25 mm</b>.
+          ETAPA 2 — FOTO DO PRODUTO
 
         </div>
-
-        <input
-          id="fotoProduto"
-          type="file"
-          accept="image/*"
-          capture="environment"
-          class="hidden"
-          onchange="processarFotoProduto(this)">
 
         <button
+          id="photoButton"
           class="primary"
-          style="margin-top:10px"
-          onclick="abrirFotoProduto()">
+          onclick="tirarFoto()">
 
-          📸 Fotografar produto
+          📸 Tirar foto do produto
 
         </button>
 
@@ -759,55 +765,63 @@ function editor(){
       </div>
 
 
-      <div class="step">
-        ETAPA 3 — Validade e quantidade
-      </div>
+      <div
+        id="dataSection"
+        class="hidden">
 
-      <div class="row">
+        <div class="step">
+
+          ETAPA 3 — VALIDADE E QUANTIDADE
+
+        </div>
+
+        <div class="row">
+
+          <label>
+
+            Validade
+
+            <input
+              id="pexp"
+              type="date">
+
+          </label>
+
+          <label>
+
+            Quantidade
+
+            <input
+              id="pqty"
+              type="number"
+              min="1"
+              value="1">
+
+          </label>
+
+        </div>
+
 
         <label>
 
-          Validade
+          Setor
 
           <input
-            id="pexp"
-            type="date">
+            id="psector"
+            placeholder="Ex.: Câmara Fria">
 
         </label>
 
-        <label>
 
-          Quantidade
+        <button
+          class="green"
+          onclick="addProduct()">
 
-          <input
-            id="pqty"
-            type="number"
-            min="1"
-            value="1">
+          💾 Salvar produto
 
-        </label>
+        </button>
 
       </div>
-
-
-      <label>
-
-        Setor
-
-        <input
-          id="psector"
-          placeholder="Ex.: Câmara Fria">
-
-      </label>
-
-
-      <button
-        class="green"
-        onclick="addProduct()">
-
-        💾 Salvar produto
-
-      </button>
 
 
       <div style="margin-top:18px">
@@ -835,6 +849,15 @@ function editor(){
   `;
 
   renderProducts();
+
+  /*
+    A câmera começa automaticamente.
+  */
+
+  setTimeout(
+    iniciarLeituraCodigo,
+    200
+  );
 
 }
 
@@ -877,13 +900,15 @@ function renderProducts(){
 
             ${
               p.photo
-              ? `
+              ?
+              `
                 <img
                   src="${p.photo}"
                   class="report-photo"
                   alt="Produto">
               `
-              : ""
+              :
+              ""
             }
 
             <div>
@@ -902,12 +927,14 @@ function renderProducts(){
 
             ${
               p.sector
-              ? `
+              ?
+              `
                 <div class="muted">
                   Setor: ${esc(p.sector)}
                 </div>
               `
-              : ""
+              :
+              ""
             }
 
           </div>
@@ -921,7 +948,7 @@ function renderProducts(){
 
 
 /* =====================================================
-   FORMATA DATA
+   DATA
 ===================================================== */
 
 function formatDate(value){
@@ -929,57 +956,43 @@ function formatDate(value){
   if(!value)
     return "";
 
-  const parts =
+  const p =
     String(value).split("-");
 
-  if(parts.length !== 3)
+  if(p.length !== 3)
     return value;
 
   return (
-    parts[2] +
+    p[2] +
     "/" +
-    parts[1] +
+    p[1] +
     "/" +
-    parts[0]
+    p[0]
   );
 
 }
 
 
 /* =====================================================
-   INICIAR CÂMERA DO CÓDIGO
+   CÂMERA — CÓDIGO
 ===================================================== */
 
-async function startScan(){
+async function iniciarLeituraCodigo(){
 
-  const status =
-    document.getElementById(
-      "scanstatus"
-    );
+  cameraMode =
+    "barcode";
 
   const video =
-    document.getElementById(
-      "video"
-    );
+    document.getElementById("video");
 
-  const cammsg =
-    document.getElementById(
-      "cammsg"
-    );
+  const status =
+    document.getElementById("scanstatus");
 
-  if(!status || !video)
+  const msg =
+    document.getElementById("cammsg");
+
+  if(!video)
     return;
-
-  status.classList.remove(
-    "hidden"
-  );
-
-  status.classList.remove(
-    "processing"
-  );
-
-  status.textContent =
-    "📷 Abrindo câmera...";
 
   try{
 
@@ -988,14 +1001,27 @@ async function startScan(){
       !navigator.mediaDevices.getUserMedia
     ){
 
-      status.textContent =
-        "⚠️ A câmera não está disponível.";
-
-      return;
+      throw new Error(
+        "Câmera indisponível"
+      );
 
     }
 
     stopCam();
+
+    if(msg){
+
+      msg.textContent =
+        "Aponte para o código de barras.";
+
+    }
+
+    if(status){
+
+      status.textContent =
+        "🔎 Procurando código...";
+
+    }
 
     stream =
       await navigator.mediaDevices
@@ -1004,19 +1030,22 @@ async function startScan(){
         audio:false,
 
         video:{
-
           facingMode:{
             ideal:"environment"
           },
 
           width:{
-            ideal:1280
+            ideal:1920
           },
 
           height:{
-            ideal:720
-          }
+            ideal:1080
+          },
 
+          frameRate:{
+            ideal:30,
+            max:60
+          }
         }
 
       });
@@ -1024,53 +1053,19 @@ async function startScan(){
     video.srcObject =
       stream;
 
-    video.classList.remove(
-      "hidden"
-    );
-
-    const scanline =
-      document.getElementById(
-        "scanline"
-      );
-
-    const scanarea =
-      document.getElementById(
-        "scanarea"
-      );
-
-    if(scanline){
-
-      scanline.classList.remove(
-        "hidden"
-      );
-
-    }
-
-    if(scanarea){
-
-      scanarea.classList.remove(
-        "hidden"
-      );
-
-    }
-
-    if(cammsg){
-
-      cammsg.textContent =
-        "Aponte para o código de barras.";
-
-    }
-
-    status.textContent =
-      "🔎 Procurando código de barras...";
+    await video.play();
 
 
     if(
       !("BarcodeDetector" in window)
     ){
 
-      status.textContent =
-        "⚠️ O leitor automático não está disponível. Digite o código manualmente.";
+      if(status){
+
+        status.textContent =
+          "⚠️ Leitura automática não disponível. Digite o código.";
+
+      }
 
       return;
 
@@ -1085,7 +1080,7 @@ async function startScan(){
         await BarcodeDetector
         .getSupportedFormats();
 
-    }catch(error){
+    }catch(e){
 
       formats = [];
 
@@ -1098,12 +1093,14 @@ async function startScan(){
 
       detector =
         formats.length
-        ? new BarcodeDetector({
-            formats:formats
-          })
-        : new BarcodeDetector();
+        ?
+        new BarcodeDetector({
+          formats:formats
+        })
+        :
+        new BarcodeDetector();
 
-    }catch(error){
+    }catch(e){
 
       detector =
         new BarcodeDetector();
@@ -1111,9 +1108,22 @@ async function startScan(){
     }
 
 
+    /*
+      ESCANEAMENTO MAIS RÁPIDO:
+      tenta a cada 100 ms.
+    */
+
     scanTimer =
       setInterval(
         async function(){
+
+          if(
+            cameraMode !== "barcode"
+          ){
+
+            return;
+
+          }
 
           if(
             !video.videoWidth ||
@@ -1133,31 +1143,27 @@ async function startScan(){
 
             if(
               codes &&
-              codes.length &&
-              codes[0].rawValue
+              codes.length
             ){
 
               let codigo =
-                String(
-                  codes[0].rawValue
-                );
+                codes[0].rawValue || "";
 
               /*
-                IMPORTANTE:
-                guardar somente números
+                Somente números.
               */
 
               codigo =
-                codigo.replace(
+                String(codigo)
+                .replace(
                   /\D/g,
                   ""
                 );
 
-              if(!codigo){
 
+              if(!codigo)
                 return;
 
-              }
 
               const input =
                 document.getElementById(
@@ -1171,49 +1177,69 @@ async function startScan(){
 
               }
 
+
               clearInterval(
                 scanTimer
               );
 
               scanTimer = null;
 
-              stopCameraTracksOnly();
 
-              status.textContent =
-                "✅ Código lido: " +
-                codigo;
+              if(status){
 
-              if(cammsg){
-
-                cammsg.textContent =
-                  "Código lido. Agora fotografe o produto.";
+                status.textContent =
+                  "✅ Código copiado: " +
+                  codigo;
 
               }
+
+
+              if(msg){
+
+                msg.textContent =
+                  "Código lido. Preparando câmera para a foto...";
+
+              }
+
+
+              /*
+                MUDA AUTOMATICAMENTE
+                PARA A CÂMERA DE FOTO.
+              */
+
+              setTimeout(
+                iniciarCameraFoto,
+                350
+              );
 
             }
 
           }catch(error){
 
             console.log(
-              "Erro no leitor:",
+              "Leitura:",
               error
             );
 
           }
 
         },
-        350
+        100
       );
 
   }catch(error){
 
     console.log(
-      "Erro câmera:",
+      "Câmera:",
       error
     );
 
-    status.textContent =
-      "⚠️ Não foi possível abrir a câmera. Verifique a permissão.";
+    if(status){
+
+      status.textContent =
+        "⚠️ Não foi possível abrir a câmera. Verifique a permissão.";
+
+    }
 
   }
 
@@ -1221,305 +1247,313 @@ async function startScan(){
 
 
 /* =====================================================
-   ABRIR FOTO
+   CÂMERA — FOTO
 ===================================================== */
 
-function abrirFotoProduto(){
+async function iniciarCameraFoto(){
 
-  const codigo =
-    document.getElementById(
-      "pbar"
+  cameraMode =
+    "photo";
+
+  if(scanTimer){
+
+    clearInterval(
+      scanTimer
     );
 
+    scanTimer = null;
+
+  }
+
+  stopCameraTracksOnly();
+
+
+  const video =
+    document.getElementById("video");
+
+  const status =
+    document.getElementById("scanstatus");
+
+  const msg =
+    document.getElementById("cammsg");
+
+  const scanArea =
+    document.getElementById("scanarea");
+
+  const scanLine =
+    document.getElementById("scanline");
+
+  const photoFrame =
+    document.getElementById("photoframe");
+
+  const photoSection =
+    document.getElementById("photoSection");
+
+
+  if(!video)
+    return;
+
+
+  if(scanArea)
+    scanArea.classList.add("hidden");
+
+  if(scanLine)
+    scanLine.classList.add("hidden");
+
+  if(photoFrame)
+    photoFrame.classList.remove("hidden");
+
+  if(photoSection)
+    photoSection.classList.remove("hidden");
+
+
+  if(msg){
+
+    msg.textContent =
+      "Agora enquadre o produto e tire a foto.";
+
+  }
+
+
+  if(status){
+
+    status.classList.remove(
+      "processing"
+    );
+
+    status.textContent =
+      "📸 Câmera pronta para fotografar.";
+
+  }
+
+
+  try{
+
+    stream =
+      await navigator.mediaDevices
+      .getUserMedia({
+
+        audio:false,
+
+        video:{
+          facingMode:{
+            ideal:"environment"
+          },
+
+          width:{
+            ideal:1920
+          },
+
+          height:{
+            ideal:1080
+          }
+        }
+
+      });
+
+    video.srcObject =
+      stream;
+
+    await video.play();
+
+
+  }catch(error){
+
+    console.log(
+      error
+    );
+
+    if(status){
+
+      status.textContent =
+        "⚠️ Não foi possível abrir a câmera para a foto.";
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   TIRAR FOTO
+===================================================== */
+
+function tirarFoto(){
+
   if(
-    !codigo ||
-    !codigo.value.trim()
+    cameraMode !== "photo"
+  ){
+
+    iniciarCameraFoto();
+
+    return;
+
+  }
+
+
+  const video =
+    document.getElementById("video");
+
+  if(
+    !video ||
+    !video.videoWidth
   ){
 
     alert(
-      "Leia primeiro o código de barras."
+      "A câmera ainda não está pronta."
     );
 
     return;
 
   }
 
-  const input =
-    document.getElementById(
-      "fotoProduto"
+
+  /*
+    PROPORÇÃO 60 x 25
+    = 2.4 : 1
+  */
+
+  const ratio =
+    60 / 25;
+
+
+  const vw =
+    video.videoWidth;
+
+  const vh =
+    video.videoHeight;
+
+
+  let cropWidth =
+    vw;
+
+  let cropHeight =
+    Math.round(
+      vw / ratio
     );
 
-  if(input){
 
-    input.value = "";
+  if(cropHeight > vh){
 
-    input.click();
+    cropHeight =
+      vh;
 
-  }
-
-}
-
-
-/* =====================================================
-   LER ARQUIVO COMO IMAGEM
-===================================================== */
-
-function carregarImagem(
-  arquivo
-){
-
-  return new Promise(
-    function(resolve,reject){
-
-      const reader =
-        new FileReader();
-
-      reader.onload =
-        function(){
-
-          const img =
-            new Image();
-
-          img.onload =
-            function(){
-
-              resolve(img);
-
-            };
-
-          img.onerror =
-            reject;
-
-          img.src =
-            reader.result;
-
-        };
-
-      reader.onerror =
-        reject;
-
-      reader.readAsDataURL(
-        arquivo
+    cropWidth =
+      Math.round(
+        vh * ratio
       );
 
-    }
+  }
+
+
+  const sx =
+    Math.round(
+      (vw - cropWidth) / 2
+    );
+
+
+  const sy =
+    Math.round(
+      (vh - cropHeight) / 2
+    );
+
+
+  const canvas =
+    document.createElement(
+      "canvas"
+    );
+
+
+  canvas.width =
+    1200;
+
+  canvas.height =
+    500;
+
+
+  const ctx =
+    canvas.getContext("2d");
+
+
+  ctx.drawImage(
+    video,
+    sx,
+    sy,
+    cropWidth,
+    cropHeight,
+    0,
+    0,
+    1200,
+    500
   );
 
-}
+
+  currentPhoto =
+    canvas.toDataURL(
+      "image/jpeg",
+      0.82
+    );
 
 
-/* =====================================================
-   PREPARAR FOTO 60 x 25 MM
-   PROPORÇÃO 2.4 : 1
-===================================================== */
+  const preview =
+    document.getElementById(
+      "photoPreview"
+    );
 
-async function processarFotoProduto(
-  input
-){
 
-  if(
-    !input ||
-    !input.files ||
-    !input.files.length
-  ){
+  if(preview){
 
-    return;
+    preview.src =
+      currentPhoto;
+
+    preview.classList.remove(
+      "hidden"
+    );
 
   }
+
+
+  stopCam();
+
 
   const status =
     document.getElementById(
       "scanstatus"
     );
 
+  const msg =
+    document.getElementById(
+      "cammsg"
+    );
+
+
   if(status){
 
-    status.classList.remove(
-      "hidden"
-    );
-
-    status.classList.add(
-      "processing"
-    );
-
     status.textContent =
-      "📸 Preparando foto do produto...";
+      "✅ Foto capturada.";
 
   }
 
-  try{
 
-    const imagem =
-      await carregarImagem(
-        input.files[0]
-      );
+  if(msg){
 
+    msg.textContent =
+      "Foto pronta. Informe validade e quantidade.";
 
-    /*
-      Proporção física:
-      60 / 25 = 2.4
-    */
-
-    const ratio =
-      60 / 25;
+  }
 
 
-    let largura =
-      imagem.naturalWidth ||
-      imagem.width;
-
-    let altura =
-      imagem.naturalHeight ||
-      imagem.height;
-
-
-    /*
-      Recorte central para 2.4:1
-    */
-
-    let cropWidth =
-      largura;
-
-    let cropHeight =
-      Math.round(
-        largura / ratio
-      );
-
-
-    if(cropHeight > altura){
-
-      cropHeight =
-        altura;
-
-      cropWidth =
-        Math.round(
-          altura * ratio
-        );
-
-    }
-
-
-    const sx =
-      Math.round(
-        (largura - cropWidth) / 2
-      );
-
-    const sy =
-      Math.round(
-        (altura - cropHeight) / 2
-      );
-
-
-    /*
-      Tamanho interno de boa qualidade.
-      A proporção continua exatamente 2.4:1.
-    */
-
-    const outputWidth =
-      1200;
-
-    const outputHeight =
-      500;
-
-
-    const canvas =
-      document.createElement(
-        "canvas"
-      );
-
-    canvas.width =
-      outputWidth;
-
-    canvas.height =
-      outputHeight;
-
-
-    const ctx =
-      canvas.getContext(
-        "2d"
-      );
-
-    if(!ctx){
-
-      throw new Error(
-        "Canvas indisponível."
-      );
-
-    }
-
-
-    ctx.drawImage(
-      imagem,
-      sx,
-      sy,
-      cropWidth,
-      cropHeight,
-      0,
-      0,
-      outputWidth,
-      outputHeight
+  const dataSection =
+    document.getElementById(
+      "dataSection"
     );
 
+  if(dataSection){
 
-    /*
-      JPEG comprimido para não
-      deixar o armazenamento pesado.
-    */
-
-    currentPhoto =
-      canvas.toDataURL(
-        "image/jpeg",
-        0.82
-      );
-
-
-    const preview =
-      document.getElementById(
-        "photoPreview"
-      );
-
-    if(preview){
-
-      preview.src =
-        currentPhoto;
-
-      preview.classList.remove(
-        "hidden"
-      );
-
-    }
-
-
-    if(status){
-
-      status.classList.remove(
-        "processing"
-      );
-
-      status.textContent =
-        "✅ Foto preparada no formato 60 × 25 mm.";
-
-    }
-
-  }catch(error){
-
-    console.log(
-      "Erro ao preparar foto:",
-      error
+    dataSection.classList.remove(
+      "hidden"
     );
-
-    currentPhoto = "";
-
-    if(status){
-
-      status.classList.remove(
-        "processing"
-      );
-
-      status.textContent =
-        "⚠️ Não foi possível preparar a foto.";
-
-    }
 
   }
 
@@ -1527,7 +1561,7 @@ async function processarFotoProduto(
 
 
 /* =====================================================
-   PARAR SOMENTE OS TRACKS
+   PARAR TRACKS
 ===================================================== */
 
 function stopCameraTracksOnly(){
@@ -1580,35 +1614,11 @@ function addProduct(){
     return;
 
 
-  const barInput =
-    document.getElementById(
-      "pbar"
-    );
-
-  const expInput =
-    document.getElementById(
-      "pexp"
-    );
-
-  const qtyInput =
-    document.getElementById(
-      "pqty"
-    );
-
-  const sectorInput =
-    document.getElementById(
-      "psector"
-    );
-
-
-  /*
-    Código:
-    somente números
-  */
-
   const bar =
     String(
-      barInput?.value || ""
+      document.getElementById(
+        "pbar"
+      )?.value || ""
     )
     .replace(
       /\D/g,
@@ -1617,18 +1627,24 @@ function addProduct(){
 
 
   const exp =
-    expInput?.value || "";
+    document.getElementById(
+      "pexp"
+    )?.value || "";
 
 
   const qty =
     Number(
-      qtyInput?.value || 0
+      document.getElementById(
+        "pqty"
+      )?.value || 0
     );
 
 
   const sector =
     String(
-      sectorInput?.value || ""
+      document.getElementById(
+        "psector"
+      )?.value || ""
     ).trim();
 
 
@@ -1646,7 +1662,7 @@ function addProduct(){
   if(!currentPhoto){
 
     alert(
-      "Fotografe o produto antes de salvar."
+      "Tire a foto do produto."
     );
 
     return;
@@ -1701,7 +1717,7 @@ function addProduct(){
 
 
 /* =====================================================
-   FINALIZAR
+   FINALIZAR LISTA
 ===================================================== */
 
 function finishList(){
@@ -1714,7 +1730,7 @@ function finishList(){
   ){
 
     alert(
-      "Cadastre pelo menos um produto antes de finalizar."
+      "Cadastre pelo menos um produto."
     );
 
     return;
@@ -1753,6 +1769,7 @@ function finishList(){
   );
 
   current = null;
+
   currentPhoto = "";
 
   home();
@@ -1779,7 +1796,9 @@ function lists(){
         <button
           class="back"
           onclick="home()">
+
           ← Início
+
         </button>
 
       </div>
@@ -1791,44 +1810,44 @@ function lists(){
         ?
 
         db.lists
-          .map(function(l){
+        .map(function(l){
 
-            return `
+          return `
 
-              <div class="listbox">
+            <div class="listbox">
 
-                <b>
-                  ${esc(l.name)}
-                </b>
+              <b>
+                ${esc(l.name)}
+              </b>
 
-                <br>
+              <br>
 
-                <span class="muted">
+              <span class="muted">
 
-                  ${l.products.length}
-                  produto(s)
-                  •
-                  ${esc(l.created)}
+                ${l.products.length}
+                produto(s)
+                •
+                ${esc(l.created)}
 
-                </span>
+              </span>
 
-                <br>
+              <br>
 
-                <button
-                  class="light"
-                  style="margin-top:8px"
-                  onclick="openList(${l.id})">
+              <button
+                class="light"
+                style="margin-top:8px"
+                onclick="openList(${l.id})">
 
-                  Abrir lista
+                Abrir lista
 
-                </button>
+              </button>
 
-              </div>
+            </div>
 
-            `;
+          `;
 
-          })
-          .join("")
+        })
+        .join("")
 
         :
 
@@ -1857,6 +1876,7 @@ function openList(id){
 
       }
     );
+
 
   if(current){
 
@@ -1900,104 +1920,127 @@ function reports(){
         ?
 
         db.lists
-          .map(function(l){
+        .map(function(l){
 
-            return `
+          return `
 
-              <div class="listbox">
+            <div class="listbox">
 
-                <b>
-                  ${esc(l.name)}
-                </b>
+              <b>
+                ${esc(l.name)}
+              </b>
 
-                <br>
+              <br>
 
-                <span class="muted">
+              <span class="muted">
 
-                  ${l.products.length}
-                  produto(s)
-                  •
-                  ${esc(l.created)}
+                ${l.products.length}
+                produto(s)
+                •
+                ${esc(l.created)}
 
-                </span>
+              </span>
 
-                <div style="margin-top:12px">
 
-                  ${
-                    l.products
-                      .map(function(p,i){
+              <div style="margin-top:12px">
 
-                        return `
+                ${
+                  l.products
+                  .map(function(p,i){
 
-                          <div class="product">
+                    return `
 
-                            <div class="code-number">
+                      <div class="product">
 
-                              ${i+1}.
-                              ${esc(p.bar)}
+                        <div class="code-number">
 
+                          ${i+1}.
+                          ${esc(p.bar)}
+
+                        </div>
+
+
+                        ${
+                          p.photo
+                          ?
+                          `
+                            <img
+                              src="${p.photo}"
+                              class="report-photo"
+                              alt="Produto">
+                          `
+                          :
+                          ""
+                        }
+
+
+                        <div>
+
+                          <b>Validade:</b>
+                          ${esc(formatDate(p.exp))}
+
+                        </div>
+
+
+                        <div>
+
+                          <b>Quantidade:</b>
+                          ${esc(p.qty)}
+
+                        </div>
+
+
+                        ${
+                          p.sector
+                          ?
+                          `
+                            <div class="muted">
+                              Setor:
+                              ${esc(p.sector)}
                             </div>
+                          `
+                          :
+                          ""
+                        }
 
-                            ${
-                              p.photo
-                              ? `
-                                <img
-                                  src="${p.photo}"
-                                  class="report-photo"
-                                  alt="Foto do produto">
-                              `
-                              : ""
-                            }
+                      </div>
 
-                            <div>
+                    `;
 
-                              <b>Validade:</b>
-                              ${esc(formatDate(p.exp))}
+                  })
+                  .join("")
+                }
 
-                            </div>
+              </div>
 
-                            <div>
 
-                              <b>Quantidade:</b>
-                              ${esc(p.qty)}
-
-                            </div>
-
-                            ${
-                              p.sector
-                              ? `
-                                <div class="muted">
-                                  Setor: ${esc(p.sector)}
-                                </div>
-                              `
-                              : ""
-                            }
-
-                          </div>
-
-                        `;
-
-                      })
-                      .join("")
-                  }
-
-                </div>
+              <div class="report-actions">
 
                 <button
                   class="primary"
-                  style="margin-top:10px"
                   onclick="generatePDF(${l.id})">
 
-                  📄 Gerar PDF desta lista
+                  📄 Gerar PDF da lista
+
+                </button>
+
+
+                <button
+                  class="whatsapp"
+                  onclick="sharePDFWhatsApp(${l.id})">
+
+                  📲 Enviar PDF pelo WhatsApp
 
                 </button>
 
               </div>
 
-            `;
+            </div>
 
-          })
-          .join("")
+          `;
+
+        })
+        .join("")
 
         :
 
@@ -2013,10 +2056,10 @@ function reports(){
 
 
 /* =====================================================
-   GERAR PDF
+   CRIAR PDF
 ===================================================== */
 
-function generatePDF(id){
+function createPDFBlob(id){
 
   const l =
     db.lists.find(
@@ -2027,19 +2070,13 @@ function generatePDF(id){
       }
     );
 
+
   if(!l)
-    return;
+    return null;
 
 
-  if(!window.jspdf){
-
-    alert(
-      "O gerador de PDF ainda está carregando. Tente novamente."
-    );
-
-    return;
-
-  }
+  if(!window.jspdf)
+    return null;
 
 
   const jsPDF =
@@ -2048,9 +2085,13 @@ function generatePDF(id){
 
   const doc =
     new jsPDF({
+
       orientation:"portrait",
+
       unit:"mm",
+
       format:"a4"
+
     });
 
 
@@ -2068,7 +2109,7 @@ function generatePDF(id){
   doc.text(
     String(l.name).slice(
       0,
-      45
+      50
     ),
     14,
     27
@@ -2082,6 +2123,7 @@ function generatePDF(id){
     14,
     34
   );
+
 
   doc.text(
     "Data: " + l.created,
@@ -2097,13 +2139,12 @@ function generatePDF(id){
     function(p,index){
 
       /*
-        Cada produto ocupa uma área.
-        A foto é inserida fisicamente em
-        exatamente 60 x 25 mm.
+        Cada produto possui sua
+        própria foto 60 x 25 mm.
       */
 
       const blockHeight =
-        45;
+        48;
 
 
       if(
@@ -2147,7 +2188,7 @@ function generatePDF(id){
         }catch(error){
 
           console.log(
-            "Erro ao inserir foto:",
+            "Erro foto PDF:",
             error
           );
 
@@ -2156,36 +2197,39 @@ function generatePDF(id){
       }
 
 
-      const infoX =
+      const x =
         82;
 
 
       doc.setFontSize(9);
 
+
       doc.text(
         "Validade:",
-        infoX,
+        x,
         y + 6
       );
+
 
       doc.text(
         String(
           formatDate(p.exp)
         ),
-        infoX + 22,
+        x + 23,
         y + 6
       );
 
 
       doc.text(
         "Quantidade:",
-        infoX,
+        x,
         y + 13
       );
 
+
       doc.text(
         String(p.qty),
-        infoX + 25,
+        x + 25,
         y + 13
       );
 
@@ -2194,18 +2238,16 @@ function generatePDF(id){
 
         doc.text(
           "Setor:",
-          infoX,
+          x,
           y + 20
         );
 
         doc.text(
-          String(
-            p.sector
-          ).slice(
+          String(p.sector).slice(
             0,
-            30
+            35
           ),
-          infoX + 15,
+          x + 15,
           y + 20
         );
 
@@ -2214,12 +2256,6 @@ function generatePDF(id){
 
       y += 33;
 
-
-      doc.setDrawColor(
-        210,
-        218,
-        230
-      );
 
       doc.line(
         14,
@@ -2237,27 +2273,316 @@ function generatePDF(id){
 
   doc.setFontSize(9);
 
+  if(y > 285){
+
+    doc.addPage();
+
+    y = 20;
+
+  }
+
+
   doc.text(
     "Total de produtos: " +
     l.products.length,
     14,
-    Math.min(y,285)
+    y
   );
 
 
-  const nomeArquivo =
+  return doc.output(
+    "blob"
+  );
+
+}
+
+
+/* =====================================================
+   NOME DO PDF
+===================================================== */
+
+function pdfFileName(l){
+
+  const nome =
     String(l.name)
       .replace(
         /[^a-z0-9À-ÿ]+/gi,
         "-"
+      )
+      .replace(
+        /^-+|-+$/g,
+        ""
       );
 
 
-  doc.save(
+  return (
     "Validade-" +
-    nomeArquivo +
+    (nome || "Lista") +
     ".pdf"
   );
+
+}
+
+
+/* =====================================================
+   GERAR PDF
+===================================================== */
+
+function generatePDF(id){
+
+  try{
+
+    const l =
+      db.lists.find(
+        function(item){
+
+          return item.id === id;
+
+        }
+      );
+
+
+    if(!l){
+
+      alert(
+        "Lista não encontrada."
+      );
+
+      return;
+
+    }
+
+
+    const blob =
+      createPDFBlob(id);
+
+
+    if(!blob){
+
+      alert(
+        "Não foi possível gerar o PDF."
+      );
+
+      return;
+
+    }
+
+
+    const url =
+      URL.createObjectURL(blob);
+
+
+    const a =
+      document.createElement("a");
+
+
+    a.href =
+      url;
+
+    a.download =
+      pdfFileName(l);
+
+    a.style.display =
+      "none";
+
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+
+    setTimeout(
+      function(){
+
+        URL.revokeObjectURL(url);
+
+      },
+      5000
+    );
+
+
+  }catch(error){
+
+    console.log(
+      "Erro PDF:",
+      error
+    );
+
+    alert(
+      "Erro ao gerar o PDF: " +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   ENVIAR PDF
+   COMPARTILHAMENTO ANDROID
+===================================================== */
+
+async function sharePDFWhatsApp(id){
+
+  try{
+
+    const l =
+      db.lists.find(
+        function(item){
+
+          return item.id === id;
+
+        }
+      );
+
+
+    if(!l){
+
+      alert(
+        "Lista não encontrada."
+      );
+
+      return;
+
+    }
+
+
+    const blob =
+      createPDFBlob(id);
+
+
+    if(!blob){
+
+      alert(
+        "Não foi possível criar o PDF."
+      );
+
+      return;
+
+    }
+
+
+    const file =
+      new File(
+        [blob],
+        pdfFileName(l),
+        {
+          type:"application/pdf"
+        }
+      );
+
+
+    /*
+      Android/Chrome:
+      abre a tela de compartilhamento
+      com o PDF anexado.
+
+      O usuário escolhe WhatsApp.
+    */
+
+    if(
+      navigator.share &&
+      navigator.canShare &&
+      navigator.canShare({
+        files:[file]
+      })
+    ){
+
+      await navigator.share({
+
+        title:
+          "Validade- — " +
+          l.name,
+
+        text:
+          "Relatório de validade — " +
+          l.name,
+
+        files:[
+          file
+        ]
+
+      });
+
+      return;
+
+    }
+
+
+    /*
+      Caso o navegador não suporte
+      compartilhamento de arquivo,
+      baixa o PDF.
+    */
+
+    const url =
+      URL.createObjectURL(blob);
+
+
+    const a =
+      document.createElement("a");
+
+
+    a.href =
+      url;
+
+    a.download =
+      pdfFileName(l);
+
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+
+    setTimeout(
+      function(){
+
+        URL.revokeObjectURL(url);
+
+      },
+      5000
+    );
+
+
+    alert(
+      "Este navegador não permite anexar o PDF diretamente. O arquivo foi salvo. Abra o WhatsApp e anexe o PDF da lista."
+    );
+
+
+  }catch(error){
+
+    /*
+      Cancelamento da janela
+      de compartilhamento não é erro.
+    */
+
+    if(
+      error &&
+      error.name === "AbortError"
+    ){
+
+      return;
+
+    }
+
+
+    console.log(
+      "Compartilhamento:",
+      error
+    );
+
+
+    alert(
+      "Não foi possível compartilhar o PDF. Tente gerar o PDF primeiro."
+    );
+
+  }
 
 }
 
@@ -2322,7 +2647,7 @@ if(
 </script>
 
 
-<!-- PDF -->
+<!-- GERADOR PDF -->
 <script
 src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js">
 </script>
