@@ -29,7 +29,7 @@ jobs:
 
       - name: Adicionar suporte nativo para compartilhamento
         run: |
-          npm install @capacitor/share@^7.4.3 @capacitor/filesystem@^7.4.3
+          npm install @capacitor/share@7.0.2 @capacitor/filesystem@7.1.4
 
       - name: Preparar arquivos web
         run: |
