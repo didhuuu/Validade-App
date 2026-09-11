@@ -7,291 +7,49 @@
 
 <style>
 *{box-sizing:border-box}
-
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#f4f7fb;
- color:#172033
-}
-
-header{
- background:linear-gradient(135deg,#071d49,#1265d8);
- color:#fff;
- padding:24px 18px 20px;
- border-radius:0 0 24px 24px
-}
-
-header h1{
- margin:0;
- font-size:28px
-}
-
-header p{
- margin:5px 0 0;
- opacity:.85
-}
-
-main{
- max-width:620px;
- margin:auto;
- padding:18px
-}
-
-.card{
- background:#fff;
- border-radius:18px;
- padding:18px;
- margin-bottom:14px;
- box-shadow:0 5px 18px #102a4d14
-}
-
-button{
- border:0;
- border-radius:13px;
- padding:14px 16px;
- font-size:16px;
- font-weight:700;
- cursor:pointer
-}
-
-.primary{
- background:#1265d8;
- color:#fff;
- width:100%
-}
-
-.green{
- background:#16a36b;
- color:#fff;
- width:100%
-}
-
-.whatsapp{
- background:#128c4a;
- color:#fff;
- width:100%
-}
-
-.light{
- background:#eaf1fb;
- color:#17457f
-}
-
-.danger{
- background:#feecec;
- color:#b42318;
- width:100%
-}
-
-.actions{
- display:grid;
- gap:12px
-}
-
-.muted{
- color:#68758a;
- font-size:14px
-}
-
-.hidden{
- display:none!important
-}
-
-input{
- width:100%;
- padding:13px;
- border:1px solid #ccd6e4;
- border-radius:11px;
- font-size:16px;
- margin-top:7px
-}
-
-label{
- display:block;
- margin:13px 0;
- font-weight:700;
- font-size:14px
-}
-
-.row{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px
-}
-
-.top{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:10px
-}
-
-.back{
- background:transparent;
- color:#1265d8;
- padding:5px 0
-}
-
-.listbox{
- border:1px solid #dce4ef;
- border-radius:13px;
- padding:13px;
- margin:10px 0
-}
-
-.product{
- border:1px solid #dce4ef;
- padding:12px;
- background:#f7f9fc;
- border-radius:12px;
- margin-top:10px
-}
-
-.badge{
- display:inline-block;
- background:#e8f4ff;
- color:#1265d8;
- border-radius:20px;
- padding:5px 9px;
- font-size:12px
-}
-
-.camera{
- background:#101722;
- border-radius:16px;
- padding:14px;
- color:#fff;
- text-align:center
-}
-
-.camera-title{
- font-size:15px;
- margin-bottom:10px
-}
-
-.video-wrap{
- position:relative
-}
-
-video{
- width:100%;
- height:300px;
- object-fit:cover;
- border-radius:11px;
- background:#05080d
-}
-
-.scan-area{
- position:absolute;
- left:8%;
- right:8%;
- top:28%;
- height:44%;
- border:2px solid #31d78c;
- border-radius:10px;
- pointer-events:none
-}
-
-.scan-area span,
-.photo-frame span{
- position:absolute;
- bottom:-28px;
- left:0;
- right:0;
- font-size:12px;
- color:#31d78c
-}
-
-.scanline{
- height:3px;
- background:#31d78c;
- position:absolute;
- left:10%;
- right:10%;
- top:50%;
- border-radius:5px
-}
-
-.photo-frame{
- position:absolute;
- left:5%;
- right:5%;
- top:35%;
- height:30%;
- border:2px solid #31d78c;
- border-radius:8px;
- pointer-events:none
-}
-
-.status{
- padding:10px;
- border-radius:10px;
- background:#eef7f1;
- color:#17663f;
- font-size:14px;
- margin-top:10px
-}
-
-.photo-preview{
- width:100%;
- aspect-ratio:2.4/1;
- object-fit:cover;
- border-radius:10px;
- margin-top:12px;
- border:1px solid #ccd6e4;
- background:#e9eef5
-}
-
-.report-photo{
- width:180px;
- height:75px;
- object-fit:cover;
- border-radius:6px;
- border:1px solid #ccd6e4;
- display:block;
- margin:10px 0
-}
-
-.step{
- font-size:13px;
- color:#68758a;
- margin:14px 0 6px;
- font-weight:700
-}
-
-.code-number{
- font-size:18px;
- font-weight:700;
- letter-spacing:1px
-}
-
-hr{
- border:0;
- border-top:1px solid #e3e8ef;
- margin:18px 0
-}
-
-.report-actions{
- display:grid;
- gap:8px;
- margin-top:12px
-}
-
-.pdf-status{
- font-size:13px;
- margin-top:8px;
- color:#68758a
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
+header{background:linear-gradient(135deg,#071d49,#1265d8);color:#fff;padding:24px 18px 20px;border-radius:0 0 24px 24px}
+header h1{margin:0;font-size:28px}
+header p{margin:5px 0 0;opacity:.85}
+main{max-width:620px;margin:auto;padding:18px}
+.card{background:#fff;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 5px 18px #102a4d14}
+button{border:0;border-radius:13px;padding:14px 16px;font-size:16px;font-weight:700;cursor:pointer}
+.primary{background:#1265d8;color:#fff;width:100%}
+.green{background:#16a36b;color:#fff;width:100%}
+.whatsapp{background:#128c4a;color:#fff;width:100%}
+.light{background:#eaf1fb;color:#17457f}
+.danger{background:#feecec;color:#b42318;width:100%}
+.actions{display:grid;gap:12px}
+.muted{color:#68758a;font-size:14px}
+.hidden{display:none!important}
+input{width:100%;padding:13px;border:1px solid #ccd6e4;border-radius:11px;font-size:16px;margin-top:7px}
+label{display:block;margin:13px 0;font-weight:700;font-size:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.back{background:transparent;color:#1265d8;padding:5px 0}
+.listbox{border:1px solid #dce4ef;border-radius:13px;padding:13px;margin:10px 0}
+.product{border:1px solid #dce4ef;padding:12px;background:#f7f9fc;border-radius:12px;margin-top:10px}
+.badge{display:inline-block;background:#e8f4ff;color:#1265d8;border-radius:20px;padding:5px 9px;font-size:12px}
+.camera{background:#101722;border-radius:16px;padding:14px;color:#fff;text-align:center}
+.camera-title{font-size:15px;margin-bottom:10px}
+.video-wrap{position:relative}
+video{width:100%;height:300px;object-fit:cover;border-radius:11px;background:#05080d}
+.scan-area{position:absolute;left:8%;right:8%;top:28%;height:44%;border:2px solid #31d78c;border-radius:10px;pointer-events:none}
+.scan-area span,.photo-frame span{position:absolute;bottom:-28px;left:0;right:0;font-size:12px;color:#31d78c}
+.scanline{height:3px;background:#31d78c;position:absolute;left:10%;right:10%;top:50%;border-radius:5px}
+.photo-frame{position:absolute;left:5%;right:5%;top:35%;height:30%;border:2px solid #31d78c;border-radius:8px;pointer-events:none}
+.status{padding:10px;border-radius:10px;background:#eef7f1;color:#17663f;font-size:14px;margin-top:10px}
+.photo-preview{width:100%;aspect-ratio:2.4/1;object-fit:cover;border-radius:10px;margin-top:12px;border:1px solid #ccd6e4;background:#e9eef5}
+.report-photo{width:180px;height:75px;object-fit:cover;border-radius:6px;border:1px solid #ccd6e4;display:block;margin:10px 0}
+.step{font-size:13px;color:#68758a;margin:14px 0 6px;font-weight:700}
+.code-number{font-size:18px;font-weight:700;letter-spacing:1px}
+hr{border:0;border-top:1px solid #e3e8ef;margin:18px 0}
+.report-actions{display:grid;gap:8px;margin-top:12px}
+.pdf-status{font-size:13px;margin-top:8px;color:#68758a}
 
 @media(max-width:480px){
- .row{
-  grid-template-columns:1fr
- }
-
- video{
-  height:270px
- }
+.row{grid-template-columns:1fr}
+video{height:270px}
 }
 </style>
 </head>
@@ -308,57 +66,37 @@ hr{
 <script>
 
 var KEY="validade_app_v7";
-
-var db={
- lists:[]
-};
-
+var db={lists:[]};
 var current=null;
 var stream=null;
 var scanTimer=null;
 var cameraMode="barcode";
 var currentPhoto="";
 
-
 function app(){
  return document.getElementById("app");
 }
 
-
 function esc(v){
-
- return String(v==null?"":v).replace(
-  /[&<>"']/g,
-  function(m){
-   return {
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-   }[m];
-  }
- );
-
+ return String(v==null?"":v).replace(/[&<>"']/g,function(m){
+  return {
+   "&":"&amp;",
+   "<":"&lt;",
+   ">":"&gt;",
+   '"':"&quot;",
+   "'":"&#39;"
+  }[m];
+ });
 }
-
 
 function formatDate(v){
-
  if(!v)return"";
-
  var p=String(v).split("-");
-
- return p.length===3
-  ?p[2]+"/"+p[1]+"/"+p[0]
-  :v;
+ return p.length===3?p[2]+"/"+p[1]+"/"+p[0]:v;
 }
 
-
 function loadData(){
-
  try{
-
   var s=
    localStorage.getItem(KEY)||
    localStorage.getItem("validade_app_v6")||
@@ -366,52 +104,26 @@ function loadData(){
    localStorage.getItem("validade_app_v4");
 
   if(s){
-
    var d=JSON.parse(s);
-
-   if(d&&Array.isArray(d.lists)){
-    db=d;
-   }
-
+   if(d&&Array.isArray(d.lists))db=d;
   }
-
  }catch(e){
-
   console.error(e);
-
-  db={
-   lists:[]
-  };
-
+  db={lists:[]};
  }
-
 }
-
 
 function save(){
-
  try{
-
-  localStorage.setItem(
-   KEY,
-   JSON.stringify(db)
-  );
-
+  localStorage.setItem(KEY,JSON.stringify(db));
  }catch(e){
-
-  alert(
-   "Não foi possível salvar os dados."
-  );
-
+  alert("Não foi possível salvar os dados.");
  }
-
 }
-
 
 function home(){
 
  stopCam();
-
  current=null;
  currentPhoto="";
 
@@ -430,9 +142,7 @@ function home(){
  '<b>Como funciona</b>'+
  '<p class="muted">A câmera lê o código de barras. Depois abre novamente para fotografar o produto. Informe a validade e a quantidade e salve.</p>'+
  '</section>';
-
 }
-
 
 function newList(){
 
@@ -447,24 +157,15 @@ function newList(){
  '</label>'+
  '<button class="primary" onclick="createList()">Criar lista</button>'+
  '</section>';
-
 }
-
 
 function createList(){
 
  var x=document.getElementById("lname");
-
- var name=x
-  ?x.value.trim()
-  :"";
+ var name=x?x.value.trim():"";
 
  if(!name){
-
-  alert(
-   "Digite o nome da lista."
-  );
-
+  alert("Digite o nome da lista.");
   return;
  }
 
@@ -476,20 +177,15 @@ function createList(){
  };
 
  currentPhoto="";
-
  editor();
-
 }
-
 
 function editor(){
 
  stopCam();
 
  if(!current){
-
   home();
-
   return;
  }
 
@@ -501,24 +197,18 @@ function editor(){
  '<div class="top">'+
  '<div>'+
  '<h2>'+esc(current.name)+'</h2>'+
- '<span class="badge">'+
- current.products.length+
- ' produto(s)</span>'+
+ '<span class="badge">'+current.products.length+' produto(s)</span>'+
  '</div>'+
  '<button class="back" onclick="home()">← Início</button>'+
  '</div>'+
 
  '<hr>'+
 
- '<div class="step">'+
- 'ETAPA 1 — ESCANEAR CÓDIGO DE BARRAS'+
- '</div>'+
+ '<div class="step">ETAPA 1 — ESCANEAR CÓDIGO DE BARRAS</div>'+
 
  '<div class="camera">'+
 
- '<div id="cammsg" class="camera-title">'+
- 'Abrindo câmera...'+
- '</div>'+
+ '<div id="cammsg" class="camera-title">Abrindo câmera...</div>'+
 
  '<div class="video-wrap">'+
 
@@ -537,40 +227,25 @@ function editor(){
  '</div>'+
  '</div>'+
 
- '<div id="scanstatus" class="status">'+
- '📷 Preparando câmera...'+
- '</div>'+
+ '<div id="scanstatus" class="status">📷 Preparando câmera...</div>'+
 
  '<label>Código de barras'+
-
- '<input id="pbar" '+
- 'inputmode="numeric" '+
- 'pattern="[0-9]*" '+
- 'placeholder="Código preenchido automaticamente">'+
-
+ '<input id="pbar" inputmode="numeric" pattern="[0-9]*" placeholder="Código preenchido automaticamente">'+
  '</label>'+
 
  '<div id="photoSection" class="hidden">'+
 
- '<div class="step">'+
- 'ETAPA 2 — FOTO DO PRODUTO'+
- '</div>'+
+ '<div class="step">ETAPA 2 — FOTO DO PRODUTO</div>'+
 
- '<button class="primary" onclick="tirarFoto()">'+
- '📸 Tirar foto do produto'+
- '</button>'+
+ '<button class="primary" onclick="tirarFoto()">📸 Tirar foto do produto</button>'+
 
- '<img id="photoPreview" '+
- 'class="photo-preview hidden" '+
- 'alt="Foto do produto">'+
+ '<img id="photoPreview" class="photo-preview hidden" alt="Foto do produto">'+
 
  '</div>'+
 
  '<div id="dataSection" class="hidden">'+
 
- '<div class="step">'+
- 'ETAPA 3 — VALIDADE E QUANTIDADE'+
- '</div>'+
+ '<div class="step">ETAPA 3 — VALIDADE E QUANTIDADE</div>'+
 
  '<div class="row">'+
 
@@ -588,9 +263,7 @@ function editor(){
  '<input id="psector" placeholder="Ex.: Câmara Fria">'+
  '</label>'+
 
- '<button class="green" onclick="addProduct()">'+
- '💾 Salvar produto'+
- '</button>'+
+ '<button class="green" onclick="addProduct()">💾 Salvar produto</button>'+
 
  '</div>'+
 
@@ -599,21 +272,14 @@ function editor(){
  '<div id="products"></div>'+
  '</div>'+
 
- '<button class="primary" style="margin-top:15px" onclick="finishList()">'+
- '✅ Finalizar lista'+
- '</button>'+
+ '<button class="primary" style="margin-top:15px" onclick="finishList()">✅ Finalizar lista</button>'+
 
  '</section>';
 
  renderProducts();
 
- setTimeout(
-  iniciarLeituraCodigo,
-  400
- );
-
+ setTimeout(iniciarLeituraCodigo,400);
 }
-
 
 function renderProducts(){
 
@@ -622,319 +288,190 @@ function renderProducts(){
  if(!el||!current)return;
 
  if(!current.products.length){
-
-  el.innerHTML=
-   '<p class="muted">'+
-   'Nenhum produto cadastrado ainda.'+
-   '</p>';
-
+  el.innerHTML='<p class="muted">Nenhum produto cadastrado ainda.</p>';
   return;
  }
 
- el.innerHTML=
-  current.products.map(
-   function(p,i){
+ el.innerHTML=current.products.map(function(p,i){
 
-    return(
-     '<div class="product">'+
+  return '<div class="product">'+
+   '<div class="code-number">'+
+   (i+1)+'. '+esc(p.bar)+
+   '</div>'+
 
-     '<div class="code-number">'+
-     (i+1)+
-     '. '+
-     esc(p.bar)+
-     '</div>'+
+   (p.photo?
+    '<img src="'+p.photo+'" class="report-photo" alt="Produto">':
+    "")+
 
-     (
-      p.photo
-      ?'<img src="'+
-       p.photo+
-       '" class="report-photo" alt="Produto">'
-      :""
-     )+
+   '<div><b>Validade:</b> '+esc(formatDate(p.exp))+'</div>'+
+   '<div><b>Quantidade:</b> '+esc(p.qty)+'</div>'+
 
-     '<div><b>Validade:</b> '+
-     esc(formatDate(p.exp))+
-     '</div>'+
+   (p.sector?
+    '<div class="muted">Setor: '+esc(p.sector)+'</div>':
+    "")+
 
-     '<div><b>Quantidade:</b> '+
-     esc(p.qty)+
-     '</div>'+
+   '</div>';
 
-     (
-      p.sector
-      ?'<div class="muted">Setor: '+
-       esc(p.sector)+
-       '</div>'
-      :""
-     )+
-
-     '</div>'
-    );
-
-   }
-  ).join("");
-
+ }).join("");
 }
-
 
 function iniciarLeituraCodigo(){
 
  cameraMode="barcode";
 
- var video=
-  document.getElementById("video");
-
- var status=
-  document.getElementById("scanstatus");
-
- var msg=
-  document.getElementById("cammsg");
+ var video=document.getElementById("video");
+ var status=document.getElementById("scanstatus");
+ var msg=document.getElementById("cammsg");
 
  if(!video)return;
 
  stopCam();
 
- if(
-  !navigator.mediaDevices||
-  !navigator.mediaDevices.getUserMedia
- ){
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
 
   if(status)
-   status.textContent=
-    "⚠️ Câmera indisponível.";
+   status.textContent="⚠️ Câmera indisponível.";
 
   return;
  }
 
  if(msg)
-  msg.textContent=
-   "Aponte para o código de barras.";
+  msg.textContent="Aponte para o código de barras.";
 
  if(status)
-  status.textContent=
-   "🔎 Procurando código...";
+  status.textContent="🔎 Procurando código...";
 
  navigator.mediaDevices.getUserMedia({
-
   audio:false,
-
   video:{
-   facingMode:{
-    ideal:"environment"
-   },
-
-   width:{
-    ideal:1280
-   },
-
-   height:{
-    ideal:720
-   },
-
-   frameRate:{
-    ideal:30,
-    max:60
-   }
+   facingMode:{ideal:"environment"},
+   width:{ideal:1280},
+   height:{ideal:720},
+   frameRate:{ideal:30,max:60}
   }
+ })
+ .then(function(s){
 
- }).then(
-  function(s){
+  stream=s;
+  video.srcObject=s;
 
-   stream=s;
+  return video.play();
 
-   video.srcObject=s;
+ })
+ .then(function(){
 
-   return video.play();
-
-  }
- ).then(
-  function(){
-
-   if(!window.BarcodeDetector){
-
-    if(status)
-     status.textContent=
-      "⚠️ Leitura automática indisponível. Digite o código.";
-
-    return;
-   }
-
-   return BarcodeDetector
-    .getSupportedFormats()
-    .then(
-     function(formats){
-
-      var pref=[
-       "ean_13",
-       "ean_8",
-       "upc_a",
-       "upc_e",
-       "code_128",
-       "itf"
-      ];
-
-      var valid=
-       pref.filter(
-        function(f){
-         return formats.indexOf(f)>=0;
-        }
-       );
-
-      var detector=
-       new BarcodeDetector({
-        formats:
-         valid.length
-         ?valid
-         :formats
-       });
-
-      var busy=false;
-
-      scanTimer=
-       setInterval(
-        function(){
-
-         if(
-          cameraMode!=="barcode"||
-          busy||
-          !video.videoWidth
-         ){
-          return;
-         }
-
-         busy=true;
-
-         detector.detect(video)
-          .then(
-           function(codes){
-
-            if(
-             codes&&
-             codes.length
-            ){
-
-             var codigo=
-              String(
-               codes[0].rawValue||""
-              ).replace(
-               /\D/g,
-               ""
-              );
-
-             if(codigo){
-
-              var input=
-               document.getElementById(
-                "pbar"
-               );
-
-              if(input)
-               input.value=codigo;
-
-              if(scanTimer){
-
-               clearInterval(
-                scanTimer
-               );
-
-               scanTimer=null;
-              }
-
-              if(status)
-               status.textContent=
-                "✅ Código lido: "+
-                codigo;
-
-              if(msg)
-               msg.textContent=
-                "Código lido. Abrindo câmera para foto...";
-
-              setTimeout(
-               iniciarCameraFoto,
-               400
-              );
-
-             }
-
-            }
-
-           }
-          )
-          .catch(
-           function(e){
-            console.log(
-             "Scanner:",
-             e
-            );
-           }
-          )
-          .then(
-           function(){
-            busy=false;
-           }
-          );
-
-        },
-        120
-       );
-
-     }
-    );
-
-  }
- ).catch(
-  function(e){
-
-   console.log(
-    "Câmera:",
-    e
-   );
+  if(!window.BarcodeDetector){
 
    if(status)
-    status.textContent=
-     "⚠️ Não foi possível abrir a câmera. Verifique a permissão.";
+    status.textContent="⚠️ Leitura automática indisponível. Digite o código.";
 
+   return;
   }
- );
 
+  return BarcodeDetector.getSupportedFormats().then(function(formats){
+
+   var pref=[
+    "ean_13",
+    "ean_8",
+    "upc_a",
+    "upc_e",
+    "code_128",
+    "itf"
+   ];
+
+   var valid=pref.filter(function(f){
+    return formats.indexOf(f)>=0;
+   });
+
+   var detector=new BarcodeDetector({
+    formats:valid.length?valid:formats
+   });
+
+   var busy=false;
+
+   scanTimer=setInterval(function(){
+
+    if(cameraMode!=="barcode"||busy||!video.videoWidth)
+     return;
+
+    busy=true;
+
+    detector.detect(video)
+
+    .then(function(codes){
+
+     if(codes&&codes.length){
+
+      var codigo=String(
+       codes[0].rawValue||""
+      ).replace(/\D/g,"");
+
+      if(codigo){
+
+       var input=document.getElementById("pbar");
+
+       if(input)
+        input.value=codigo;
+
+       if(scanTimer){
+        clearInterval(scanTimer);
+        scanTimer=null;
+       }
+
+       if(status)
+        status.textContent="✅ Código lido: "+codigo;
+
+       if(msg)
+        msg.textContent="Código lido. Abrindo câmera para foto...";
+
+       setTimeout(iniciarCameraFoto,400);
+      }
+     }
+
+    })
+
+    .catch(function(e){
+     console.log("Scanner:",e);
+    })
+
+    .then(function(){
+     busy=false;
+    });
+
+   },120);
+
+  });
+
+ })
+
+ .catch(function(e){
+
+  console.log("Câmera:",e);
+
+  if(status)
+   status.textContent="⚠️ Não foi possível abrir a câmera. Verifique a permissão.";
+
+ });
 }
-
 
 function iniciarCameraFoto(){
 
  cameraMode="photo";
 
  if(scanTimer){
-
-  clearInterval(
-   scanTimer
-  );
-
+  clearInterval(scanTimer);
   scanTimer=null;
  }
 
  stopCameraTracksOnly();
 
- var video=
-  document.getElementById("video");
-
- var status=
-  document.getElementById("scanstatus");
-
- var msg=
-  document.getElementById("cammsg");
-
- var scanarea=
-  document.getElementById("scanarea");
-
- var scanline=
-  document.getElementById("scanline");
-
- var frame=
-  document.getElementById("photoframe");
-
- var section=
-  document.getElementById("photoSection");
+ var video=document.getElementById("video");
+ var status=document.getElementById("scanstatus");
+ var msg=document.getElementById("cammsg");
+ var scanarea=document.getElementById("scanarea");
+ var scanline=document.getElementById("scanline");
+ var frame=document.getElementById("photoframe");
+ var section=document.getElementById("photoSection");
 
  if(!video)return;
 
@@ -951,324 +488,181 @@ function iniciarCameraFoto(){
   section.classList.remove("hidden");
 
  if(msg)
-  msg.textContent=
-   "Agora enquadre o produto e tire a foto.";
+  msg.textContent="Agora enquadre o produto e tire a foto.";
 
  if(status)
-  status.textContent=
-   "📸 Câmera pronta para fotografar.";
+  status.textContent="📸 Câmera pronta para fotografar.";
 
  navigator.mediaDevices.getUserMedia({
-
   audio:false,
-
   video:{
-   facingMode:{
-    ideal:"environment"
-   },
-
-   width:{
-    ideal:1920
-   },
-
-   height:{
-    ideal:1080
-   }
+   facingMode:{ideal:"environment"},
+   width:{ideal:1920},
+   height:{ideal:1080}
   }
+ })
+ .then(function(s){
 
- }).then(
-  function(s){
+  stream=s;
+  video.srcObject=s;
 
-   stream=s;
+  return video.play();
 
-   video.srcObject=s;
+ })
+ .catch(function(e){
 
-   return video.play();
+  console.log("Foto:",e);
 
-  }
- ).catch(
-  function(e){
+  if(status)
+   status.textContent="⚠️ Não foi possível abrir a câmera para a foto.";
 
-   console.log(
-    "Foto:",
-    e
-   );
-
-   if(status)
-    status.textContent=
-     "⚠️ Não foi possível abrir a câmera para a foto.";
-
-  }
- );
-
+ });
 }
-
 
 function tirarFoto(){
 
  if(cameraMode!=="photo"){
-
   iniciarCameraFoto();
-
   return;
  }
 
- var video=
-  document.getElementById("video");
+ var video=document.getElementById("video");
 
- if(
-  !video||
-  !video.videoWidth
- ){
-
-  alert(
-   "A câmera ainda não está pronta."
-  );
-
+ if(!video||!video.videoWidth){
+  alert("A câmera ainda não está pronta.");
   return;
  }
 
  var ratio=2.4;
 
  var vw=video.videoWidth;
-
  var vh=video.videoHeight;
 
  var cw=vw;
-
- var ch=Math.round(
-  vw/ratio
- );
+ var ch=Math.round(vw/ratio);
 
  if(ch>vh){
-
   ch=vh;
-
-  cw=Math.round(
-   vh*ratio
-  );
+  cw=Math.round(vh*ratio);
  }
 
- var sx=Math.round(
-  (vw-cw)/2
- );
+ var sx=Math.round((vw-cw)/2);
+ var sy=Math.round((vh-ch)/2);
 
- var sy=Math.round(
-  (vh-ch)/2
- );
-
- var canvas=
-  document.createElement(
-   "canvas"
-  );
+ var canvas=document.createElement("canvas");
 
  canvas.width=1200;
-
  canvas.height=500;
 
- canvas
-  .getContext("2d")
-  .drawImage(
-   video,
-   sx,
-   sy,
-   cw,
-   ch,
-   0,
-   0,
-   1200,
-   500
-  );
+ canvas.getContext("2d").drawImage(
+  video,
+  sx,
+  sy,
+  cw,
+  ch,
+  0,
+  0,
+  1200,
+  500
+ );
 
- currentPhoto=
-  canvas.toDataURL(
-   "image/jpeg",
-   .82
-  );
+ currentPhoto=canvas.toDataURL("image/jpeg",.82);
 
- var preview=
-  document.getElementById(
-   "photoPreview"
-  );
+ var preview=document.getElementById("photoPreview");
 
  if(preview){
-
-  preview.src=
-   currentPhoto;
-
-  preview.classList.remove(
-   "hidden"
-  );
+  preview.src=currentPhoto;
+  preview.classList.remove("hidden");
  }
 
  stopCam();
 
- var status=
-  document.getElementById(
-   "scanstatus"
-  );
-
- var msg=
-  document.getElementById(
-   "cammsg"
-  );
-
- var data=
-  document.getElementById(
-   "dataSection"
-  );
+ var status=document.getElementById("scanstatus");
+ var msg=document.getElementById("cammsg");
+ var data=document.getElementById("dataSection");
 
  if(status)
-  status.textContent=
-   "✅ Foto capturada.";
+  status.textContent="✅ Foto capturada.";
 
  if(msg)
-  msg.textContent=
-   "Foto pronta. Informe validade e quantidade.";
+  msg.textContent="Foto pronta. Informe validade e quantidade.";
 
  if(data)
-  data.classList.remove(
-   "hidden"
-  );
-
+  data.classList.remove("hidden");
 }
-
 
 function stopCameraTracksOnly(){
 
  if(stream){
-
-  stream
-   .getTracks()
-   .forEach(
-    function(t){
-     t.stop();
-    }
-   );
+  stream.getTracks().forEach(function(t){
+   t.stop();
+  });
 
   stream=null;
  }
-
 }
-
 
 function stopCam(){
 
  if(scanTimer){
-
-  clearInterval(
-   scanTimer
-  );
-
+  clearInterval(scanTimer);
   scanTimer=null;
  }
 
  stopCameraTracksOnly();
-
 }
-
 
 function addProduct(){
 
  if(!current)return;
 
- var b=
-  document.getElementById(
-   "pbar"
-  );
+ var b=document.getElementById("pbar");
+ var e=document.getElementById("pexp");
+ var q=document.getElementById("pqty");
+ var s=document.getElementById("psector");
 
- var e=
-  document.getElementById(
-   "pexp"
-  );
+ var bar=b?
+  String(b.value||"").replace(/\D/g,""):
+  "";
 
- var q=
-  document.getElementById(
-   "pqty"
-  );
+ var exp=e?
+  e.value:
+  "";
 
- var s=
-  document.getElementById(
-   "psector"
-  );
+ var qty=q?
+  Number(q.value||0):
+  0;
 
- var bar=
-  b
-  ?String(
-    b.value||""
-   ).replace(
-    /\D/g,
-    ""
-   )
-  :"";
-
- var exp=
-  e
-  ?e.value
-  :"";
-
- var qty=
-  q
-  ?Number(
-    q.value||0
-   )
-  :0;
-
- var sector=
-  s
-  ?String(
-    s.value||""
-   ).trim()
-  :"";
+ var sector=s?
+  String(s.value||"").trim():
+  "";
 
  if(!bar){
-
-  alert(
-   "Leia o código de barras."
-  );
-
+  alert("Leia o código de barras.");
   return;
  }
 
  if(!currentPhoto){
-
-  alert(
-   "Tire a foto do produto."
-  );
-
+  alert("Tire a foto do produto.");
   return;
  }
 
  if(!exp){
-
-  alert(
-   "Informe a validade."
-  );
-
+  alert("Informe a validade.");
   return;
  }
 
  if(qty<1){
-
-  alert(
-   "Informe uma quantidade válida."
-  );
-
+  alert("Informe uma quantidade válida.");
   return;
  }
 
  current.products.push({
-
   bar:bar,
-
   photo:currentPhoto,
-
   exp:exp,
-
   qty:qty,
-
   sector:sector
-
  });
 
  save();
@@ -1276,32 +670,20 @@ function addProduct(){
  currentPhoto="";
 
  editor();
-
 }
-
 
 function finishList(){
 
  stopCam();
 
- if(
-  !current||
-  !current.products.length
- ){
-
-  alert(
-   "Cadastre pelo menos um produto."
-  );
-
+ if(!current||!current.products.length){
+  alert("Cadastre pelo menos um produto.");
   return;
  }
 
- var index=
-  db.lists.findIndex(
-   function(x){
-    return x.id===current.id;
-   }
-  );
+ var index=db.lists.findIndex(function(x){
+  return x.id===current.id;
+ });
 
  if(index<0)
   db.lists.push(current);
@@ -1310,764 +692,557 @@ function finishList(){
 
  save();
 
- alert(
-  "Lista salva no aparelho!"
- );
+ alert("Lista salva no aparelho!");
 
  current=null;
-
  currentPhoto="";
 
  home();
-
 }
-
 
 function lists(){
 
  stopCam();
 
  var html=
-  '<section class="card">'+
-
-  '<div class="top">'+
-  '<h2>Minhas listas</h2>'+
-  '<button class="back" onclick="home()">← Início</button>'+
-  '</div>';
+ '<section class="card">'+
+ '<div class="top">'+
+ '<h2>Minhas listas</h2>'+
+ '<button class="back" onclick="home()">← Início</button>'+
+ '</div>';
 
  if(db.lists.length){
 
-  html+=
-   db.lists.map(
-    function(l){
+  html+=db.lists.map(function(l){
 
-     return(
-      '<div class="listbox">'+
+   return '<div class="listbox">'+
+    '<b>'+esc(l.name)+'</b><br>'+
+    '<span class="muted">'+
+    l.products.length+
+    ' produto(s) • '+
+    esc(l.created)+
+    '</span><br>'+
+    '<button class="light" style="margin-top:8px" onclick="openList('+l.id+')">Abrir lista</button>'+
+    '</div>';
 
-      '<b>'+
-      esc(l.name)+
-      '</b><br>'+
-
-      '<span class="muted">'+
-      l.products.length+
-      ' produto(s) • '+
-      esc(l.created)+
-      '</span><br>'+
-
-      '<button class="light" style="margin-top:8px" onclick="openList('+l.id+')">'+
-      'Abrir lista'+
-      '</button>'+
-
-      '</div>'
-     );
-
-    }
-   ).join("");
+  }).join("");
 
  }else{
 
-  html+=
-   '<p class="muted">'+
-   'Nenhuma lista finalizada.'+
-   '</p>';
+  html+='<p class="muted">Nenhuma lista finalizada.</p>';
 
  }
 
  html+='</section>';
 
  app().innerHTML=html;
-
 }
-
 
 function openList(id){
 
- current=
-  db.lists.find(
-   function(x){
-    return x.id===id;
-   }
-  )||null;
+ current=db.lists.find(function(x){
+  return x.id===id;
+ })||null;
 
  if(current)
   editor();
-
 }
-
 
 function reports(){
 
  stopCam();
 
  var html=
-  '<section class="card">'+
-
-  '<div class="top">'+
-  '<h2>Relatório final</h2>'+
-  '<button class="back" onclick="home()">← Início</button>'+
-  '</div>';
+ '<section class="card">'+
+ '<div class="top">'+
+ '<h2>Relatório final</h2>'+
+ '<button class="back" onclick="home()">← Início</button>'+
+ '</div>';
 
  if(db.lists.length){
 
-  html+=
-   db.lists.map(
-    function(l){
+  html+=db.lists.map(function(l){
 
-     var products=
-      l.products.map(
-       function(p,i){
+   var products=l.products.map(function(p,i){
 
-        return(
-         '<div class="product">'+
+    return '<div class="product">'+
 
-         '<div class="code-number">'+
-         (i+1)+
-         '. '+
-         esc(p.bar)+
-         '</div>'+
+     '<div class="code-number">'+
+     (i+1)+'. '+esc(p.bar)+
+     '</div>'+
 
-         (
-          p.photo
-          ?'<img src="'+
-           p.photo+
-           '" class="report-photo" alt="Produto">'
-          :""
-         )+
+     (p.photo?
+      '<img src="'+p.photo+'" class="report-photo" alt="Produto">':
+      "")+
 
-         '<div><b>Validade:</b> '+
-         esc(formatDate(p.exp))+
-         '</div>'+
+     '<div><b>Validade:</b> '+
+     esc(formatDate(p.exp))+
+     '</div>'+
 
-         '<div><b>Quantidade:</b> '+
-         esc(p.qty)+
-         '</div>'+
+     '<div><b>Quantidade:</b> '+
+     esc(p.qty)+
+     '</div>'+
 
-         (
-          p.sector
-          ?'<div class="muted">Setor: '+
-           esc(p.sector)+
-           '</div>'
-          :""
-         )+
+     (p.sector?
+      '<div class="muted">Setor: '+
+      esc(p.sector)+
+      '</div>':
+      "")+
 
-         '</div>'
-        );
+     '</div>';
 
-       }
-      ).join("");
+   }).join("");
 
-     return(
-      '<div class="listbox">'+
+   return '<div class="listbox">'+
 
-      '<b>'+
-      esc(l.name)+
-      '</b><br>'+
+    '<b>'+esc(l.name)+'</b><br>'+
 
-      '<span class="muted">'+
-      l.products.length+
-      ' produto(s) • '+
-      esc(l.created)+
-      '</span>'+
+    '<span class="muted">'+
+    l.products.length+
+    ' produto(s) • '+
+    esc(l.created)+
+    '</span>'+
 
-      '<div style="margin-top:12px">'+
-      products+
-      '</div>'+
+    '<div style="margin-top:12px">'+
+    products+
+    '</div>'+
 
-      '<div class="report-actions">'+
+    '<div class="report-actions">'+
 
-      '<button class="primary" onclick="generatePDF('+l.id+')">'+
-      '📄 Gerar PDF da lista'+
-      '</button>'+
+    '<button class="primary" onclick="generatePDF('+l.id+')">'+
+    '📄 Gerar PDF da lista'+
+    '</button>'+
 
-      '<button class="whatsapp" onclick="sharePDFWhatsApp('+l.id+')">'+
-      '📲 Enviar PDF pelo WhatsApp'+
-      '</button>'+
+    '<button class="whatsapp" onclick="sharePDFWhatsApp('+l.id+')">'+
+    '📲 Enviar PDF pelo WhatsApp'+
+    '</button>'+
 
-      '</div>'+
+    '</div>'+
 
-      '<div id="pdfStatus-'+
-      l.id+
-      '" class="pdf-status"></div>'+
+    '<div id="pdfStatus-'+l.id+'" class="pdf-status"></div>'+
 
-      '</div>'
-     );
+    '</div>';
 
-    }
-   ).join("");
+  }).join("");
 
  }else{
 
-  html+=
-   '<p class="muted">'+
-   'Finalize uma lista para vê-la aqui.'+
-   '</p>';
+  html+='<p class="muted">Finalize uma lista para vê-la aqui.</p>';
 
  }
 
  html+='</section>';
 
  app().innerHTML=html;
-
 }
-
 
 function getPDFConstructor(){
 
- return(
-  window.jspdf&&
-  typeof window.jspdf.jsPDF==="function"
- )
- ?window.jspdf.jsPDF
- :null;
-
+ return window.jspdf&&
+ typeof window.jspdf.jsPDF==="function"?
+ window.jspdf.jsPDF:
+ null;
 }
-
 
 function loadPDF(){
 
- return new Promise(
-  function(resolve,reject){
+ return new Promise(function(resolve,reject){
 
-   var c=
-    getPDFConstructor();
+  var c=getPDFConstructor();
 
-   if(c){
-
-    resolve(c);
-
-    return;
-   }
-
-   var old=
-    document.getElementById(
-     "jspdf-loader"
-    );
-
-   if(old){
-
-    old.addEventListener(
-     "load",
-     function(){
-
-      var x=
-       getPDFConstructor();
-
-      if(x)
-       resolve(x);
-      else
-       reject(
-        new Error(
-         "Gerador PDF indisponível"
-        )
-       );
-
-     }
-    );
-
-    old.addEventListener(
-     "error",
-     function(){
-
-      reject(
-       new Error(
-        "Não foi possível carregar o gerador PDF"
-       )
-      );
-
-     }
-    );
-
-    return;
-   }
-
-   var s=
-    document.createElement(
-     "script"
-    );
-
-   s.id=
-    "jspdf-loader";
-
-   s.src=
-    "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js";
-
-   s.onload=
-    function(){
-
-     var x=
-      getPDFConstructor();
-
-     if(x)
-      resolve(x);
-     else
-      reject(
-       new Error(
-        "Gerador PDF indisponível"
-       )
-      );
-
-    };
-
-   s.onerror=
-    function(){
-
-    reject(
-     new Error(
-      "Não foi possível carregar o gerador PDF"
-     )
-    );
-
-   };
-
-   document.head.appendChild(s);
-
+  if(c){
+   resolve(c);
+   return;
   }
- );
 
+  var old=document.getElementById("jspdf-loader");
+
+  if(old){
+
+   old.addEventListener("load",function(){
+
+    var x=getPDFConstructor();
+
+    if(x)
+     resolve(x);
+    else
+     reject(new Error("Gerador PDF indisponível"));
+
+   });
+
+   old.addEventListener("error",function(){
+    reject(new Error("Não foi possível carregar o gerador PDF"));
+   });
+
+   return;
+  }
+
+  var s=document.createElement("script");
+
+  s.id="jspdf-loader";
+
+  s.src=
+   "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js";
+
+  s.onload=function(){
+
+   var x=getPDFConstructor();
+
+   if(x)
+    resolve(x);
+   else
+    reject(new Error("Gerador PDF indisponível"));
+
+  };
+
+  s.onerror=function(){
+
+   reject(
+    new Error("Não foi possível carregar o gerador PDF")
+   );
+
+  };
+
+  document.head.appendChild(s);
+ });
 }
-
 
 function createPDF(id,jsPDF){
 
- var l=
-  db.lists.find(
-   function(x){
-    return x.id===id;
-   }
-  );
+ var l=db.lists.find(function(x){
+  return x.id===id;
+ });
 
  if(!l)
-  throw new Error(
-   "Lista não encontrada."
-  );
+  throw new Error("Lista não encontrada.");
 
- var doc=
-  new jsPDF({
-   orientation:"portrait",
-   unit:"mm",
-   format:"a4"
-  });
+ var doc=new jsPDF({
+  orientation:"portrait",
+  unit:"mm",
+  format:"a4"
+ });
 
- doc.setFont(
-  "helvetica",
-  "bold"
- );
-
+ doc.setFont("helvetica","bold");
  doc.setFontSize(20);
+ doc.text("VALIDADE-",14,18);
 
- doc.text(
-  "VALIDADE-",
-  14,
-  18
- );
-
- doc.setFont(
-  "helvetica",
-  "normal"
- );
-
+ doc.setFont("helvetica","normal");
  doc.setFontSize(13);
-
- doc.text(
-  String(l.name).slice(0,55),
-  14,
-  27
- );
+ doc.text(String(l.name).slice(0,55),14,27);
 
  doc.setFontSize(9);
-
- doc.text(
-  "Relatório de vencimentos",
-  14,
-  34
- );
-
- doc.text(
-  "Data: "+
-  String(l.created),
-  145,
-  34
- );
+ doc.text("Relatório de vencimentos",14,34);
+ doc.text("Data: "+String(l.created),145,34);
 
  var y=44;
 
- l.products.forEach(
-  function(p,index){
+ l.products.forEach(function(p,index){
 
-   if(y+50>285){
-
-    doc.addPage();
-
-    y=20;
-   }
-
-   doc.setFont(
-    "helvetica",
-    "bold"
-   );
-
-   doc.setFontSize(10);
-
-   doc.text(
-    (index+1)+
-    ". Codigo: "+
-    String(p.bar),
-    14,
-    y
-   );
-
-   doc.setFont(
-    "helvetica",
-    "normal"
-   );
-
-   y+=5;
-
-   if(p.photo){
-
-    try{
-
-     doc.addImage(
-      p.photo,
-      "JPEG",
-      14,
-      y,
-      60,
-      25
-     );
-
-    }catch(e){
-
-     console.log(e);
-
-    }
-
-   }
-
-   var x=82;
-
-   doc.setFontSize(9);
-
-   doc.text(
-    "Validade:",
-    x,
-    y+6
-   );
-
-   doc.text(
-    formatDate(p.exp),
-    x+23,
-    y+6
-   );
-
-   doc.text(
-    "Quantidade:",
-    x,
-    y+13
-   );
-
-   doc.text(
-    String(p.qty),
-    x+25,
-    y+13
-   );
-
-   if(p.sector){
-
-    doc.text(
-     "Setor:",
-     x,
-     y+20
-    );
-
-    doc.text(
-     String(p.sector).slice(0,35),
-     x+15,
-     y+20
-    );
-
-   }
-
-   y+=33;
-
-   doc.line(
-    14,
-    y,
-    196,
-    y
-   );
-
-   y+=8;
-
+  if(y+50>285){
+   doc.addPage();
+   y=20;
   }
- );
+
+  doc.setFont("helvetica","bold");
+  doc.setFontSize(10);
+
+  doc.text(
+   (index+1)+". Codigo: "+String(p.bar),
+   14,
+   y
+  );
+
+  doc.setFont("helvetica","normal");
+
+  y+=5;
+
+  if(p.photo){
+
+   try{
+
+    doc.addImage(
+     p.photo,
+     "JPEG",
+     14,
+     y,
+     60,
+     25
+    );
+
+   }catch(e){
+    console.log(e);
+   }
+  }
+
+  var x=82;
+
+  doc.setFontSize(9);
+
+  doc.text("Validade:",x,y+6);
+  doc.text(formatDate(p.exp),x+23,y+6);
+
+  doc.text("Quantidade:",x,y+13);
+  doc.text(String(p.qty),x+25,y+13);
+
+  if(p.sector){
+
+   doc.text("Setor:",x,y+20);
+
+   doc.text(
+    String(p.sector).slice(0,35),
+    x+15,
+    y+20
+   );
+  }
+
+  y+=33;
+
+  doc.line(14,y,196,y);
+
+  y+=8;
+ });
 
  if(y+10>285){
-
   doc.addPage();
-
   y=20;
  }
 
  doc.text(
-  "Total de produtos: "+
-  l.products.length,
+  "Total de produtos: "+l.products.length,
   14,
   y
  );
 
  return doc;
-
 }
-
 
 function pdfFileName(l){
 
- var n=
-  String(l.name)
-   .replace(
-    /[^a-z0-9À-ÿ]+/gi,
-    "-"
-   )
-   .replace(
-    /^-+|-+$/g,
-    ""
-   );
+ var n=String(l.name)
+  .replace(/[^a-z0-9À-ÿ]+/gi,"-")
+  .replace(/^-+|-+$/g,"");
 
- return(
-  "Validade-"+
-  (n||"Lista")+
-  ".pdf"
- );
-
+ return "Validade-"+(n||"Lista")+".pdf";
 }
-
 
 function generatePDF(id){
 
- var status=
-  document.getElementById(
-   "pdfStatus-"+id
-  );
+ var status=document.getElementById("pdfStatus-"+id);
 
  if(status)
-  status.textContent=
-   "⏳ Gerando PDF...";
+  status.textContent="⏳ Gerando PDF...";
 
  loadPDF()
-  .then(
-   function(jsPDF){
 
-    var l=
-     db.lists.find(
-      function(x){
-       return x.id===id;
-      }
-     );
+ .then(function(jsPDF){
 
-    if(!l)
-     throw new Error(
-      "Lista não encontrada."
-     );
+  var l=db.lists.find(function(x){
+   return x.id===id;
+  });
 
-    var blob=
-     createPDF(
-      id,
-      jsPDF
-     ).output(
-      "blob"
-     );
+  if(!l)
+   throw new Error("Lista não encontrada.");
 
-    var url=
-     URL.createObjectURL(
-      blob
-     );
+  var blob=createPDF(id,jsPDF).output("blob");
 
-    var a=
-     document.createElement(
-      "a"
-     );
+  var url=URL.createObjectURL(blob);
 
-    a.href=url;
+  var a=document.createElement("a");
 
-    a.download=
-     pdfFileName(l);
+  a.href=url;
+  a.download=pdfFileName(l);
+  a.style.display="none";
 
-    a.style.display=
-     "none";
+  document.body.appendChild(a);
 
-    document.body.appendChild(a);
+  a.click();
 
-    a.click();
+  document.body.removeChild(a);
 
-    document.body.removeChild(a);
+  if(status)
+   status.textContent=
+    "✅ PDF gerado: "+pdfFileName(l);
 
-    if(status)
-     status.textContent=
-      "✅ PDF gerado: "+
-      pdfFileName(l);
+  setTimeout(function(){
+   URL.revokeObjectURL(url);
+  },5000);
 
-    setTimeout(
-     function(){
+ })
 
-      URL.revokeObjectURL(
-       url
-      );
+ .catch(function(e){
 
-     },
-     5000
-    );
+  console.error(e);
 
-   }
-  )
-  .catch(
-   function(e){
+  if(status)
+   status.textContent="";
 
-    console.error(e);
-
-    if(status)
-     status.textContent="";
-
-    alert(
-     "Não foi possível gerar o PDF. Verifique a internet e tente novamente."
-    );
-
-   }
+  alert(
+   "Não foi possível gerar o PDF. Verifique a internet e tente novamente."
   );
-
+ });
 }
 
+
+/* =====================================================
+   ENVIAR PDF PELO WHATSAPP
+===================================================== */
 
 function sharePDFWhatsApp(id){
 
  loadPDF()
-  .then(
-   function(jsPDF){
 
-    var l=
-     db.lists.find(
-      function(x){
-       return x.id===id;
-      }
-     );
+ .then(function(jsPDF){
 
-    if(!l)
-     throw new Error(
-      "Lista não encontrada."
-     );
+  var l=db.lists.find(function(x){
+   return x.id===id;
+  });
 
-    var blob=
-     createPDF(
-      id,
-      jsPDF
-     ).output(
-      "blob"
-     );
+  if(!l)
+   throw new Error("Lista não encontrada.");
 
-    var file=
-     new File(
-      [blob],
-      pdfFileName(l),
-      {
-       type:"application/pdf"
-      }
-     );
+  var blob=createPDF(id,jsPDF).output("blob");
 
-    if(
-     navigator.share&&
-     navigator.canShare&&
-     navigator.canShare({
-      files:[file]
-     })
-    ){
-
-     return navigator.share({
-      title:
-       "Validade- - "+
-       l.name,
-
-      text:
-       "Relatório de validade - "+
-       l.name,
-
-      files:[file]
-     });
-
-    }
-
-    var url=
-     URL.createObjectURL(
-      blob
-     );
-
-    var a=
-     document.createElement(
-      "a"
-     );
-
-    a.href=url;
-
-    a.download=
-     pdfFileName(l);
-
-    a.style.display=
-     "none";
-
-    document.body.appendChild(a);
-
-    a.click();
-
-    document.body.removeChild(a);
-
-    setTimeout(
-     function(){
-
-      URL.revokeObjectURL(
-       url
-      );
-
-     },
-     5000
-    );
-
-    alert(
-     "O PDF foi salvo. Abra o WhatsApp e anexe o arquivo."
-    );
-
-   }
-  )
-  .catch(
-   function(e){
-
-    if(
-     e&&
-     e.name==="AbortError"
-    )
-     return;
-
-    console.error(e);
-
-    alert(
-     "Não foi possível compartilhar o PDF."
-    );
-
+  var file=new File(
+   [blob],
+   pdfFileName(l),
+   {
+    type:"application/pdf"
    }
   );
+
+  /*
+   * PRIMEIRA TENTATIVA:
+   * compartilhamento nativo do Android/WebView.
+   *
+   * Não usamos canShare() como bloqueio,
+   * porque em alguns Android/WebViews ele retorna
+   * false mesmo quando navigator.share consegue
+   * abrir o compartilhamento de arquivos.
+   */
+
+  if(
+   navigator.share&&
+   typeof navigator.share==="function"
+  ){
+
+   return navigator.share({
+
+    title:"Validade- - "+l.name,
+
+    text:"Relatório de validade - "+l.name,
+
+    files:[file]
+
+   })
+
+   .then(function(){
+
+    var status=document.getElementById(
+     "pdfStatus-"+id
+    );
+
+    if(status)
+     status.textContent="✅ PDF enviado para compartilhamento.";
+
+   })
+
+   .catch(function(e){
+
+    /*
+     * Se o usuário cancelar, não fazemos nada.
+     */
+
+    if(e&&e.name==="AbortError"){
+     return;
+    }
+
+    /*
+     * Se o WebView não aceitar arquivo,
+     * seguimos para o método alternativo.
+     */
+
+    console.log(
+     "Compartilhamento nativo não aceitou o arquivo:",
+     e
+    );
+
+    compartilharPDFAlternativo(blob,l);
+   });
+
+  }
+
+  compartilharPDFAlternativo(blob,l);
+
+ })
+
+ .catch(function(e){
+
+  console.error(e);
+
+  alert(
+   "Não foi possível preparar o PDF para envio."
+  );
+
+ });
+}
+
+
+/* =====================================================
+   ALTERNATIVA
+===================================================== */
+
+function compartilharPDFAlternativo(blob,l){
+
+ var url=URL.createObjectURL(blob);
+
+ var a=document.createElement("a");
+
+ a.href=url;
+ a.download=pdfFileName(l);
+ a.style.display="none";
+
+ document.body.appendChild(a);
+
+ a.click();
+
+ document.body.removeChild(a);
+
+ setTimeout(function(){
+
+  URL.revokeObjectURL(url);
+
+ },5000);
+
+ /*
+  * Abre o WhatsApp depois de salvar o PDF.
+  */
+
+ setTimeout(function(){
+
+  var texto=
+   encodeURIComponent(
+    "Relatório de validade - "+l.name
+   );
+
+  var whatsappUrl=
+   "https://wa.me/?text="+texto;
+
+  window.location.href=whatsappUrl;
+
+ },700);
 
 }
 
 
+/* =====================================================
+   LIMPAR DADOS
+===================================================== */
+
 function clearData(){
 
- if(
-  confirm(
-   "Apagar todas as listas?"
-  )
- ){
+ if(confirm("Apagar todas as listas?")){
 
-  db={
-   lists:[]
-  };
+  db={lists:[]};
 
   save();
 
@@ -2076,25 +1251,17 @@ function clearData(){
   currentPhoto="";
 
   home();
-
  }
-
 }
-
 
 function iniciarAplicativo(){
 
  loadData();
 
  home();
-
 }
 
-
-if(
- document.readyState===
- "loading"
-){
+if(document.readyState==="loading"){
 
  document.addEventListener(
   "DOMContentLoaded",
