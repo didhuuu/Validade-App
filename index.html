@@ -4,49 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Validade-</title>
-
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
 header{background:linear-gradient(135deg,#071d49,#1265d8);color:#fff;padding:24px 18px 20px;border-radius:0 0 24px 24px}
-header h1{margin:0;font-size:28px}
-header p{margin:5px 0 0;opacity:.85}
-main{max-width:620px;margin:auto;padding:18px}
-.card{background:#fff;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 5px 18px #102a4d14}
+header h1{margin:0;font-size:28px}header p{margin:5px 0 0;opacity:.85}
+main{max-width:620px;margin:auto;padding:18px}.card{background:#fff;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 5px 18px #102a4d14}
 button{border:0;border-radius:13px;padding:14px 16px;font-size:16px;font-weight:700;cursor:pointer}
-.primary{background:#1265d8;color:#fff;width:100%}
-.green{background:#16a36b;color:#fff;width:100%}
-.whatsapp{background:#128c4a;color:#fff;width:100%}
-.light{background:#eaf1fb;color:#17457f}
-.danger{background:#feecec;color:#b42318;width:100%}
-.actions{display:grid;gap:12px}
-.muted{color:#68758a;font-size:14px}
-.hidden{display:none!important}
-input{width:100%;padding:13px;border:1px solid #ccd6e4;border-radius:11px;font-size:16px;margin-top:7px}
-label{display:block;margin:13px 0;font-weight:700;font-size:14px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.back{background:transparent;color:#1265d8;padding:5px 0}
-.listbox{border:1px solid #dce4ef;border-radius:13px;padding:13px;margin:10px 0}
-.product{border:1px solid #dce4ef;padding:12px;background:#f7f9fc;border-radius:12px;margin-top:10px}
-.badge{display:inline-block;background:#e8f4ff;color:#1265d8;border-radius:20px;padding:5px 9px;font-size:12px}
-.camera{background:#101722;border-radius:16px;padding:14px;color:#fff;text-align:center}
-.camera-title{font-size:15px;margin-bottom:10px}
-.video-wrap{position:relative}
-video{width:100%;height:300px;object-fit:cover;border-radius:11px;background:#05080d}
-.scan-area{position:absolute;left:8%;right:8%;top:28%;height:44%;border:2px solid #31d78c;border-radius:10px;pointer-events:none}
-.scan-area span{position:absolute;bottom:-28px;left:0;right:0;font-size:12px;color:#31d78c}
-.scanline{height:3px;background:#31d78c;position:absolute;left:10%;right:10%;top:50%;border-radius:5px}
-.photo-frame{position:absolute;left:5%;right:5%;top:35%;height:30%;border:2px solid #31d78c;border-radius:8px;pointer-events:none}
-.photo-frame span{position:absolute;bottom:-28px;left:0;right:0;font-size:12px;color:#31d78c}
-.status{padding:10px;border-radius:10px;background:#eef7f1;color:#17663f;font-size:14px;margin-top:10px}
-.photo-preview{width:100%;aspect-ratio:2.4/1;object-fit:cover;border-radius:10px;margin-top:12px;border:1px solid #ccd6e4;background:#e9eef5}
-.report-photo{width:180px;height:75px;object-fit:cover;border-radius:6px;border:1px solid #ccd6e4;display:block;margin:10px 0}
-.step{font-size:13px;color:#68758a;margin:14px 0 6px;font-weight:700}
-.code-number{font-size:18px;font-weight:700;letter-spacing:1px}
-hr{border:0;border-top:1px solid #e3e8ef;margin:18px 0}
-.report-actions{display:grid;gap:8px;margin-top:12px}
-.pdf-status{font-size:13px;margin-top:8px;color:#68758a}
+.primary{background:#1265d8;color:#fff;width:100%}.green{background:#16a36b;color:#fff;width:100%}.whatsapp{background:#128c4a;color:#fff;width:100%}.light{background:#eaf1fb;color:#17457f}.danger{background:#feecec;color:#b42318;width:100%}
+.actions{display:grid;gap:12px}.muted{color:#68758a;font-size:14px}.hidden{display:none!important}
+input{width:100%;padding:13px;border:1px solid #ccd6e4;border-radius:11px;font-size:16px;margin-top:7px}label{display:block;margin:13px 0;font-weight:700;font-size:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.top{display:flex;justify-content:space-between;align-items:center;gap:10px}.back{background:transparent;color:#1265d8;padding:5px 0}
+.listbox{border:1px solid #dce4ef;border-radius:13px;padding:13px;margin:10px 0}.product{border:1px solid #dce4ef;padding:12px;background:#f7f9fc;border-radius:12px;margin-top:10px}
+.badge{display:inline-block;background:#e8f4ff;color:#1265d8;border-radius:20px;padding:5px 9px;font-size:12px}.camera{background:#101722;border-radius:16px;padding:14px;color:#fff;text-align:center}.camera-title{font-size:15px;margin-bottom:10px}
+.video-wrap{position:relative}video{width:100%;height:300px;object-fit:cover;border-radius:11px;background:#05080d}.scan-area{position:absolute;left:8%;right:8%;top:28%;height:44%;border:2px solid #31d78c;border-radius:10px;pointer-events:none}.scan-area span,.photo-frame span{position:absolute;bottom:-28px;left:0;right:0;font-size:12px;color:#31d78c}
+.scanline{height:3px;background:#31d78c;position:absolute;left:10%;right:10%;top:50%;border-radius:5px}.photo-frame{position:absolute;left:5%;right:5%;top:35%;height:30%;border:2px solid #31d78c;border-radius:8px;pointer-events:none}
+.status{padding:10px;border-radius:10px;background:#eef7f1;color:#17663f;font-size:14px;margin-top:10px}.photo-preview{width:100%;aspect-ratio:2.4/1;object-fit:cover;border-radius:10px;margin-top:12px;border:1px solid #ccd6e4;background:#e9eef5}.report-photo{width:180px;height:75px;object-fit:cover;border-radius:6px;border:1px solid #ccd6e4;display:block;margin:10px 0}
+.step{font-size:13px;color:#68758a;margin:14px 0 6px;font-weight:700}.code-number{font-size:18px;font-weight:700;letter-spacing:1px}hr{border:0;border-top:1px solid #e3e8ef;margin:18px 0}.report-actions{display:grid;gap:8px;margin-top:12px}.pdf-status{font-size:13px;margin-top:8px;color:#68758a}
 @media(max-width:480px){.row{grid-template-columns:1fr}video{height:270px}}
 </style>
 </head>
@@ -62,217 +36,96 @@ hr{border:0;border-top:1px solid #e3e8ef;margin:18px 0}
 
 <script>
 
-/* =====================================================
-   CONFIGURAÇÃO
-===================================================== */
+var KEY="validade_app_v7";
+var db={lists:[]},current=null,stream=null,scanTimer=null,cameraMode="barcode",currentPhoto="";
 
-const KEY="validade_app_v6";
+function app(){
+ return document.getElementById("app")
+}
 
-let db={lists:[]};
-let current=null;
-let stream=null;
-let scanTimer=null;
-let cameraMode="barcode";
-let currentPhoto="";
+function esc(v){
+ return String(v==null?"":v).replace(/[&<>"']/g,function(m){
+  return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]
+ })
+}
 
-/* =====================================================
-   INICIALIZAÇÃO DO BANCO
-===================================================== */
+function formatDate(v){
+ if(!v)return"";
+ var p=String(v).split("-");
+ return p.length===3?p[2]+"/"+p[1]+"/"+p[0]:v
+}
 
 function loadData(){
-
  try{
+  var s=localStorage.getItem(KEY)||
+        localStorage.getItem("validade_app_v6")||
+        localStorage.getItem("validade_app_v5")||
+        localStorage.getItem("validade_app_v4");
 
-  let saved=localStorage.getItem(KEY);
-
-  /* compatibilidade com versões anteriores */
-  if(!saved){
-   saved=localStorage.getItem("validade_app_v5");
+  if(s){
+   var d=JSON.parse(s);
+   if(d&&Array.isArray(d.lists))db=d
   }
-
-  if(!saved){
-   saved=localStorage.getItem("validade_app_v4");
-  }
-
-  if(saved){
-
-   const parsed=JSON.parse(saved);
-
-   if(parsed && Array.isArray(parsed.lists)){
-    db=parsed;
-   }
-
-  }
-
  }catch(e){
-
-  console.error("Erro ao carregar:",e);
-  db={lists:[]};
-
+  console.error(e);
+  db={lists:[]}
  }
-
 }
 
 function save(){
-
  try{
-
-  localStorage.setItem(KEY,JSON.stringify(db));
-
+  localStorage.setItem(KEY,JSON.stringify(db))
  }catch(e){
-
-  alert("Não foi possível salvar os dados.");
-
+  alert("Não foi possível salvar os dados.")
  }
-
 }
-
-/* =====================================================
-   UTILIDADES
-===================================================== */
-
-function app(){
- return document.getElementById("app");
-}
-
-function esc(value){
-
- return String(value??"")
- .replace(/[&<>"']/g,function(m){
-
-  return {
-   "&":"&amp;",
-   "<":"&lt;",
-   ">":"&gt;",
-   '"':"&quot;",
-   "'":"&#39;"
-  }[m];
-
- });
-
-}
-
-function formatDate(value){
-
- if(!value)return "";
-
- const p=String(value).split("-");
-
- if(p.length!==3)return value;
-
- return p[2]+"/"+p[1]+"/"+p[0];
-
-}
-
-/* =====================================================
-   INÍCIO
-===================================================== */
 
 function home(){
 
  stopCam();
-
  current=null;
  currentPhoto="";
 
- app().innerHTML=`
-
- <section class="card">
-
-  <h2>Início</h2>
-
-  <p class="muted">
-   Controle seus produtos e datas de validade.
-  </p>
-
-  <div class="actions">
-
-   <button class="primary" onclick="newList()">
-    ➕ Criar nova lista
-   </button>
-
-   <button class="light" onclick="lists()">
-    📋 Minhas listas
-   </button>
-
-   <button class="light" onclick="reports()">
-    📄 Relatório final
-   </button>
-
-   <button class="danger" onclick="clearData()">
-    🗑 Limpar dados
-   </button>
-
-  </div>
-
- </section>
-
- <section class="card">
-
-  <b>Como funciona</b>
-
-  <p class="muted">
-   A câmera lê o código de barras.
-   Depois abre novamente para fotografar o produto.
-   Informe a validade e a quantidade e salve.
-  </p>
-
- </section>
-
- `;
-
+ app().innerHTML=
+ '<section class="card">'+
+ '<h2>Início</h2>'+
+ '<p class="muted">Controle seus produtos e datas de validade.</p>'+
+ '<div class="actions">'+
+ '<button class="primary" onclick="newList()">➕ Criar nova lista</button>'+
+ '<button class="light" onclick="lists()">📋 Minhas listas</button>'+
+ '<button class="light" onclick="reports()">📄 Relatório final</button>'+
+ '<button class="danger" onclick="clearData()">🗑 Limpar dados</button>'+
+ '</div>'+
+ '</section>'+
+ '<section class="card">'+
+ '<b>Como funciona</b>'+
+ '<p class="muted">A câmera lê o código de barras. Depois abre novamente para fotografar o produto. Informe a validade e a quantidade e salve.</p>'+
+ '</section>'
 }
-
-/* =====================================================
-   NOVA LISTA
-===================================================== */
 
 function newList(){
 
- app().innerHTML=`
-
- <section class="card">
-
-  <div class="top">
-
-   <h2>Nova lista</h2>
-
-   <button class="back" onclick="home()">
-    ← Voltar
-   </button>
-
-  </div>
-
-  <label>
-   Nome da lista
-
-   <input
-    id="lname"
-    placeholder="Ex.: Câmara Fria - 11/09">
-  </label>
-
-  <button class="primary" onclick="createList()">
-   Criar lista
-  </button>
-
- </section>
-
- `;
-
+ app().innerHTML=
+ '<section class="card">'+
+ '<div class="top">'+
+ '<h2>Nova lista</h2>'+
+ '<button class="back" onclick="home()">← Voltar</button>'+
+ '</div>'+
+ '<label>Nome da lista'+
+ '<input id="lname" placeholder="Ex.: Câmara Fria - 11/09">'+
+ '</label>'+
+ '<button class="primary" onclick="createList()">Criar lista</button>'+
+ '</section>'
 }
 
 function createList(){
 
- const name=document
-  .getElementById("lname")
-  ?.value
-  .trim();
+ var x=document.getElementById("lname"),
+ name=x?x.value.trim():"";
 
  if(!name){
-
   alert("Digite o nome da lista.");
-  return;
-
+  return
  }
 
  current={
@@ -283,344 +136,197 @@ function createList(){
  };
 
  currentPhoto="";
-
- editor();
-
+ editor()
 }
-
-/* =====================================================
-   EDITOR
-===================================================== */
 
 function editor(){
 
  stopCam();
 
  if(!current){
-
   home();
-  return;
-
+  return
  }
 
  currentPhoto="";
 
- app().innerHTML=`
+ app().innerHTML=
+ '<section class="card">'+
 
- <section class="card">
+ '<div class="top">'+
+ '<div>'+
+ '<h2>'+esc(current.name)+'</h2>'+
+ '<span class="badge">'+current.products.length+' produto(s)</span>'+
+ '</div>'+
+ '<button class="back" onclick="home()">← Início</button>'+
+ '</div>'+
 
-  <div class="top">
+ '<hr>'+
 
-   <div>
+ '<div class="step">ETAPA 1 — ESCANEAR CÓDIGO DE BARRAS</div>'+
 
-    <h2>${esc(current.name)}</h2>
+ '<div class="camera">'+
+ '<div id="cammsg" class="camera-title">Abrindo câmera...</div>'+
 
-    <span class="badge">
-     ${current.products.length} produto(s)
-    </span>
+ '<div class="video-wrap">'+
+ '<video id="video" autoplay playsinline muted></video>'+
 
-   </div>
+ '<div id="scanarea" class="scan-area">'+
+ '<span>Posicione o código de barras aqui</span>'+
+ '</div>'+
 
-   <button class="back" onclick="home()">
-    ← Início
-   </button>
+ '<div id="scanline" class="scanline"></div>'+
 
-  </div>
+ '<div id="photoframe" class="photo-frame hidden">'+
+ '<span>Enquadre o produto aqui</span>'+
+ '</div>'+
 
-  <hr>
+ '</div>'+
+ '</div>'+
 
-  <div class="step">
-   ETAPA 1 — ESCANEAR CÓDIGO DE BARRAS
-  </div>
+ '<div id="scanstatus" class="status">📷 Preparando câmera...</div>'+
 
-  <div class="camera">
+ '<label>Código de barras'+
+ '<input id="pbar" inputmode="numeric" pattern="[0-9]*" placeholder="Código preenchido automaticamente">'+
+ '</label>'+
 
-   <div id="cammsg" class="camera-title">
-    Abrindo câmera...
-   </div>
+ '<div id="photoSection" class="hidden">'+
 
-   <div class="video-wrap">
+ '<div class="step">ETAPA 2 — FOTO DO PRODUTO</div>'+
 
-    <video
-     id="video"
-     autoplay
-     playsinline
-     muted>
-    </video>
+ '<button class="primary" onclick="tirarFoto()">📸 Tirar foto do produto</button>'+
 
-    <div id="scanarea" class="scan-area">
+ '<img id="photoPreview" class="photo-preview hidden" alt="Foto do produto">'+
 
-     <span>
-      Posicione o código de barras aqui
-     </span>
+ '</div>'+
 
-    </div>
+ '<div id="dataSection" class="hidden">'+
 
-    <div id="scanline" class="scanline"></div>
+ '<div class="step">ETAPA 3 — VALIDADE E QUANTIDADE</div>'+
 
-    <div id="photoframe" class="photo-frame hidden">
+ '<div class="row">'+
 
-     <span>
-      Enquadre o produto aqui
-     </span>
+ '<label>Validade'+
+ '<input id="pexp" type="date">'+
+ '</label>'+
 
-    </div>
+ '<label>Quantidade'+
+ '<input id="pqty" type="number" min="1" value="1">'+
+ '</label>'+
 
-   </div>
+ '</div>'+
 
-  </div>
+ '<label>Setor'+
+ '<input id="psector" placeholder="Ex.: Câmara Fria">'+
+ '</label>'+
 
-  <div id="scanstatus" class="status">
-   📷 Preparando câmera...
-  </div>
+ '<button class="green" onclick="addProduct()">💾 Salvar produto</button>'+
 
-  <label>
+ '</div>'+
 
-   Código de barras
+ '<div style="margin-top:18px">'+
+ '<h3>Produtos desta lista</h3>'+
+ '<div id="products"></div>'+
+ '</div>'+
 
-   <input
-    id="pbar"
-    inputmode="numeric"
-    pattern="[0-9]*"
-    placeholder="Código preenchido automaticamente">
+ '<button class="primary" style="margin-top:15px" onclick="finishList()">✅ Finalizar lista</button>'+
 
-  </label>
-
-  <div id="photoSection" class="hidden">
-
-   <div class="step">
-    ETAPA 2 — FOTO DO PRODUTO
-   </div>
-
-   <button
-    id="photoButton"
-    class="primary"
-    onclick="tirarFoto()">
-
-    📸 Tirar foto do produto
-
-   </button>
-
-   <img
-    id="photoPreview"
-    class="photo-preview hidden"
-    alt="Foto do produto">
-
-  </div>
-
-  <div id="dataSection" class="hidden">
-
-   <div class="step">
-    ETAPA 3 — VALIDADE E QUANTIDADE
-   </div>
-
-   <div class="row">
-
-    <label>
-
-     Validade
-
-     <input id="pexp" type="date">
-
-    </label>
-
-    <label>
-
-     Quantidade
-
-     <input
-      id="pqty"
-      type="number"
-      min="1"
-      value="1">
-
-    </label>
-
-   </div>
-
-   <label>
-
-    Setor
-
-    <input
-     id="psector"
-     placeholder="Ex.: Câmara Fria">
-
-   </label>
-
-   <button class="green" onclick="addProduct()">
-    💾 Salvar produto
-   </button>
-
-  </div>
-
-  <div style="margin-top:18px">
-
-   <h3>
-    Produtos desta lista
-   </h3>
-
-   <div id="products"></div>
-
-  </div>
-
-  <button
-   class="primary"
-   style="margin-top:15px"
-   onclick="finishList()">
-
-   ✅ Finalizar lista
-
-  </button>
-
- </section>
-
- `;
+ '</section>';
 
  renderProducts();
 
- setTimeout(function(){
-  iniciarLeituraCodigo();
- },400);
-
+ setTimeout(iniciarLeituraCodigo,400)
 }
-
-/* =====================================================
-   PRODUTOS
-===================================================== */
 
 function renderProducts(){
 
- const el=document.getElementById("products");
+ var el=document.getElementById("products");
 
- if(!el || !current)return;
+ if(!el||!current)return;
 
  if(!current.products.length){
-
-  el.innerHTML=
-   '<p class="muted">Nenhum produto cadastrado ainda.</p>';
-
-  return;
-
+  el.innerHTML='<p class="muted">Nenhum produto cadastrado ainda.</p>';
+  return
  }
 
  el.innerHTML=current.products.map(function(p,i){
 
-  return `
+  return '<div class="product">'+
+  '<div class="code-number">'+
+  (i+1)+'. '+esc(p.bar)+
+  '</div>'+
 
-   <div class="product">
+  (p.photo?
+   '<img src="'+p.photo+'" class="report-photo" alt="Produto">':
+   "")+
 
-    <div class="code-number">
-     ${i+1}. ${esc(p.bar)}
-    </div>
+  '<div><b>Validade:</b> '+esc(formatDate(p.exp))+'</div>'+
+  '<div><b>Quantidade:</b> '+esc(p.qty)+'</div>'+
 
-    ${
-     p.photo
-     ?
-     `<img
-       src="${p.photo}"
-       class="report-photo"
-       alt="Produto">`
-     :
-     ""
-    }
+  (p.sector?
+   '<div class="muted">Setor: '+esc(p.sector)+'</div>':
+   "")+
 
-    <div>
-     <b>Validade:</b>
-     ${esc(formatDate(p.exp))}
-    </div>
+  '</div>'
 
-    <div>
-     <b>Quantidade:</b>
-     ${esc(p.qty)}
-    </div>
-
-    ${
-     p.sector
-     ?
-     `<div class="muted">
-       Setor: ${esc(p.sector)}
-      </div>`
-     :
-     ""
-    }
-
-   </div>
-
-  `;
-
- }).join("");
-
+ }).join("")
 }
 
-/* =====================================================
-   CÓDIGO DE BARRAS
-===================================================== */
-
-async function iniciarLeituraCodigo(){
+function iniciarLeituraCodigo(){
 
  cameraMode="barcode";
 
- const video=document.getElementById("video");
- const status=document.getElementById("scanstatus");
- const msg=document.getElementById("cammsg");
+ var video=document.getElementById("video"),
+ status=document.getElementById("scanstatus"),
+ msg=document.getElementById("cammsg");
 
  if(!video)return;
 
- try{
+ stopCam();
 
-  stopCam();
-
-  if(!navigator.mediaDevices ||
-     !navigator.mediaDevices.getUserMedia){
-
-   throw new Error("Câmera indisponível");
-
-  }
-
-  if(msg)
-   msg.textContent=
-   "Aponte para o código de barras.";
+ if(!navigator.mediaDevices||
+    !navigator.mediaDevices.getUserMedia){
 
   if(status)
-   status.textContent=
-   "🔎 Procurando código...";
+   status.textContent="⚠️ Câmera indisponível.";
 
-  stream=await navigator.mediaDevices.getUserMedia({
+  return
+ }
 
-   audio:false,
+ if(msg)
+  msg.textContent="Aponte para o código de barras.";
 
-   video:{
-    facingMode:{ideal:"environment"},
-    width:{ideal:1280},
-    height:{ideal:720},
-    frameRate:{ideal:30,max:60}
-   }
+ if(status)
+  status.textContent="🔎 Procurando código...";
 
-  });
+ navigator.mediaDevices.getUserMedia({
+  audio:false,
+  video:{
+   facingMode:{ideal:"environment"},
+   width:{ideal:1280},
+   height:{ideal:720},
+   frameRate:{ideal:30,max:60}
+  }
+ }).then(function(s){
 
-  video.srcObject=stream;
+  stream=s;
+  video.srcObject=s;
 
-  await video.play();
+  return video.play()
 
-  if(!("BarcodeDetector" in window)){
+ }).then(function(){
+
+  if(!window.BarcodeDetector){
 
    if(status)
-    status.textContent=
-    "⚠️ Leitura automática indisponível. Digite o código.";
+    status.textContent="⚠️ Leitura automática indisponível. Digite o código.";
 
-   return;
-
+   return
   }
 
-  let detector;
+  return BarcodeDetector.getSupportedFormats().then(function(formats){
 
-  try{
-
-   const formats=
-    await BarcodeDetector.getSupportedFormats();
-
-   const preferidos=[
+   var pref=[
     "ean_13",
     "ean_8",
     "upc_a",
@@ -629,121 +335,96 @@ async function iniciarLeituraCodigo(){
     "itf"
    ];
 
-   const validos=
-    preferidos.filter(function(f){
-     return formats.includes(f);
-    });
-
-   detector=new BarcodeDetector({
-    formats:validos.length?validos:formats
+   var valid=pref.filter(function(f){
+    return formats.indexOf(f)>=0
    });
 
-  }catch(e){
+   var detector=new BarcodeDetector({
+    formats:valid.length?valid:formats
+   });
 
-   detector=new BarcodeDetector();
+   var busy=false;
 
-  }
+   scanTimer=setInterval(function(){
 
-  let busy=false;
+    if(cameraMode!=="barcode"||
+       busy||
+       !video.videoWidth)return;
 
-  scanTimer=setInterval(async function(){
+    busy=true;
 
-   if(cameraMode!=="barcode")return;
+    detector.detect(video).then(function(codes){
 
-   if(busy)return;
+     if(codes&&codes.length){
 
-   if(!video.videoWidth)return;
+      var codigo=String(
+       codes[0].rawValue||""
+      ).replace(/\D/g,"");
 
-   busy=true;
+      if(codigo){
 
-   try{
+       var input=document.getElementById("pbar");
 
-    const codes=await detector.detect(video);
+       if(input)
+        input.value=codigo;
 
-    if(codes && codes.length){
+       if(scanTimer){
+        clearInterval(scanTimer);
+        scanTimer=null
+       }
 
-     let codigo=String(
-      codes[0].rawValue||""
-     ).replace(/\D/g,"");
+       if(status)
+        status.textContent="✅ Código lido: "+codigo;
 
-     if(codigo){
+       if(msg)
+        msg.textContent="Código lido. Abrindo câmera para foto...";
 
-      const input=
-       document.getElementById("pbar");
-
-      if(input)
-       input.value=codigo;
-
-      clearInterval(scanTimer);
-      scanTimer=null;
-
-      if(status)
-       status.textContent=
-       "✅ Código lido: "+codigo;
-
-      if(msg)
-       msg.textContent=
-       "Código lido. Abrindo câmera para foto...";
-
-      setTimeout(function(){
-
-       iniciarCameraFoto();
-
-      },400);
-
+       setTimeout(iniciarCameraFoto,400)
+      }
      }
 
-    }
+    }).catch(function(e){
 
-   }catch(e){
+     console.log("Scanner:",e)
 
-    console.log("Scanner:",e);
+    }).then(function(){
 
-   }finally{
+     busy=false
 
-    busy=false;
+    })
 
-   }
+   },120)
 
-  },120);
+  })
 
- }catch(e){
+ }).catch(function(e){
 
   console.log("Câmera:",e);
 
   if(status)
-   status.textContent=
-   "⚠️ Não foi possível abrir a câmera. Verifique a permissão.";
+   status.textContent="⚠️ Não foi possível abrir a câmera. Verifique a permissão."
 
- }
-
+ })
 }
 
-/* =====================================================
-   CÂMERA DE FOTO
-===================================================== */
-
-async function iniciarCameraFoto(){
+function iniciarCameraFoto(){
 
  cameraMode="photo";
 
  if(scanTimer){
-
   clearInterval(scanTimer);
-  scanTimer=null;
-
+  scanTimer=null
  }
 
  stopCameraTracksOnly();
 
- const video=document.getElementById("video");
- const status=document.getElementById("scanstatus");
- const msg=document.getElementById("cammsg");
-
- const scanarea=document.getElementById("scanarea");
- const scanline=document.getElementById("scanline");
- const photoframe=document.getElementById("photoframe");
- const photoSection=document.getElementById("photoSection");
+ var video=document.getElementById("video"),
+ status=document.getElementById("scanstatus"),
+ msg=document.getElementById("cammsg"),
+ scanarea=document.getElementById("scanarea"),
+ scanline=document.getElementById("scanline"),
+ frame=document.getElementById("photoframe"),
+ section=document.getElementById("photoSection");
 
  if(!video)return;
 
@@ -753,103 +434,81 @@ async function iniciarCameraFoto(){
  if(scanline)
   scanline.classList.add("hidden");
 
- if(photoframe)
-  photoframe.classList.remove("hidden");
+ if(frame)
+  frame.classList.remove("hidden");
 
- if(photoSection)
-  photoSection.classList.remove("hidden");
+ if(section)
+  section.classList.remove("hidden");
 
  if(msg)
-  msg.textContent=
-  "Agora enquadre o produto e tire a foto.";
+  msg.textContent="Agora enquadre o produto e tire a foto.";
 
  if(status)
-  status.textContent=
-  "📸 Câmera pronta para fotografar.";
+  status.textContent="📸 Câmera pronta para fotografar.";
 
- try{
+ navigator.mediaDevices.getUserMedia({
+  audio:false,
+  video:{
+   facingMode:{ideal:"environment"},
+   width:{ideal:1920},
+   height:{ideal:1080}
+  }
+ }).then(function(s){
 
-  stream=await navigator.mediaDevices.getUserMedia({
+  stream=s;
+  video.srcObject=s;
 
-   audio:false,
+  return video.play()
 
-   video:{
-    facingMode:{ideal:"environment"},
-    width:{ideal:1920},
-    height:{ideal:1080}
-   }
-
-  });
-
-  video.srcObject=stream;
-
-  await video.play();
-
- }catch(e){
+ }).catch(function(e){
 
   console.log("Foto:",e);
 
   if(status)
-   status.textContent=
-   "⚠️ Não foi possível abrir a câmera para a foto.";
+   status.textContent="⚠️ Não foi possível abrir a câmera para a foto."
 
- }
-
+ })
 }
-
-/* =====================================================
-   TIRAR FOTO
-===================================================== */
 
 function tirarFoto(){
 
  if(cameraMode!=="photo"){
-
   iniciarCameraFoto();
-  return;
-
+  return
  }
 
- const video=document.getElementById("video");
+ var video=document.getElementById("video");
 
- if(!video || !video.videoWidth){
-
+ if(!video||!video.videoWidth){
   alert("A câmera ainda não está pronta.");
-  return;
-
+  return
  }
 
- const ratio=60/25;
+ var ratio=2.4,
+ vw=video.videoWidth,
+ vh=video.videoHeight,
+ cw=vw,
+ ch=Math.round(vw/ratio);
 
- const vw=video.videoWidth;
- const vh=video.videoHeight;
-
- let cropWidth=vw;
- let cropHeight=Math.round(vw/ratio);
-
- if(cropHeight>vh){
-
-  cropHeight=vh;
-  cropWidth=Math.round(vh*ratio);
-
+ if(ch>vh){
+  ch=vh;
+  cw=Math.round(vh*ratio)
  }
 
- const sx=Math.round((vw-cropWidth)/2);
- const sy=Math.round((vh-cropHeight)/2);
+ var sx=Math.round((vw-cw)/2),
+ sy=Math.round((vh-ch)/2),
 
- const canvas=document.createElement("canvas");
+ canvas=document.createElement("canvas");
 
  canvas.width=1200;
  canvas.height=500;
 
- const ctx=canvas.getContext("2d");
-
- ctx.drawImage(
+ canvas.getContext("2d").drawImage(
   video,
   sx,
   sy,
-  cropWidth,
-  cropHeight,
+  cw,
+  ch,
   0,
   0,
   1200,
@@ -861,158 +520,117 @@ function tirarFoto(){
   .82
  );
 
- const preview=
-  document.getElementById("photoPreview");
+ var preview=document.getElementById("photoPreview");
 
  if(preview){
-
   preview.src=currentPhoto;
-
-  preview.classList.remove("hidden");
-
+  preview.classList.remove("hidden")
  }
 
  stopCam();
 
- const status=
-  document.getElementById("scanstatus");
-
- const msg=
-  document.getElementById("cammsg");
-
- const data=
-  document.getElementById("dataSection");
+ var status=document.getElementById("scanstatus"),
+ msg=document.getElementById("cammsg"),
+ data=document.getElementById("dataSection");
 
  if(status)
-  status.textContent=
-  "✅ Foto capturada.";
+  status.textContent="✅ Foto capturada.";
 
  if(msg)
-  msg.textContent=
-  "Foto pronta. Informe validade e quantidade.";
+  msg.textContent="Foto pronta. Informe validade e quantidade.";
 
  if(data)
-  data.classList.remove("hidden");
-
+  data.classList.remove("hidden")
 }
-
-/* =====================================================
-   PARAR CÂMERA
-===================================================== */
 
 function stopCameraTracksOnly(){
 
  if(stream){
-
-  stream.getTracks().forEach(function(track){
-   track.stop();
+  stream.getTracks().forEach(function(t){
+   t.stop()
   });
 
-  stream=null;
-
+  stream=null
  }
-
 }
 
 function stopCam(){
 
  if(scanTimer){
-
   clearInterval(scanTimer);
-  scanTimer=null;
-
+  scanTimer=null
  }
 
- stopCameraTracksOnly();
-
+ stopCameraTracksOnly()
 }
-
-/* =====================================================
-   ADICIONAR PRODUTO
-===================================================== */
 
 function addProduct(){
 
  if(!current)return;
 
- const bar=String(
-  document.getElementById("pbar")?.value||""
- ).replace(/\D/g,"");
+ var b=document.getElementById("pbar"),
+ e=document.getElementById("pexp"),
+ q=document.getElementById("pqty"),
+ s=document.getElementById("psector"),
 
- const exp=
-  document.getElementById("pexp")?.value||"";
+ bar=b?
+  String(b.value||"").replace(/\D/g,""):
+  "",
 
- const qty=Number(
-  document.getElementById("pqty")?.value||0
- );
+ exp=e?e.value:"",
 
- const sector=String(
-  document.getElementById("psector")?.value||""
- ).trim();
+ qty=q?Number(q.value||0):0,
+
+ sector=s?
+  String(s.value||"").trim():
+  "";
 
  if(!bar){
-
   alert("Leia o código de barras.");
-  return;
-
+  return
  }
 
  if(!currentPhoto){
-
   alert("Tire a foto do produto.");
-  return;
-
+  return
  }
 
  if(!exp){
-
   alert("Informe a validade.");
-  return;
-
+  return
  }
 
  if(qty<1){
-
   alert("Informe uma quantidade válida.");
-  return;
-
+  return
  }
 
  current.products.push({
-
   bar:bar,
   photo:currentPhoto,
   exp:exp,
   qty:qty,
   sector:sector
-
  });
 
  save();
 
  currentPhoto="";
 
- editor();
-
+ editor()
 }
-
-/* =====================================================
-   FINALIZAR LISTA
-===================================================== */
 
 function finishList(){
 
  stopCam();
 
- if(!current || !current.products.length){
-
+ if(!current||!current.products.length){
   alert("Cadastre pelo menos um produto.");
-  return;
-
+  return
  }
 
- const index=db.lists.findIndex(function(item){
-  return item.id===current.id;
+ var index=db.lists.findIndex(function(x){
+  return x.id===current.id
  });
 
  if(index<0)
@@ -1027,254 +645,237 @@ function finishList(){
  current=null;
  currentPhoto="";
 
- home();
-
+ home()
 }
-
-/* =====================================================
-   LISTAS
-===================================================== */
 
 function lists(){
 
  stopCam();
 
- app().innerHTML=`
+ var html=
+ '<section class="card">'+
+ '<div class="top">'+
+ '<h2>Minhas listas</h2>'+
+ '<button class="back" onclick="home()">← Início</button>'+
+ '</div>';
 
- <section class="card">
+ if(db.lists.length)
 
-  <div class="top">
+  html+=db.lists.map(function(l){
 
-   <h2>Minhas listas</h2>
+   return '<div class="listbox">'+
+   '<b>'+esc(l.name)+'</b><br>'+
+   '<span class="muted">'+
+   l.products.length+
+   ' produto(s) • '+
+   esc(l.created)+
+   '</span><br>'+
 
-   <button class="back" onclick="home()">
-    ← Início
-   </button>
+   '<button class="light" style="margin-top:8px" onclick="openList('+l.id+')">'+
+   'Abrir lista'+
+   '</button>'+
 
-  </div>
+   '</div>'
 
-  ${
-   db.lists.length
-   ?
-   db.lists.map(function(l){
+  }).join("");
 
-    return `
+ else
 
-     <div class="listbox">
+  html+='<p class="muted">Nenhuma lista finalizada.</p>';
 
-      <b>${esc(l.name)}</b>
+ html+='</section>';
 
-      <br>
-
-      <span class="muted">
-       ${l.products.length} produto(s)
-       • ${esc(l.created)}
-      </span>
-
-      <br>
-
-      <button
-       class="light"
-       style="margin-top:8px"
-       onclick="openList(${l.id})">
-
-       Abrir lista
-
-      </button>
-
-     </div>
-
-    `;
-
-   }).join("")
-   :
-   '<p class="muted">Nenhuma lista finalizada.</p>'
-  }
-
- </section>
-
- `;
-
+ app().innerHTML=html
 }
 
 function openList(id){
 
- current=db.lists.find(function(item){
-  return item.id===id;
+ current=db.lists.find(function(x){
+  return x.id===id
  })||null;
 
  if(current)
-  editor();
-
+  editor()
 }
-
-/* =====================================================
-   RELATÓRIO
-===================================================== */
 
 function reports(){
 
  stopCam();
 
- app().innerHTML=`
+ var html=
+ '<section class="card">'+
+ '<div class="top">'+
+ '<h2>Relatório final</h2>'+
+ '<button class="back" onclick="home()">← Início</button>'+
+ '</div>';
 
- <section class="card">
+ if(db.lists.length)
 
-  <div class="top">
+  html+=db.lists.map(function(l){
 
-   <h2>Relatório final</h2>
+   var products=l.products.map(function(p,i){
 
-   <button class="back" onclick="home()">
-    ← Início
-   </button>
+    return '<div class="product">'+
 
-  </div>
+    '<div class="code-number">'+
+    (i+1)+'. '+esc(p.bar)+
+    '</div>'+
 
-  ${
-   db.lists.length
-   ?
-   db.lists.map(function(l){
+    (p.photo?
+     '<img src="'+p.photo+'" class="report-photo" alt="Produto">':
+     "")+
 
-    return `
+    '<div><b>Validade:</b> '+
+    esc(formatDate(p.exp))+
+    '</div>'+
 
-     <div class="listbox">
+    '<div><b>Quantidade:</b> '+
+    esc(p.qty)+
+    '</div>'+
 
-      <b>${esc(l.name)}</b>
+    (p.sector?
+     '<div class="muted">Setor: '+
+     esc(p.sector)+
+     '</div>':
+     "")+
 
-      <br>
+    '</div>'
 
-      <span class="muted">
-       ${l.products.length} produto(s)
-       • ${esc(l.created)}
-      </span>
+   }).join("");
 
-      <div style="margin-top:12px">
+   return '<div class="listbox">'+
 
-       ${
-        l.products.map(function(p,i){
+   '<b>'+esc(l.name)+'</b><br>'+
 
-         return `
+   '<span class="muted">'+
+   l.products.length+
+   ' produto(s) • '+
+   esc(l.created)+
+   '</span>'+
 
-          <div class="product">
+   '<div style="margin-top:12px">'+
+   products+
+   '</div>'+
 
-           <div class="code-number">
-            ${i+1}. ${esc(p.bar)}
-           </div>
+   '<div class="report-actions">'+
 
-           ${
-            p.photo
-            ?
-            `<img
-             src="${p.photo}"
-             class="report-photo"
-             alt="Produto">`
-            :
-            ""
-           }
+   '<button class="primary" onclick="generatePDF('+l.id+')">'+
+   '📄 Gerar PDF da lista'+
+   '</button>'+
 
-           <div>
-            <b>Validade:</b>
-            ${esc(formatDate(p.exp))}
-           </div>
+   '<button class="whatsapp" onclick="sharePDFWhatsApp('+l.id+')">'+
+   '📲 Enviar PDF pelo WhatsApp'+
+   '</button>'+
 
-           <div>
-            <b>Quantidade:</b>
-            ${esc(p.qty)}
-           </div>
+   '</div>'+
 
-           ${
-            p.sector
-            ?
-            `<div class="muted">
-             Setor: ${esc(p.sector)}
-            </div>`
-            :
-            ""
-           }
+   '<div id="pdfStatus-'+l.id+'" class="pdf-status"></div>'+
 
-          </div>
+   '</div>'
 
-         `;
+  }).join("");
 
-        }).join("")
-       }
+ else
 
-      </div>
+  html+='<p class="muted">Finalize uma lista para vê-la aqui.</p>';
 
-      <div class="report-actions">
+ html+='</section>';
 
-       <button
-        class="primary"
-        onclick="generatePDF(${l.id})">
-
-        📄 Gerar PDF da lista
-
-       </button>
-
-       <button
-        class="whatsapp"
-        onclick="sharePDFWhatsApp(${l.id})">
-
-        📲 Enviar PDF pelo WhatsApp
-
-       </button>
-
-      </div>
-
-      <div
-       id="pdfStatus-${l.id}"
-       class="pdf-status">
-      </div>
-
-     </div>
-
-    `;
-
-   }).join("")
-   :
-   '<p class="muted">Finalize uma lista para vê-la aqui.</p>'
-  }
-
- </section>
-
- `;
-
+ app().innerHTML=html
 }
-
-/* =====================================================
-   PDF
-===================================================== */
 
 function getPDFConstructor(){
 
- if(
-  window.jspdf &&
-  typeof window.jspdf.jsPDF==="function"
- ){
-
-  return window.jspdf.jsPDF;
-
- }
-
- return null;
-
+ return window.jspdf&&
+ typeof window.jspdf.jsPDF==="function"?
+ window.jspdf.jsPDF:
+ null
 }
 
-function createPDF(id){
+function loadPDF(){
 
- const l=db.lists.find(function(item){
-  return item.id===id;
+ return new Promise(function(resolve,reject){
+
+  var c=getPDFConstructor();
+
+  if(c){
+   resolve(c);
+   return
+  }
+
+  var old=document.getElementById("jspdf-loader");
+
+  if(old){
+
+   old.addEventListener("load",function(){
+
+    var x=getPDFConstructor();
+
+    if(x)
+     resolve(x);
+    else
+     reject(new Error("Gerador PDF indisponível"))
+
+   });
+
+   old.addEventListener("error",function(){
+
+    reject(
+     new Error(
+      "Não foi possível carregar o gerador PDF"
+     )
+    )
+
+   });
+
+   return
+  }
+
+  var s=document.createElement("script");
+
+  s.id="jspdf-loader";
+
+  s.src=
+   "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js";
+
+  s.onload=function(){
+
+   var x=getPDFConstructor();
+
+   if(x)
+    resolve(x);
+   else
+    reject(
+     new Error(
+      "Gerador PDF indisponível"
+     )
+    )
+  };
+
+  s.onerror=function(){
+
+   reject(
+    new Error(
+     "Não foi possível carregar o gerador PDF"
+    )
+   )
+  };
+
+  document.head.appendChild(s)
+
+ })
+}
+
+function createPDF(id,jsPDF){
+
+ var l=db.lists.find(function(x){
+  return x.id===id
  });
 
  if(!l)
   throw new Error("Lista não encontrada.");
 
- const jsPDF=getPDFConstructor();
-
- if(!jsPDF)
-  throw new Error("Gerador PDF ainda não carregou.");
-
- const doc=new jsPDF({
+ var doc=new jsPDF({
   orientation:"portrait",
   unit:"mm",
   format:"a4"
@@ -1282,12 +883,10 @@ function createPDF(id){
 
  doc.setFont("helvetica","bold");
  doc.setFontSize(20);
-
  doc.text("VALIDADE-",14,18);
 
  doc.setFont("helvetica","normal");
  doc.setFontSize(13);
-
  doc.text(
   String(l.name).slice(0,55),
   14,
@@ -1308,22 +907,20 @@ function createPDF(id){
   34
  );
 
- let y=44;
+ var y=44;
 
  l.products.forEach(function(p,index){
 
   if(y+50>285){
-
    doc.addPage();
-   y=20;
-
+   y=20
   }
 
   doc.setFont("helvetica","bold");
   doc.setFontSize(10);
 
   doc.text(
-   (index+1)+". Código: "+String(p.bar),
+   (index+1)+". Codigo: "+String(p.bar),
    14,
    y
   );
@@ -1343,21 +940,22 @@ function createPDF(id){
      y,
      60,
      25
-    );
+    )
 
    }catch(e){
-
-    console.error("Foto PDF:",e);
-
+    console.log(e)
    }
-
   }
 
-  const x=82;
+  var x=82;
 
   doc.setFontSize(9);
 
-  doc.text("Validade:",x,y+6);
+  doc.text(
+   "Validade:",
+   x,
+   y+6
+  );
 
   doc.text(
    formatDate(p.exp),
@@ -1365,7 +963,11 @@ function createPDF(id){
    y+6
   );
 
-  doc.text("Quantidade:",x,y+13);
+  doc.text(
+   "Quantidade:",
+   x,
+   y+13
+  );
 
   doc.text(
    String(p.qty),
@@ -1375,14 +977,17 @@ function createPDF(id){
 
   if(p.sector){
 
-   doc.text("Setor:",x,y+20);
+   doc.text(
+    "Setor:",
+    x,
+    y+20
+   );
 
    doc.text(
     String(p.sector).slice(0,35),
     x+15,
     y+20
-   );
-
+   )
   }
 
   y+=33;
@@ -1394,209 +999,158 @@ function createPDF(id){
    y
   );
 
-  y+=8;
-
+  y+=8
  });
 
  if(y+10>285){
-
   doc.addPage();
-  y=20;
-
+  y=20
  }
 
- doc.setFontSize(9);
-
  doc.text(
-  "Total de produtos: "+l.products.length,
+  "Total de produtos: "+
+  l.products.length,
   14,
   y
  );
 
- return doc;
-
+ return doc
 }
-
-/* =====================================================
-   NOME DO PDF
-===================================================== */
 
 function pdfFileName(l){
 
- const nome=String(l.name)
- .replace(/[^a-z0-9À-ÿ]+/gi,"-")
- .replace(/^-+|-+$/g,"");
+ var n=String(l.name)
+  .replace(/[^a-z0-9À-ÿ]+/gi,"-")
+  .replace(/^-+|-+$/g,"");
 
- return "Validade-"+(nome||"Lista")+".pdf";
-
+ return "Validade-"+(n||"Lista")+".pdf"
 }
-
-/* =====================================================
-   GERAR PDF
-===================================================== */
 
 function generatePDF(id){
 
- try{
+ var status=
+  document.getElementById(
+   "pdfStatus-"+id
+  );
 
-  const l=db.lists.find(function(item){
-   return item.id===id;
+ if(status)
+  status.textContent="⏳ Gerando PDF...";
+
+ loadPDF().then(function(jsPDF){
+
+  var l=db.lists.find(function(x){
+   return x.id===id
   });
 
-  if(!l){
+  if(!l)
+   throw new Error("Lista não encontrada.");
 
-   alert("Lista não encontrada.");
-   return;
+  var blob=
+   createPDF(id,jsPDF).output("blob"),
 
-  }
+  url=
+   URL.createObjectURL(blob),
 
-  const doc=createPDF(id);
-
-  const blob=doc.output("blob");
-
-  const url=URL.createObjectURL(blob);
-
-  const a=document.createElement("a");
+  a=
+   document.createElement("a");
 
   a.href=url;
   a.download=pdfFileName(l);
-
   a.style.display="none";
 
   document.body.appendChild(a);
-
   a.click();
-
   document.body.removeChild(a);
-
-  const status=
-   document.getElementById("pdfStatus-"+id);
 
   if(status)
    status.textContent=
-   "✅ PDF gerado: "+pdfFileName(l);
+    "✅ PDF gerado: "+
+    pdfFileName(l);
 
   setTimeout(function(){
+   URL.revokeObjectURL(url)
+  },5000)
 
-   URL.revokeObjectURL(url);
+ }).catch(function(e){
 
-  },5000);
+  console.error(e);
 
- }catch(e){
-
-  console.error("Erro PDF:",e);
+  if(status)
+   status.textContent="";
 
   alert(
-   "Não foi possível gerar o PDF. Aguarde o carregamento do gerador e tente novamente."
-  );
-
- }
-
+   "Não foi possível gerar o PDF. Verifique a internet e tente novamente."
+  )
+ })
 }
 
-/* =====================================================
-   COMPARTILHAR PDF
-===================================================== */
+function sharePDFWhatsApp(id){
 
-async function sharePDFWhatsApp(id){
+ loadPDF().then(function(jsPDF){
 
- try{
-
-  const l=db.lists.find(function(item){
-   return item.id===id;
+  var l=db.lists.find(function(x){
+   return x.id===id
   });
 
-  if(!l){
+  if(!l)
+   throw new Error("Lista não encontrada.");
 
-   alert("Lista não encontrada.");
-   return;
+  var blob=
+   createPDF(id,jsPDF).output("blob"),
 
-  }
-
-  const doc=createPDF(id);
-
-  const blob=doc.output("blob");
-
-  const file=new File(
-   [blob],
-   pdfFileName(l),
-   {
-    type:"application/pdf"
-   }
-  );
+  file=
+   new File(
+    [blob],
+    pdfFileName(l),
+    {type:"application/pdf"}
+   );
 
   if(
-   navigator.share &&
-   navigator.canShare &&
-   navigator.canShare({
-    files:[file]
-   })
+   navigator.share&&
+   navigator.canShare&&
+   navigator.canShare({files:[file]})
   ){
 
-   await navigator.share({
-
+   return navigator.share({
     title:"Validade- - "+l.name,
-
     text:"Relatório de validade - "+l.name,
-
     files:[file]
-
-   });
-
-   return;
-
+   })
   }
 
-  const url=URL.createObjectURL(blob);
+  var url=
+   URL.createObjectURL(blob),
 
-  const a=document.createElement("a");
+  a=
+   document.createElement("a");
 
   a.href=url;
   a.download=pdfFileName(l);
-
   a.style.display="none";
 
   document.body.appendChild(a);
-
   a.click();
-
   document.body.removeChild(a);
 
   setTimeout(function(){
-
-   URL.revokeObjectURL(url);
-
+   URL.revokeObjectURL(url)
   },5000);
 
   alert(
    "O PDF foi salvo. Abra o WhatsApp e anexe o arquivo."
-  );
+  )
 
- }catch(e){
+ }).catch(function(e){
 
-  if(
-   e &&
-   e.name==="AbortError"
-  ){
-
+  if(e&&e.name==="AbortError")
    return;
 
-  }
-
-  console.error(
-   "Erro ao compartilhar PDF:",
-   e
-  );
+  console.error(e);
 
   alert(
    "Não foi possível compartilhar o PDF."
-  );
-
+  )
 }
-
-/* =====================================================
-   LIMPAR DADOS
-===================================================== */
 
 function clearData(){
 
@@ -1609,44 +1163,27 @@ function clearData(){
   current=null;
   currentPhoto="";
 
-  home();
-
+  home()
  }
-
 }
-
-/* =====================================================
-   INICIALIZAÇÃO
-===================================================== */
 
 function iniciarAplicativo(){
 
  loadData();
-
- home();
-
+ home()
 }
 
-if(document.readyState==="loading"){
+if(document.readyState==="loading")
 
  document.addEventListener(
   "DOMContentLoaded",
   iniciarAplicativo
  );
 
-}else{
+else
 
  iniciarAplicativo();
 
-}
-
-</script>
-
-<!-- GERADOR PDF -->
-<script
- src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"
- onload="console.log('Gerador PDF carregado')"
- onerror="console.error('Falha ao carregar jsPDF')">
 </script>
 
 </body>
