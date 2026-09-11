@@ -1,0 +1,13 @@
+{
+  "name": "validade-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cp index.html www/index.html && npx cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/core": "^7.4.3",
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/cli": "^7.4.3"
+  }
+}
