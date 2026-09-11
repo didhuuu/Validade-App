@@ -4,37 +4,1693 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Validade-</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
-header{background:linear-gradient(135deg,#071d49,#1265d8);color:white;padding:24px 18px 20px;border-radius:0 0 24px 24px}
-header h1{margin:0;font-size:28px}
-header p{margin:5px 0 0;opacity:.85}
-main{max-width:620px;margin:auto;padding:18px}
-.card{background:#fff;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 5px 18px #102a4d14}
-button{border:0;border-radius:13px;padding:14px 16px;font-size:16px;font-weight:700;cursor:pointer}
-.primary{background:#1265d8;color:white;width:100%}
-.green{background:#16a36b;color:white;width:100%}
-.light{background:#eaf1fb;color:#17457f}
-.danger{background:#feecec;color:#b42318;width:100%}
-.actions{display:grid;gap:12px}
-.muted{color:#68758a;font-size:14px}
-.hidden{display:none!important}
-input{width:100%;padding:13px;border:1px solid #ccd6e4;border-radius:11px;font-size:16px;margin-top:7px}
-label{display:block;margin:13px 0;font-weight:700;font-size:14px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.back{background:transparent;color:#1265d8;padding:5px 0}
-.listbox{border:1px solid #dce4ef;border-radius:13px;padding:13px;margin:10px 0}
-.product{border-left:4px solid #1265d8;padding:11px;background:#f7f9fc;border-radius:9px;margin-top:9px}
-.badge{display:inline-block;background:#e8f4ff;color:#1265d8;border-radius:20px;padding:5px 9px;font-size:12px}
-.camera{background:#101722;border-radius:16px;padding:14px;color:white;text-align:center}
-video{width:100%;max-height:240px;object-fit:cover;border-radius:11px;background:#05080d}
-.scanline{height:3px;background:#31d78c;margin:-60px 12% 45px;border-radius:5px;position:relative}
-.status{padding:10px;border-radius:10px;background:#eef7f1;color:#17663f;font-size:14px}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:linear-gradient(135deg,#071d49,#1265d8);
+  color:white;
+  padding:24px 18px 20px;
+  border-radius:0 0 24px 24px;
+}
+
+header h1{
+  margin:0;
+  font-size:28px;
+}
+
+header p{
+  margin:5px 0 0;
+  opacity:.85;
+}
+
+main{
+  max-width:620px;
+  margin:auto;
+  padding:18px;
+}
+
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:14px;
+  box-shadow:0 5px 18px #102a4d14;
+}
+
+button{
+  border:0;
+  border-radius:13px;
+  padding:14px 16px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.primary{
+  background:#1265d8;
+  color:white;
+  width:100%;
+}
+
+.green{
+  background:#16a36b;
+  color:white;
+  width:100%;
+}
+
+.light{
+  background:#eaf1fb;
+  color:#17457f;
+}
+
+.danger{
+  background:#feecec;
+  color:#b42318;
+  width:100%;
+}
+
+.actions{
+  display:grid;
+  gap:12px;
+}
+
+.muted{
+  color:#68758a;
+  font-size:14px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  border:1px solid #ccd6e4;
+  border-radius:11px;
+  font-size:16px;
+  margin-top:7px;
+}
+
+label{
+  display:block;
+  margin:13px 0;
+  font-weight:700;
+  font-size:14px;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.back{
+  background:transparent;
+  color:#1265d8;
+  padding:5px 0;
+}
+
+.listbox{
+  border:1px solid #dce4ef;
+  border-radius:13px;
+  padding:13px;
+  margin:10px 0;
+}
+
+.product{
+  border-left:4px solid #1265d8;
+  padding:11px;
+  background:#f7f9fc;
+  border-radius:9px;
+  margin-top:9px;
+}
+
+.badge{
+  display:inline-block;
+  background:#e8f4ff;
+  color:#1265d8;
+  border-radius:20px;
+  padding:5px 9px;
+  font-size:12px;
+}
+
+.camera{
+  background:#101722;
+  border-radius:16px;
+  padding:14px;
+  color:white;
+  text-align:center;
+}
+
+video{
+  width:100%;
+  max-height:240px;
+  object-fit:cover;
+  border-radius:11px;
+  background:#05080d;
+}
+
+.scanline{
+  height:3px;
+  background:#31d78c;
+  margin:-60px 12% 45px;
+  border-radius:5px;
+  position:relative;
+}
+
+.status{
+  padding:10px;
+  border-radius:10px;
+  background:#eef7f1;
+  color:#17663f;
+  font-size:14px;
+}
 </style>
 </head>
+
 <body>
 
 <header>
-<h1>Validade-</
+  <h1>Validade-</h1>
+  <p>Controle de vencimentos</p>
+</header>
+
+<main id="app">
+  <section class="card">
+    <h2>Carregando...</h2>
+    <p class="muted">Inicializando aplicativo.</p>
+  </section>
+</main>
+
+<script>
+
+const KEY = "validade_app_v2";
+
+let db = {
+  lists:[]
+};
+
+let current = null;
+let stream = null;
+let scanTimer = null;
+let scanStage = "barcode";
+
+
+/* =========================
+   BANCO LOCAL
+========================= */
+
+function loadData(){
+
+  try{
+
+    const saved = localStorage.getItem(KEY);
+
+    if(saved){
+
+      const parsed = JSON.parse(saved);
+
+      if(parsed && Array.isArray(parsed.lists)){
+        db = parsed;
+      }
+
+    }
+
+  }catch(error){
+
+    console.log("Erro ao carregar dados:",error);
+
+    db = {
+      lists:[]
+    };
+
+  }
+
+}
+
+
+function save(){
+
+  try{
+
+    localStorage.setItem(KEY,JSON.stringify(db));
+
+  }catch(error){
+
+    console.log("Erro ao salvar dados:",error);
+
+  }
+
+}
+
+
+/* =========================
+   SEGURANÇA DE TEXTO
+========================= */
+
+function esc(s){
+
+  return String(s ?? "").replace(
+    /[&<>"']/g,
+    function(m){
+
+      return {
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+
+      }[m];
+
+    }
+  );
+
+}
+
+
+/* =========================
+   APP
+========================= */
+
+function app(){
+
+  return document.getElementById("app");
+
+}
+
+
+/* =========================
+   TELA INICIAL
+========================= */
+
+function home(){
+
+  stopCam();
+
+  app().innerHTML = `
+
+    <section class="card">
+
+      <h2>Início</h2>
+
+      <p class="muted">
+        Controle seus produtos e datas de validade.
+      </p>
+
+      <div class="actions">
+
+        <button class="primary"
+          onclick="newList()">
+          ➕ Criar nova lista
+        </button>
+
+        <button class="light"
+          onclick="lists()">
+          📋 Minhas listas
+        </button>
+
+        <button class="light"
+          onclick="reports()">
+          📄 Relatório final
+        </button>
+
+        <button class="danger"
+          onclick="clearData()">
+          🗑 Limpar dados
+        </button>
+
+      </div>
+
+    </section>
+
+    <section class="card">
+
+      <b>Fluxo</b>
+
+      <p class="muted">
+        Criar lista → Ler Produto →
+        código de barras → descrição →
+        validade → quantidade →
+        salvar → finalizar.
+      </p>
+
+    </section>
+
+  `;
+
+}
+
+
+/* =========================
+   NOVA LISTA
+========================= */
+
+function newList(){
+
+  app().innerHTML = `
+
+    <section class="card">
+
+      <div class="top">
+
+        <h2>Nova lista</h2>
+
+        <button class="back"
+          onclick="home()">
+          ← Voltar
+        </button>
+
+      </div>
+
+      <label>
+
+        Nome da lista
+
+        <input
+          id="lname"
+          placeholder="Ex.: Câmara Fria – 11/09">
+
+      </label>
+
+      <button
+        class="primary"
+        onclick="createList()">
+
+        Criar lista
+
+      </button>
+
+    </section>
+
+  `;
+
+}
+
+
+/* =========================
+   CRIAR LISTA
+========================= */
+
+function createList(){
+
+  const input = document.getElementById("lname");
+
+  if(!input){
+
+    return;
+
+  }
+
+  const name = input.value.trim();
+
+  if(!name){
+
+    alert("Digite o nome da lista.");
+
+    return;
+
+  }
+
+  current = {
+
+    id:Date.now(),
+
+    name:name,
+
+    created:new Date().toLocaleDateString("pt-BR"),
+
+    products:[]
+
+  };
+
+  editor();
+
+}
+
+
+/* =========================
+   EDITOR
+========================= */
+
+function editor(){
+
+  stopCam();
+
+  if(!current){
+
+    home();
+
+    return;
+
+  }
+
+  app().innerHTML = `
+
+    <section class="card">
+
+      <div class="top">
+
+        <div>
+
+          <h2>${esc(current.name)}</h2>
+
+          <span class="badge">
+            ${current.products.length} produto(s)
+          </span>
+
+        </div>
+
+        <button
+          class="back"
+          onclick="home()">
+
+          ← Início
+
+        </button>
+
+      </div>
+
+
+      <div class="camera">
+
+        <div id="cammsg">
+          A câmera será aberta para ler o código de barras.
+        </div>
+
+        <video
+          id="video"
+          autoplay
+          playsinline
+          muted
+          class="hidden">
+        </video>
+
+        <div
+          id="scanline"
+          class="scanline hidden">
+        </div>
+
+      </div>
+
+
+      <button
+        class="primary"
+        style="margin-top:10px"
+        onclick="startScan()">
+
+        📷 Ler Produto — código + descrição
+
+      </button>
+
+
+      <div
+        id="scanstatus"
+        class="status hidden"
+        style="margin-top:10px">
+      </div>
+
+
+      <label>
+
+        1️⃣ Código de barras
+
+        <input
+          id="pbar"
+          inputmode="numeric"
+          placeholder="Leia primeiro o código de barras">
+
+      </label>
+
+
+      <label>
+
+        2️⃣ Descrição do produto
+
+        <input
+          id="pname"
+          placeholder="Descrição do produto">
+
+      </label>
+
+
+      <div class="row">
+
+        <label>
+
+          3️⃣ Validade
+
+          <input
+            id="pexp"
+            type="date">
+
+        </label>
+
+
+        <label>
+
+          4️⃣ Quantidade
+
+          <input
+            id="pqty"
+            type="number"
+            min="1"
+            value="1">
+
+        </label>
+
+      </div>
+
+
+      <label>
+
+        Setor
+
+        <input
+          id="psector"
+          placeholder="Ex.: Câmara Fria">
+
+      </label>
+
+
+      <button
+        class="green"
+        onclick="addProduct()">
+
+        💾 Salvar produto
+
+      </button>
+
+
+      <div style="margin-top:16px">
+
+        <h3>Produtos desta lista</h3>
+
+        <div id="products"></div>
+
+      </div>
+
+
+      <button
+        class="primary"
+        style="margin-top:15px"
+        onclick="finishList()">
+
+        ✅ Finalizar lista
+
+      </button>
+
+    </section>
+
+  `;
+
+  renderProducts();
+
+}
+
+
+/* =========================
+   PRODUTOS
+========================= */
+
+function renderProducts(){
+
+  const el = document.getElementById("products");
+
+  if(!el || !current){
+
+    return;
+
+  }
+
+  if(!current.products.length){
+
+    el.innerHTML =
+      '<p class="muted">Nenhum produto cadastrado ainda.</p>';
+
+    return;
+
+  }
+
+  el.innerHTML = current.products.map(
+    function(p,i){
+
+      return `
+
+        <div class="product">
+
+          <b>
+            ${i+1}. ${esc(p.bar)}
+          </b>
+
+          <br>
+
+          ${esc(p.name)}
+
+          <br>
+
+          <span class="muted">
+
+            Validade: ${esc(p.exp)}
+            • Quantidade: ${p.qty}
+
+            ${p.sector
+              ? " • Setor: "+esc(p.sector)
+              : ""}
+
+          </span>
+
+        </div>
+
+      `;
+
+    }
+  ).join("");
+
+}
+
+
+/* =========================
+   CÂMERA
+========================= */
+
+async function startScan(){
+
+  const status =
+    document.getElementById("scanstatus");
+
+  const video =
+    document.getElementById("video");
+
+  const cammsg =
+    document.getElementById("cammsg");
+
+  if(!status || !video){
+
+    return;
+
+  }
+
+  scanStage = "barcode";
+
+  status.classList.remove("hidden");
+
+  status.textContent =
+    "📷 Abrindo câmera para procurar o código de barras…";
+
+  try{
+
+    if(!navigator.mediaDevices ||
+       !navigator.mediaDevices.getUserMedia){
+
+      status.textContent =
+        "⚠️ A câmera não está disponível neste aparelho.";
+
+      return;
+
+    }
+
+    stream =
+      await navigator.mediaDevices.getUserMedia({
+
+        video:{
+          facingMode:{
+            ideal:"environment"
+          }
+        }
+
+      });
+
+
+    video.srcObject = stream;
+
+    video.classList.remove("hidden");
+
+
+    const scanline =
+      document.getElementById("scanline");
+
+    if(scanline){
+
+      scanline.classList.remove("hidden");
+
+    }
+
+
+    if(cammsg){
+
+      cammsg.textContent =
+        "Aponte para o código de barras.";
+
+    }
+
+
+    if("BarcodeDetector" in window){
+
+      let formats = [];
+
+      try{
+
+        formats =
+          await BarcodeDetector.getSupportedFormats();
+
+      }catch(e){
+
+        formats = [];
+
+      }
+
+
+      let detector;
+
+      try{
+
+        detector =
+          formats.length
+          ? new BarcodeDetector({formats})
+          : new BarcodeDetector();
+
+      }catch(e){
+
+        detector =
+          new BarcodeDetector();
+
+      }
+
+
+      scanTimer =
+        setInterval(async function(){
+
+          if(!video.videoWidth){
+
+            return;
+
+          }
+
+          try{
+
+            const codes =
+              await detector.detect(video);
+
+            if(
+              codes &&
+              codes.length &&
+              codes[0].rawValue
+            ){
+
+              const input =
+                document.getElementById("pbar");
+
+              if(input){
+
+                input.value =
+                  codes[0].rawValue;
+
+              }
+
+              nextOCR();
+
+            }
+
+          }catch(e){}
+
+        },500);
+
+
+    }else{
+
+      status.textContent =
+        "⚠️ Leitor automático indisponível. Digite o código manualmente.";
+
+      if(cammsg){
+
+        cammsg.textContent =
+          "Digite o código de barras no campo abaixo.";
+
+      }
+
+    }
+
+  }catch(error){
+
+    console.log("Câmera:",error);
+
+    status.textContent =
+      "⚠️ Não foi possível abrir a câmera. Verifique a permissão do aplicativo.";
+
+  }
+
+}
+
+
+/* =========================
+   OCR
+========================= */
+
+function nextOCR(){
+
+  if(scanTimer){
+
+    clearInterval(scanTimer);
+
+    scanTimer = null;
+
+  }
+
+  scanStage = "ocr";
+
+  const status =
+    document.getElementById("scanstatus");
+
+  const cammsg =
+    document.getElementById("cammsg");
+
+  if(status){
+
+    status.textContent =
+      "✅ Código lido! Agora procure a descrição do produto.";
+
+  }
+
+  if(cammsg){
+
+    cammsg.textContent =
+      "Aponte a câmera para o nome/descrição do produto.";
+
+  }
+
+  setTimeout(
+
+    function(){
+
+      ocrMode();
+
+    },
+
+    500
+
+  );
+
+}
+
+
+function ocrMode(){
+
+  if(!stream){
+
+    return;
+
+  }
+
+  const button =
+    document.querySelector(
+      'button[onclick="startScan()"]'
+    );
+
+  if(button){
+
+    button.textContent =
+      "📷 Ler descrição novamente";
+
+  }
+
+
+  if(window.Tesseract){
+
+    const status =
+      document.getElementById("scanstatus");
+
+    if(status){
+
+      status.textContent =
+        "🔎 Procurando a descrição do produto…";
+
+    }
+
+
+    scanTimer =
+      setInterval(async function(){
+
+        const video =
+          document.getElementById("video");
+
+        if(!video || !video.videoWidth){
+
+          return;
+
+        }
+
+
+        const canvas =
+          document.createElement("canvas");
+
+        canvas.width =
+          video.videoWidth;
+
+        canvas.height =
+          video.videoHeight;
+
+
+        const context =
+          canvas.getContext("2d");
+
+        if(!context){
+
+          return;
+
+        }
+
+
+        context.drawImage(
+          video,
+          0,
+          0
+        );
+
+
+        try{
+
+          const result =
+            await Tesseract.recognize(
+              canvas,
+              "por",
+              {
+                logger:function(){}
+              }
+            );
+
+
+          const text =
+            String(
+              result?.data?.text || ""
+            )
+            .replace(/\s+/g," ")
+            .trim();
+
+
+          if(text.length >= 4){
+
+            const name =
+              document.getElementById("pname");
+
+            if(name){
+
+              name.value =
+                text.slice(0,80);
+
+            }
+
+
+            if(status){
+
+              status.textContent =
+                "✅ Descrição identificada. Confira e salve.";
+
+            }
+
+            stopCam();
+
+          }
+
+        }catch(e){}
+
+      },2000);
+
+
+  }else{
+
+    const status =
+      document.getElementById("scanstatus");
+
+    if(status){
+
+      status.textContent =
+        "Digite a descrição manualmente.";
+
+    }
+
+  }
+
+}
+
+
+/* =========================
+   PARAR CÂMERA
+========================= */
+
+function stopCam(){
+
+  if(scanTimer){
+
+    clearInterval(scanTimer);
+
+    scanTimer = null;
+
+  }
+
+  if(stream){
+
+    try{
+
+      stream.getTracks().forEach(
+        function(track){
+
+          track.stop();
+
+        }
+      );
+
+    }catch(e){}
+
+    stream = null;
+
+  }
+
+}
+
+
+/* =========================
+   SALVAR PRODUTO
+========================= */
+
+function addProduct(){
+
+  if(!current){
+
+    return;
+
+  }
+
+  const name =
+    document.getElementById("pname")?.value.trim() || "";
+
+  const bar =
+    document.getElementById("pbar")?.value.trim() || "";
+
+  const exp =
+    document.getElementById("pexp")?.value || "";
+
+  const qty =
+    Number(
+      document.getElementById("pqty")?.value || 0
+    );
+
+  const sector =
+    document.getElementById("psector")?.value.trim() || "";
+
+
+  if(!name || !bar || !exp || qty < 1){
+
+    alert(
+      "Preencha descrição, código, validade e quantidade."
+    );
+
+    return;
+
+  }
+
+
+  current.products.push({
+
+    name:name,
+    bar:bar,
+    exp:exp,
+    qty:qty,
+    sector:sector
+
+  });
+
+
+  editor();
+
+}
+
+
+/* =========================
+   FINALIZAR LISTA
+========================= */
+
+function finishList(){
+
+  stopCam();
+
+  if(!current){
+
+    home();
+
+    return;
+
+  }
+
+
+  if(!current.products.length){
+
+    alert(
+      "Cadastre pelo menos um produto antes de finalizar."
+    );
+
+    return;
+
+  }
+
+
+  const index =
+    db.lists.findIndex(
+      function(x){
+
+        return x.id === current.id;
+
+      }
+    );
+
+
+  if(index < 0){
+
+    db.lists.push(current);
+
+  }else{
+
+    db.lists[index] = current;
+
+  }
+
+
+  save();
+
+  alert(
+    "Lista salva no aparelho!"
+  );
+
+  current = null;
+
+  home();
+
+}
+
+
+/* =========================
+   MINHAS LISTAS
+========================= */
+
+function lists(){
+
+  app().innerHTML = `
+
+    <section class="card">
+
+      <div class="top">
+
+        <h2>Minhas listas</h2>
+
+        <button
+          class="back"
+          onclick="home()">
+
+          ← Início
+
+        </button>
+
+      </div>
+
+
+      ${
+        db.lists.length
+
+        ? db.lists.map(function(l){
+
+            return `
+
+              <div class="listbox">
+
+                <b>${esc(l.name)}</b>
+
+                <br>
+
+                <span class="muted">
+
+                  ${l.products.length}
+                  produto(s)
+                  •
+                  ${esc(l.created)}
+
+                </span>
+
+                <br>
+
+                <button
+                  class="light"
+                  style="margin-top:8px"
+                  onclick="openList(${l.id})">
+
+                  Abrir lista
+
+                </button>
+
+              </div>
+
+            `;
+
+          }).join("")
+
+        : '<p class="muted">Nenhuma lista finalizada.</p>'
+
+      }
+
+    </section>
+
+  `;
+
+}
+
+
+/* =========================
+   ABRIR LISTA
+========================= */
+
+function openList(id){
+
+  current =
+    db.lists.find(
+      function(x){
+
+        return x.id === id;
+
+      }
+    ) || null;
+
+
+  if(current){
+
+    editor();
+
+  }
+
+}
+
+
+/* =========================
+   RELATÓRIOS
+========================= */
+
+function reports(){
+
+  app().innerHTML = `
+
+    <section class="card">
+
+      <div class="top">
+
+        <h2>Relatório final</h2>
+
+        <button
+          class="back"
+          onclick="home()">
+
+          ← Início
+
+        </button>
+
+      </div>
+
+
+      <p class="muted">
+        Cada lista continua independente.
+      </p>
+
+
+      ${
+        db.lists.length
+
+        ? db.lists.map(function(l){
+
+            return `
+
+              <div class="listbox">
+
+                <b>${esc(l.name)}</b>
+
+                <br>
+
+                <span class="muted">
+
+                  ${l.products.length}
+                  produto(s)
+                  •
+                  ${esc(l.created)}
+
+                </span>
+
+
+                <button
+                  class="primary"
+                  style="margin-top:10px"
+                  onclick="generatePDF(${l.id})">
+
+                  📄 Gerar PDF desta lista
+
+                </button>
+
+              </div>
+
+            `;
+
+          }).join("")
+
+        : '<p class="muted">Finalize uma lista para vê-la aqui.</p>'
+
+      }
+
+    </section>
+
+  `;
+
+}
+
+
+/* =========================
+   PDF
+========================= */
+
+function generatePDF(id){
+
+  const list =
+    db.lists.find(
+      function(x){
+
+        return x.id === id;
+
+      }
+    );
+
+
+  if(!list){
+
+    return;
+
+  }
+
+
+  if(!window.jspdf){
+
+    alert(
+      "O gerador de PDF ainda está carregando. Tente novamente."
+    );
+
+    return;
+
+  }
+
+
+  const jsPDF =
+    window.jspdf.jsPDF;
+
+  const doc =
+    new jsPDF();
+
+
+  doc.setFontSize(20);
+
+  doc.text(
+    "VALIDADE-",
+    14,
+    18
+  );
+
+
+  doc.setFontSize(13);
+
+  doc.text(
+    String(list.name).slice(0,70),
+    14,
+    28
+  );
+
+
+  doc.setFontSize(9);
+
+  doc.text(
+    "Relatório de vencimentos",
+    14,
+    35
+  );
+
+
+  doc.text(
+    "Data: " + list.created,
+    150,
+    35
+  );
+
+
+  let y = 48;
+
+
+  doc.setFontSize(9);
+
+  doc.text(
+    "CÓDIGO DE BARRAS",
+    14,
+    y
+  );
+
+  doc.text(
+    "DESCRIÇÃO",
+    68,
+    y
+  );
+
+  doc.text(
+    "VALIDADE",
+    142,
+    y
+  );
+
+  doc.text(
+    "QTD",
+    182,
+    y
+  );
+
+
+  y += 6;
+
+  doc.line(
+    14,
+    y,
+    196,
+    y
+  );
+
+  y += 7;
+
+
+  list.products.forEach(
+
+    function(p){
+
+      if(y > 280){
+
+        doc.addPage();
+
+        y = 20;
+
+      }
+
+
+      doc.text(
+        String(p.bar).slice(0,20),
+        14,
+        y
+      );
+
+
+      doc.text(
+        String(p.name).slice(0,32),
+        68,
+        y
+      );
+
+
+      doc.text(
+        String(p.exp),
+        142,
+        y
+      );
+
+
+      doc.text(
+        String(p.qty),
+        182,
+        y
+      );
+
+
+      y += 7;
+
+    }
+
+  );
+
+
+  y += 5;
+
+  doc.line(
+    14,
+    y,
+    196,
+    y
+  );
+
+
+  y += 7;
+
+  doc.text(
+    "Total de produtos: " +
+    list.products.length,
+    14,
+    y
+  );
+
+
+  doc.save(
+    "Validade-" +
+    list.name.replace(
+      /[^a-z0-9À-ÿ]+/gi,
+      "-"
+    ) +
+    ".pdf"
+  );
+
+}
+
+
+/* =========================
+   LIMPAR DADOS
+========================= */
+
+function clearData(){
+
+  if(
+    confirm(
+      "Apagar todas as listas?"
+    )
+  ){
+
+    db = {
+      lists:[]
+    };
+
+    save();
+
+    current = null;
+
+    home();
+
+  }
+
+}
+
+
+/* =========================
+   INICIALIZAÇÃO SEGURA
+========================= */
+
+function iniciarAplicativo(){
+
+  try{
+
+    loadData();
+
+    home();
+
+  }catch(error){
+
+    console.log(
+      "Erro na inicialização:",
+      error
+    );
+
+
+    const container =
+      document.getElementById("app");
+
+
+    if(container){
+
+      container.innerHTML = `
+
+        <section class="card">
+
+          <h2>Validade-</h2>
+
+          <p>
+            O aplicativo foi carregado,
+            mas ocorreu um erro na inicialização.
+          </p>
+
+          <button
+            class="primary"
+            onclick="location.reload()">
+
+            🔄 Tentar novamente
+
+          </button>
+
+        </section>
+
+      `;
+
+    }
+
+  }
+
+}
+
+
+/* Inicia somente depois que a página estiver pronta */
+
+if(
+  document.readyState === "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    iniciarAplicativo
+  );
+
+}else{
+
+  iniciarAplicativo();
+
+}
+
+</script>
+
+
+<script
+src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js">
+</script>
+
+<script
+src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js">
+</script>
+
+</body>
+</html>
