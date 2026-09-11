@@ -1,20 +1,12 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-
 <meta charset="utf-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,viewport-fit=cover">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Validade-</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -246,34 +238,29 @@ video{
   line-height:1.4;
 }
 
+hr{
+  border:0;
+  border-top:1px solid #e3e8ef;
+  margin:18px 0;
+}
 </style>
-
 </head>
 
 <body>
 
 <header>
-
   <h1>Validade-</h1>
-
   <p>Controle de vencimentos</p>
-
 </header>
 
 <main id="app">
 
   <section class="card">
-
     <h2>Carregando...</h2>
-
-    <p class="muted">
-      Inicializando aplicativo.
-    </p>
-
+    <p class="muted">Inicializando aplicativo.</p>
   </section>
 
 </main>
-
 
 <script>
 
@@ -288,31 +275,24 @@ let db = {
 };
 
 let current = null;
-
 let stream = null;
-
 let scanTimer = null;
-
-let scanStage = "barcode";
-
 let ocrProcessing = false;
 
 
 /* =====================================================
-   CARREGAR DADOS
+   CARREGAR
 ===================================================== */
 
 function loadData(){
 
   try{
 
-    const saved =
-      localStorage.getItem(KEY);
+    const saved = localStorage.getItem(KEY);
 
     if(saved){
 
-      const parsed =
-        JSON.parse(saved);
+      const parsed = JSON.parse(saved);
 
       if(
         parsed &&
@@ -327,10 +307,7 @@ function loadData(){
 
   }catch(error){
 
-    console.log(
-      "Erro ao carregar dados:",
-      error
-    );
+    console.log("Erro ao carregar:",error);
 
     db = {
       lists:[]
@@ -356,10 +333,7 @@ function save(){
 
   }catch(error){
 
-    console.log(
-      "Erro ao salvar:",
-      error
-    );
+    console.log("Erro ao salvar:",error);
 
   }
 
@@ -367,18 +341,68 @@ function save(){
 
 
 /* =====================================================
-   ESCAPAR TEXTO
+   ESCAPAR HTML
 ===================================================== */
 
 function esc(value){
 
-  return String(
-    value ?? ""
-  ).replace(
-    /[&<>"']/g,
-    function(m){
+  return String(value ?? "")
+    .replace(/[&<>"']/g,function(m){
 
       return {
         "&":"&amp;",
         "<":"&lt;",
-        ">
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+      }[m];
+
+    });
+
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+function app(){
+
+  return document.getElementById("app");
+
+}
+
+
+/* =====================================================
+   TELA INICIAL
+===================================================== */
+
+function home(){
+
+  stopCam();
+
+  app().innerHTML = `
+
+    <section class="card">
+
+      <h2>Início</h2>
+
+      <p class="muted">
+        Controle seus produtos e datas de validade.
+      </p>
+
+      <div class="actions">
+
+        <button
+          class="primary"
+          onclick="newList()">
+          ➕ Criar nova lista
+        </button>
+
+        <button
+          class="light"
+          onclick="lists()">
+          📋 Minhas listas
+        </button>
+
+        <
