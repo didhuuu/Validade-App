@@ -1,12 +1,20 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover">
+
 <title>Validade-</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -241,11 +249,6 @@ video{
   margin-top:10px;
 }
 
-.processing{
-  background:#fff8e6;
-  color:#805b00;
-}
-
 .photo-preview{
   width:100%;
   aspect-ratio:2.4/1;
@@ -291,35 +294,35 @@ hr{
   margin-top:12px;
 }
 
-@media(max-width:480px){
-
-  .row{
-    grid-template-columns:1fr;
-  }
-
-  video{
-    height:270px;
-  }
-
-}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Validade-</h1>
-  <p>Controle de vencimentos</p>
+
+<h1>Validade-</h1>
+
+<p>
+Controle de vencimentos
+</p>
+
 </header>
 
 <main id="app">
 
 <section class="card">
-  <h2>Carregando...</h2>
-  <p class="muted">Inicializando aplicativo.</p>
+
+<h2>Carregando...</h2>
+
+<p class="muted">
+Inicializando aplicativo.
+</p>
+
 </section>
 
 </main>
+
 
 <script>
 
@@ -334,9 +337,13 @@ let db = {
 };
 
 let current = null;
+
 let stream = null;
+
 let scanTimer = null;
+
 let cameraMode = "barcode";
+
 let currentPhoto = "";
 
 
@@ -448,71 +455,72 @@ function home(){
   stopCam();
 
   current = null;
+
   currentPhoto = "";
 
   app().innerHTML = `
 
-    <section class="card">
+<section class="card">
 
-      <h2>Início</h2>
+<h2>Início</h2>
 
-      <p class="muted">
-        Controle seus produtos e datas de validade.
-      </p>
+<p class="muted">
+Controle seus produtos e datas de validade.
+</p>
 
-      <div class="actions">
+<div class="actions">
 
-        <button
-          class="primary"
-          onclick="newList()">
+<button
+class="primary"
+onclick="newList()">
 
-          ➕ Criar nova lista
+➕ Criar nova lista
 
-        </button>
+</button>
 
-        <button
-          class="light"
-          onclick="lists()">
+<button
+class="light"
+onclick="lists()">
 
-          📋 Minhas listas
+📋 Minhas listas
 
-        </button>
+</button>
 
-        <button
-          class="light"
-          onclick="reports()">
+<button
+class="light"
+onclick="reports()">
 
-          📄 Relatório final
+📄 Relatório final
 
-        </button>
+</button>
 
-        <button
-          class="danger"
-          onclick="clearData()">
+<button
+class="danger"
+onclick="clearData()">
 
-          🗑 Limpar dados
+🗑 Limpar dados
 
-        </button>
+</button>
 
-      </div>
+</div>
 
-    </section>
+</section>
 
-    <section class="card">
+<section class="card">
 
-      <b>Como funciona</b>
+<b>Como funciona</b>
 
-      <p class="muted">
+<p class="muted">
 
-        A câmera abre para ler o código.
-        Depois muda automaticamente para
-        fotografar o produto.
+A câmera abre para ler o código.
+Depois muda automaticamente para
+fotografar o produto.
 
-      </p>
+</p>
 
-    </section>
+</section>
 
-  `;
+`;
 
 }
 
@@ -525,43 +533,43 @@ function newList(){
 
   app().innerHTML = `
 
-    <section class="card">
+<section class="card">
 
-      <div class="top">
+<div class="top">
 
-        <h2>Nova lista</h2>
+<h2>Nova lista</h2>
 
-        <button
-          class="back"
-          onclick="home()">
+<button
+class="back"
+onclick="home()">
 
-          ← Voltar
+← Voltar
 
-        </button>
+</button>
 
-      </div>
+</div>
 
-      <label>
+<label>
 
-        Nome da lista
+Nome da lista
 
-        <input
-          id="lname"
-          placeholder="Ex.: Câmara Fria – 11/09">
+<input
+id="lname"
+placeholder="Ex.: Câmara Fria – 11/09">
 
-      </label>
+</label>
 
-      <button
-        class="primary"
-        onclick="createList()">
+<button
+class="primary"
+onclick="createList()">
 
-        Criar lista
+Criar lista
 
-      </button>
+</button>
 
-    </section>
+</section>
 
-  `;
+`;
 
 }
 
@@ -628,231 +636,227 @@ function editor(){
 
   app().innerHTML = `
 
-    <section class="card">
+<section class="card">
 
-      <div class="top">
+<div class="top">
 
-        <div>
+<div>
 
-          <h2>
-            ${esc(current.name)}
-          </h2>
+<h2>
+${esc(current.name)}
+</h2>
 
-          <span class="badge">
+<span class="badge">
 
-            ${current.products.length}
-            produto(s)
+${current.products.length}
+produto(s)
 
-          </span>
+</span>
 
-        </div>
+</div>
 
-        <button
-          class="back"
-          onclick="home()">
+<button
+class="back"
+onclick="home()">
 
-          ← Início
+← Início
 
-        </button>
+</button>
 
-      </div>
+</div>
 
-      <hr>
+<hr>
 
 
-      <div class="step">
+<div class="step">
 
-        ETAPA 1 — ESCANEANDO CÓDIGO
+ETAPA 1 — ESCANEANDO CÓDIGO
 
-      </div>
+</div>
 
 
-      <div class="camera">
+<div class="camera">
 
-        <div
-          id="cammsg"
-          class="camera-title">
+<div
+id="cammsg"
+class="camera-title">
 
-          Abrindo câmera...
+Abrindo câmera...
 
-        </div>
+</div>
 
-        <div class="video-wrap">
+<div class="video-wrap">
 
-          <video
-            id="video"
-            autoplay
-            playsinline
-            muted>
-          </video>
+<video
+id="video"
+autoplay
+playsinline
+muted>
+</video>
 
-          <div
-            id="scanarea"
-            class="scan-area">
+<div
+id="scanarea"
+class="scan-area">
 
-            <span>
-              Posicione o código de barras aqui
-            </span>
+<span>
+Posicione o código de barras aqui
+</span>
 
-          </div>
+</div>
 
-          <div
-            id="scanline"
-            class="scanline">
-          </div>
+<div
+id="scanline"
+class="scanline">
+</div>
 
-          <div
-            id="photoframe"
-            class="photo-frame hidden">
+<div
+id="photoframe"
+class="photo-frame hidden">
 
-            <span>
-              Enquadre o produto aqui
-            </span>
+<span>
+Enquadre o produto aqui
+</span>
 
-          </div>
+</div>
 
-        </div>
+</div>
 
-      </div>
+</div>
 
 
-      <div
-        id="scanstatus"
-        class="status">
+<div
+id="scanstatus"
+class="status">
 
-        📷 Preparando câmera...
+📷 Preparando câmera...
 
-      </div>
+</div>
 
 
-      <label>
+<label>
 
-        Código de barras
+Código de barras
 
-        <input
-          id="pbar"
-          inputmode="numeric"
-          pattern="[0-9]*"
-          placeholder="O código será preenchido automaticamente">
+<input
+id="pbar"
+inputmode="numeric"
+pattern="[0-9]*"
+placeholder="O código será preenchido automaticamente">
 
-      </label>
+</label>
 
 
-      <div
-        id="photoSection"
-        class="hidden">
+<div
+id="photoSection"
+class="hidden">
 
-        <div class="step">
+<div class="step">
 
-          ETAPA 2 — FOTO DO PRODUTO
+ETAPA 2 — FOTO DO PRODUTO
 
-        </div>
+</div>
 
-        <button
-          id="photoButton"
-          class="primary"
-          onclick="tirarFoto()">
+<button
+id="photoButton"
+class="primary"
+onclick="tirarFoto()">
 
-          📸 Tirar foto do produto
+📸 Tirar foto do produto
 
-        </button>
+</button>
 
-        <img
-          id="photoPreview"
-          class="photo-preview hidden"
-          alt="Foto do produto">
+<img
+id="photoPreview"
+class="photo-preview hidden"
+alt="Foto do produto">
 
-      </div>
+</div>
 
 
-      <div
-        id="dataSection"
-        class="hidden">
+<div
+id="dataSection"
+class="hidden">
 
-        <div class="step">
+<div class="step">
 
-          ETAPA 3 — VALIDADE E QUANTIDADE
+ETAPA 3 — VALIDADE E QUANTIDADE
 
-        </div>
+</div>
 
-        <div class="row">
+<div class="row">
 
-          <label>
+<label>
 
-            Validade
+Validade
 
-            <input
-              id="pexp"
-              type="date">
+<input
+id="pexp"
+type="date">
 
-          </label>
+</label>
 
-          <label>
+<label>
 
-            Quantidade
+Quantidade
 
-            <input
-              id="pqty"
-              type="number"
-              min="1"
-              value="1">
+<input
+id="pqty"
+type="number"
+min="1"
+value="1">
 
-          </label>
+</label>
 
-        </div>
+</div>
 
 
-        <label>
+<label>
 
-          Setor
+Setor
 
-          <input
-            id="psector"
-            placeholder="Ex.: Câmara Fria">
+<input
+id="psector"
+placeholder="Ex.: Câmara Fria">
 
-        </label>
+</label>
 
 
-        <button
-          class="green"
-          onclick="addProduct()">
+<button
+class="green"
+onclick="addProduct()">
 
-          💾 Salvar produto
+💾 Salvar produto
 
-        </button>
+</button>
 
-      </div>
+</div>
 
 
-      <div style="margin-top:18px">
+<div style="margin-top:18px">
 
-        <h3>
-          Produtos desta lista
-        </h3>
+<h3>
+Produtos desta lista
+</h3>
 
-        <div id="products"></div>
+<div id="products"></div>
 
-      </div>
+</div>
 
 
-      <button
-        class="primary"
-        style="margin-top:15px"
-        onclick="finishList()">
+<button
+class="primary"
+style="margin-top:15px"
+onclick="finishList()">
 
-        ✅ Finalizar lista
+✅ Finalizar lista
 
-      </button>
+</button>
 
-    </section>
+</section>
 
-  `;
+`;
 
   renderProducts();
-
-  /*
-    A câmera começa automaticamente.
-  */
 
   setTimeout(
     iniciarLeituraCodigo,
@@ -889,57 +893,60 @@ function renderProducts(){
 
         return `
 
-          <div class="product">
+<div class="product">
 
-            <div class="code-number">
+<div class="code-number">
 
-              ${i+1}.
-              ${esc(p.bar)}
+${i+1}.
+${esc(p.bar)}
 
-            </div>
+</div>
 
-            ${
-              p.photo
-              ?
-              `
-                <img
-                  src="${p.photo}"
-                  class="report-photo"
-                  alt="Produto">
-              `
-              :
-              ""
-            }
+${
+p.photo
+?
+`
+<img
+src="${p.photo}"
+class="report-photo"
+alt="Produto">
+`
+:
+""
+}
 
-            <div>
+<div>
 
-              <b>Validade:</b>
-              ${esc(formatDate(p.exp))}
+<b>Validade:</b>
+${esc(formatDate(p.exp))}
 
-            </div>
+</div>
 
-            <div>
+<div>
 
-              <b>Quantidade:</b>
-              ${esc(p.qty)}
+<b>Quantidade:</b>
+${esc(p.qty)}
 
-            </div>
+</div>
 
-            ${
-              p.sector
-              ?
-              `
-                <div class="muted">
-                  Setor: ${esc(p.sector)}
-                </div>
-              `
-              :
-              ""
-            }
+${
+p.sector
+?
+`
+<div class="muted">
 
-          </div>
+Setor:
+${esc(p.sector)}
 
-        `;
+</div>
+`
+:
+""
+}
+
+</div>
+
+`;
 
       })
       .join("");
@@ -979,8 +986,7 @@ function formatDate(value){
 
 async function iniciarLeituraCodigo(){
 
-  cameraMode =
-    "barcode";
+  cameraMode = "barcode";
 
   const video =
     document.getElementById("video");
@@ -1046,6 +1052,7 @@ async function iniciarLeituraCodigo(){
             ideal:30,
             max:60
           }
+
         }
 
       });
@@ -1109,8 +1116,7 @@ async function iniciarLeituraCodigo(){
 
 
     /*
-      ESCANEAMENTO MAIS RÁPIDO:
-      tenta a cada 100 ms.
+      LEITURA RÁPIDA
     */
 
     scanTimer =
@@ -1137,9 +1143,7 @@ async function iniciarLeituraCodigo(){
           try{
 
             const codes =
-              await detector.detect(
-                video
-              );
+              await detector.detect(video);
 
             if(
               codes &&
@@ -1148,10 +1152,6 @@ async function iniciarLeituraCodigo(){
 
               let codigo =
                 codes[0].rawValue || "";
-
-              /*
-                Somente números.
-              */
 
               codigo =
                 String(codigo)
@@ -1166,9 +1166,7 @@ async function iniciarLeituraCodigo(){
 
 
               const input =
-                document.getElementById(
-                  "pbar"
-                );
+                document.getElementById("pbar");
 
               if(input){
 
@@ -1188,7 +1186,7 @@ async function iniciarLeituraCodigo(){
               if(status){
 
                 status.textContent =
-                  "✅ Código copiado: " +
+                  "✅ Código lido: " +
                   codigo;
 
               }
@@ -1197,15 +1195,10 @@ async function iniciarLeituraCodigo(){
               if(msg){
 
                 msg.textContent =
-                  "Código lido. Preparando câmera para a foto...";
+                  "Código lido. Abrindo câmera para foto...";
 
               }
 
-
-              /*
-                MUDA AUTOMATICAMENTE
-                PARA A CÂMERA DE FOTO.
-              */
 
               setTimeout(
                 iniciarCameraFoto,
@@ -1252,8 +1245,7 @@ async function iniciarLeituraCodigo(){
 
 async function iniciarCameraFoto(){
 
-  cameraMode =
-    "photo";
+  cameraMode = "photo";
 
   if(scanTimer){
 
@@ -1317,10 +1309,6 @@ async function iniciarCameraFoto(){
 
   if(status){
 
-    status.classList.remove(
-      "processing"
-    );
-
     status.textContent =
       "📸 Câmera pronta para fotografar.";
 
@@ -1347,6 +1335,7 @@ async function iniciarCameraFoto(){
           height:{
             ideal:1080
           }
+
         }
 
       });
@@ -1356,12 +1345,9 @@ async function iniciarCameraFoto(){
 
     await video.play();
 
-
   }catch(error){
 
-    console.log(
-      error
-    );
+    console.log(error);
 
     if(status){
 
@@ -1410,8 +1396,7 @@ function tirarFoto(){
 
 
   /*
-    PROPORÇÃO 60 x 25
-    = 2.4 : 1
+    60 x 25 = 2.4 : 1
   */
 
   const ratio =
@@ -1460,16 +1445,12 @@ function tirarFoto(){
 
 
   const canvas =
-    document.createElement(
-      "canvas"
-    );
+    document.createElement("canvas");
 
 
-  canvas.width =
-    1200;
+  canvas.width = 1200;
 
-  canvas.height =
-    500;
+  canvas.height = 500;
 
 
   const ctx =
@@ -1497,9 +1478,7 @@ function tirarFoto(){
 
 
   const preview =
-    document.getElementById(
-      "photoPreview"
-    );
+    document.getElementById("photoPreview");
 
 
   if(preview){
@@ -1518,14 +1497,10 @@ function tirarFoto(){
 
 
   const status =
-    document.getElementById(
-      "scanstatus"
-    );
+    document.getElementById("scanstatus");
 
   const msg =
-    document.getElementById(
-      "cammsg"
-    );
+    document.getElementById("cammsg");
 
 
   if(status){
@@ -1545,9 +1520,8 @@ function tirarFoto(){
 
 
   const dataSection =
-    document.getElementById(
-      "dataSection"
-    );
+    document.getElementById("dataSection");
+
 
   if(dataSection){
 
@@ -1616,9 +1590,7 @@ function addProduct(){
 
   const bar =
     String(
-      document.getElementById(
-        "pbar"
-      )?.value || ""
+      document.getElementById("pbar")?.value || ""
     )
     .replace(
       /\D/g,
@@ -1627,24 +1599,18 @@ function addProduct(){
 
 
   const exp =
-    document.getElementById(
-      "pexp"
-    )?.value || "";
+    document.getElementById("pexp")?.value || "";
 
 
   const qty =
     Number(
-      document.getElementById(
-        "pqty"
-      )?.value || 0
+      document.getElementById("pqty")?.value || 0
     );
 
 
   const sector =
     String(
-      document.getElementById(
-        "psector"
-      )?.value || ""
+      document.getElementById("psector")?.value || ""
     ).trim();
 
 
@@ -1750,9 +1716,7 @@ function finishList(){
 
   if(index < 0){
 
-    db.lists.push(
-      current
-    );
+    db.lists.push(current);
 
   }else{
 
@@ -1787,77 +1751,76 @@ function lists(){
 
   app().innerHTML = `
 
-    <section class="card">
+<section class="card">
 
-      <div class="top">
+<div class="top">
 
-        <h2>Minhas listas</h2>
+<h2>Minhas listas</h2>
 
-        <button
-          class="back"
-          onclick="home()">
+<button
+class="back"
+onclick="home()">
 
-          ← Início
+← Início
 
-        </button>
+</button>
 
-      </div>
+</div>
 
-      ${
+${
+db.lists.length
 
-        db.lists.length
+?
 
-        ?
+db.lists
+.map(function(l){
 
-        db.lists
-        .map(function(l){
+return `
 
-          return `
+<div class="listbox">
 
-            <div class="listbox">
+<b>
+${esc(l.name)}
+</b>
 
-              <b>
-                ${esc(l.name)}
-              </b>
+<br>
 
-              <br>
+<span class="muted">
 
-              <span class="muted">
+${l.products.length}
+produto(s)
+•
+${esc(l.created)}
 
-                ${l.products.length}
-                produto(s)
-                •
-                ${esc(l.created)}
+</span>
 
-              </span>
+<br>
 
-              <br>
+<button
+class="light"
+style="margin-top:8px"
+onclick="openList(${l.id})">
 
-              <button
-                class="light"
-                style="margin-top:8px"
-                onclick="openList(${l.id})">
+Abrir lista
 
-                Abrir lista
+</button>
 
-              </button>
+</div>
 
-            </div>
+`;
 
-          `;
+})
+.join("")
 
-        })
-        .join("")
+:
 
-        :
+'<p class="muted">Nenhuma lista finalizada.</p>'
 
-        '<p class="muted">Nenhuma lista finalizada.</p>'
+}
 
-      }
+</section>
 
-    </section>
-
-  `;
+`;
 
 }
 
@@ -1897,160 +1860,157 @@ function reports(){
 
   app().innerHTML = `
 
-    <section class="card">
+<section class="card">
 
-      <div class="top">
+<div class="top">
 
-        <h2>Relatório final</h2>
+<h2>Relatório final</h2>
 
-        <button
-          class="back"
-          onclick="home()">
+<button
+class="back"
+onclick="home()">
 
-          ← Início
+← Início
 
-        </button>
+</button>
 
-      </div>
+</div>
 
-      ${
+${
+db.lists.length
 
-        db.lists.length
+?
 
-        ?
+db.lists
+.map(function(l){
 
-        db.lists
-        .map(function(l){
+return `
 
-          return `
+<div class="listbox">
 
-            <div class="listbox">
+<b>
+${esc(l.name)}
+</b>
 
-              <b>
-                ${esc(l.name)}
-              </b>
+<br>
 
-              <br>
+<span class="muted">
 
-              <span class="muted">
+${l.products.length}
+produto(s)
+•
+${esc(l.created)}
 
-                ${l.products.length}
-                produto(s)
-                •
-                ${esc(l.created)}
-
-              </span>
-
-
-              <div style="margin-top:12px">
-
-                ${
-                  l.products
-                  .map(function(p,i){
-
-                    return `
-
-                      <div class="product">
-
-                        <div class="code-number">
-
-                          ${i+1}.
-                          ${esc(p.bar)}
-
-                        </div>
+</span>
 
 
-                        ${
-                          p.photo
-                          ?
-                          `
-                            <img
-                              src="${p.photo}"
-                              class="report-photo"
-                              alt="Produto">
-                          `
-                          :
-                          ""
-                        }
+<div style="margin-top:12px">
+
+${
+l.products
+.map(function(p,i){
+
+return `
+
+<div class="product">
+
+<div class="code-number">
+
+${i+1}.
+${esc(p.bar)}
+
+</div>
+
+${
+p.photo
+?
+`
+<img
+src="${p.photo}"
+class="report-photo"
+alt="Produto">
+`
+:
+""
+}
+
+<div>
+
+<b>Validade:</b>
+${esc(formatDate(p.exp))}
+
+</div>
+
+<div>
+
+<b>Quantidade:</b>
+${esc(p.qty)}
+
+</div>
+
+${
+p.sector
+?
+`
+<div class="muted">
+
+Setor:
+${esc(p.sector)}
+
+</div>
+`
+:
+""
+}
+
+</div>
+
+`;
+
+})
+.join("")
+}
+
+</div>
 
 
-                        <div>
+<div class="report-actions">
 
-                          <b>Validade:</b>
-                          ${esc(formatDate(p.exp))}
+<button
+class="primary"
+onclick="generatePDF(${l.id})">
 
-                        </div>
+📄 Gerar PDF da lista
 
-
-                        <div>
-
-                          <b>Quantidade:</b>
-                          ${esc(p.qty)}
-
-                        </div>
+</button>
 
 
-                        ${
-                          p.sector
-                          ?
-                          `
-                            <div class="muted">
-                              Setor:
-                              ${esc(p.sector)}
-                            </div>
-                          `
-                          :
-                          ""
-                        }
+<button
+class="whatsapp"
+onclick="sharePDFWhatsApp(${l.id})">
 
-                      </div>
+📲 Enviar PDF pelo WhatsApp
 
-                    `;
+</button>
 
-                  })
-                  .join("")
-                }
+</div>
 
-              </div>
+</div>
 
+`;
 
-              <div class="report-actions">
+})
+.join("")
 
-                <button
-                  class="primary"
-                  onclick="generatePDF(${l.id})">
+:
 
-                  📄 Gerar PDF da lista
+'<p class="muted">Finalize uma lista para vê-la aqui.</p>'
 
-                </button>
+}
 
+</section>
 
-                <button
-                  class="whatsapp"
-                  onclick="sharePDFWhatsApp(${l.id})">
-
-                  📲 Enviar PDF pelo WhatsApp
-
-                </button>
-
-              </div>
-
-            </div>
-
-          `;
-
-        })
-        .join("")
-
-        :
-
-        '<p class="muted">Finalize uma lista para vê-la aqui.</p>'
-
-      }
-
-    </section>
-
-  `;
+`;
 
 }
 
@@ -2075,8 +2035,14 @@ function createPDFBlob(id){
     return null;
 
 
-  if(!window.jspdf)
+  if(
+    !window.jspdf ||
+    !window.jspdf.jsPDF
+  ){
+
     return null;
+
+  }
 
 
   const jsPDF =
@@ -2107,10 +2073,7 @@ function createPDFBlob(id){
   doc.setFontSize(13);
 
   doc.text(
-    String(l.name).slice(
-      0,
-      50
-    ),
+    String(l.name).slice(0,50),
     14,
     27
   );
@@ -2137,11 +2100,6 @@ function createPDFBlob(id){
 
   l.products.forEach(
     function(p,index){
-
-      /*
-        Cada produto possui sua
-        própria foto 60 x 25 mm.
-      */
 
       const blockHeight =
         48;
@@ -2197,12 +2155,10 @@ function createPDFBlob(id){
       }
 
 
-      const x =
-        82;
+      const x = 82;
 
 
       doc.setFontSize(9);
-
 
       doc.text(
         "Validade:",
@@ -2210,11 +2166,8 @@ function createPDFBlob(id){
         y + 6
       );
 
-
       doc.text(
-        String(
-          formatDate(p.exp)
-        ),
+        String(formatDate(p.exp)),
         x + 23,
         y + 6
       );
@@ -2225,7 +2178,6 @@ function createPDFBlob(id){
         x,
         y + 13
       );
-
 
       doc.text(
         String(p.qty),
@@ -2243,10 +2195,7 @@ function createPDFBlob(id){
         );
 
         doc.text(
-          String(p.sector).slice(
-            0,
-            35
-          ),
+          String(p.sector).slice(0,35),
           x + 15,
           y + 20
         );
@@ -2271,8 +2220,6 @@ function createPDFBlob(id){
   );
 
 
-  doc.setFontSize(9);
-
   if(y > 285){
 
     doc.addPage();
@@ -2282,6 +2229,8 @@ function createPDFBlob(id){
   }
 
 
+  doc.setFontSize(9);
+
   doc.text(
     "Total de produtos: " +
     l.products.length,
@@ -2290,9 +2239,7 @@ function createPDFBlob(id){
   );
 
 
-  return doc.output(
-    "blob"
-  );
+  return doc.output("blob");
 
 }
 
@@ -2360,7 +2307,7 @@ function generatePDF(id){
     if(!blob){
 
       alert(
-        "Não foi possível gerar o PDF."
+        "Não foi possível gerar o PDF. Aguarde o carregamento do gerador e tente novamente."
       );
 
       return;
@@ -2385,6 +2332,9 @@ function generatePDF(id){
     a.style.display =
       "none";
 
+    a.rel =
+      "noopener";
+
 
     document.body.appendChild(a);
 
@@ -2399,7 +2349,7 @@ function generatePDF(id){
         URL.revokeObjectURL(url);
 
       },
-      5000
+      10000
     );
 
 
@@ -2421,8 +2371,7 @@ function generatePDF(id){
 
 
 /* =====================================================
-   ENVIAR PDF
-   COMPARTILHAMENTO ANDROID
+   COMPARTILHAR PDF
 ===================================================== */
 
 async function sharePDFWhatsApp(id){
@@ -2457,65 +2406,113 @@ async function sharePDFWhatsApp(id){
     if(!blob){
 
       alert(
-        "Não foi possível criar o PDF."
+        "Não foi possível gerar o PDF."
       );
 
       return;
 
     }
+
+
+    const filename =
+      pdfFileName(l);
 
 
     const file =
       new File(
         [blob],
-        pdfFileName(l),
+        filename,
         {
-          type:"application/pdf"
+          type:"application/pdf",
+          lastModified:Date.now()
         }
       );
 
 
     /*
-      Android/Chrome:
-      abre a tela de compartilhamento
-      com o PDF anexado.
+      PRIMEIRA OPÇÃO:
+      COMPARTILHAMENTO NATIVO
+      DO ANDROID.
 
-      O usuário escolhe WhatsApp.
+      O usuário escolhe WhatsApp
+      e o PDF vai como arquivo.
     */
 
     if(
-      navigator.share &&
-      navigator.canShare &&
-      navigator.canShare({
-        files:[file]
-      })
+      navigator.share
     ){
 
-      await navigator.share({
+      let supported = true;
 
-        title:
-          "Validade- — " +
-          l.name,
 
-        text:
-          "Relatório de validade — " +
-          l.name,
+      if(
+        navigator.canShare
+      ){
 
-        files:[
-          file
-        ]
+        try{
 
-      });
+          supported =
+            navigator.canShare({
+              files:[file]
+            });
 
-      return;
+        }catch(error){
+
+          supported = false;
+
+        }
+
+      }
+
+
+      if(supported){
+
+        try{
+
+          await navigator.share({
+
+            title:
+              "Validade- — " +
+              l.name,
+
+            text:
+              "Relatório de validade — " +
+              l.name,
+
+            files:[
+              file
+            ]
+
+          });
+
+          return;
+
+        }catch(error){
+
+          if(
+            error &&
+            error.name === "AbortError"
+          ){
+
+            return;
+
+          }
+
+          console.log(
+            "Compartilhamento cancelado/indisponível:",
+            error
+          );
+
+        }
+
+      }
 
     }
 
 
     /*
-      Caso o navegador não suporte
-      compartilhamento de arquivo,
-      baixa o PDF.
+      SEGUNDA OPÇÃO:
+      SALVA O PDF.
     */
 
     const url =
@@ -2530,7 +2527,10 @@ async function sharePDFWhatsApp(id){
       url;
 
     a.download =
-      pdfFileName(l);
+      filename;
+
+    a.style.display =
+      "none";
 
 
     document.body.appendChild(a);
@@ -2546,40 +2546,61 @@ async function sharePDFWhatsApp(id){
         URL.revokeObjectURL(url);
 
       },
-      5000
+      10000
     );
 
 
-    alert(
-      "Este navegador não permite anexar o PDF diretamente. O arquivo foi salvo. Abra o WhatsApp e anexe o PDF da lista."
+    /*
+      ABRE WHATSAPP.
+    */
+
+    const texto =
+      "Relatório de validade — " +
+      l.name +
+      "\n\n" +
+      "O PDF foi salvo no aparelho. " +
+      "Anexe o arquivo " +
+      filename +
+      " nesta conversa.";
+
+
+    const whatsapp =
+      "https://wa.me/?text=" +
+      encodeURIComponent(texto);
+
+
+    setTimeout(
+      function(){
+
+        window.location.href =
+          whatsapp;
+
+      },
+      1000
     );
 
 
   }catch(error){
 
-    /*
-      Cancelamento da janela
-      de compartilhamento não é erro.
-    */
-
-    if(
-      error &&
-      error.name === "AbortError"
-    ){
-
-      return;
-
-    }
-
-
     console.log(
-      "Compartilhamento:",
+      "Erro compartilhamento:",
       error
     );
 
 
+    try{
+
+      generatePDF(id);
+
+    }catch(e){
+
+      console.log(e);
+
+    }
+
+
     alert(
-      "Não foi possível compartilhar o PDF. Tente gerar o PDF primeiro."
+      "O PDF foi gerado. O compartilhamento direto não está disponível neste ambiente."
     );
 
   }
@@ -2647,9 +2668,13 @@ if(
 </script>
 
 
-<!-- GERADOR PDF -->
+<!-- =====================================================
+     GERADOR DE PDF
+===================================================== -->
+
 <script
-src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js">
+src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"
+crossorigin="anonymous">
 </script>
 
 </body>
