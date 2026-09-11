@@ -1,12 +1,20 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover">
+
 <title>Validade-</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -159,20 +167,51 @@ label{
   text-align:center;
 }
 
+.camera-title{
+  font-size:15px;
+  margin-bottom:10px;
+}
+
+.video-wrap{
+  position:relative;
+}
+
 video{
   width:100%;
-  max-height:240px;
+  height:300px;
   object-fit:cover;
   border-radius:11px;
   background:#05080d;
 }
 
+.scan-area{
+  position:absolute;
+  left:8%;
+  right:8%;
+  top:28%;
+  height:44%;
+  border:2px solid #31d78c;
+  border-radius:10px;
+  pointer-events:none;
+}
+
+.scan-area span{
+  position:absolute;
+  bottom:-28px;
+  left:0;
+  right:0;
+  font-size:12px;
+  color:#31d78c;
+}
+
 .scanline{
   height:3px;
   background:#31d78c;
-  margin:-60px 12% 45px;
+  position:absolute;
+  left:10%;
+  right:10%;
+  top:50%;
   border-radius:5px;
-  position:relative;
 }
 
 .status{
@@ -182,24 +221,46 @@ video{
   color:#17663f;
   font-size:14px;
 }
+
+.processing{
+  background:#fff8e6;
+  color:#805b00;
+}
+
 </style>
+
 </head>
 
 <body>
 
 <header>
+
   <h1>Validade-</h1>
+
   <p>Controle de vencimentos</p>
+
 </header>
 
 <main id="app">
+
   <section class="card">
+
     <h2>Carregando...</h2>
-    <p class="muted">Inicializando aplicativo.</p>
+
+    <p class="muted">
+      Inicializando aplicativo.
+    </p>
+
   </section>
+
 </main>
 
+
 <script>
+
+/* =====================================================
+   BANCO LOCAL
+===================================================== */
 
 const KEY = "validade_app_v2";
 
@@ -208,34 +269,49 @@ let db = {
 };
 
 let current = null;
+
 let stream = null;
+
 let scanTimer = null;
+
 let scanStage = "barcode";
 
+let ocrProcessing = false;
 
-/* =========================
-   BANCO LOCAL
-========================= */
+
+/* =====================================================
+   CARREGAR DADOS
+===================================================== */
 
 function loadData(){
 
   try{
 
-    const saved = localStorage.getItem(KEY);
+    const saved =
+      localStorage.getItem(KEY);
 
     if(saved){
 
-      const parsed = JSON.parse(saved);
+      const parsed =
+        JSON.parse(saved);
 
-      if(parsed && Array.isArray(parsed.lists)){
+      if(
+        parsed &&
+        Array.isArray(parsed.lists)
+      ){
+
         db = parsed;
+
       }
 
     }
 
   }catch(error){
 
-    console.log("Erro ao carregar dados:",error);
+    console.log(
+      "Erro ao carregar dados:",
+      error
+    );
 
     db = {
       lists:[]
@@ -246,28 +322,40 @@ function loadData(){
 }
 
 
+/* =====================================================
+   SALVAR
+===================================================== */
+
 function save(){
 
   try{
 
-    localStorage.setItem(KEY,JSON.stringify(db));
+    localStorage.setItem(
+      KEY,
+      JSON.stringify(db)
+    );
 
   }catch(error){
 
-    console.log("Erro ao salvar dados:",error);
+    console.log(
+      "Erro ao salvar:",
+      error
+    );
 
   }
 
 }
 
 
-/* =========================
-   SEGURANÇA DE TEXTO
-========================= */
+/* =====================================================
+   ESCAPAR TEXTO
+===================================================== */
 
-function esc(s){
+function esc(value){
 
-  return String(s ?? "").replace(
+  return String(
+    value ?? ""
+  ).replace(
     /[&<>"']/g,
     function(m){
 
@@ -286,20 +374,22 @@ function esc(s){
 }
 
 
-/* =========================
+/* =====================================================
    APP
-========================= */
+===================================================== */
 
 function app(){
 
-  return document.getElementById("app");
+  return document.getElementById(
+    "app"
+  );
 
 }
 
 
-/* =========================
+/* =====================================================
    TELA INICIAL
-========================= */
+===================================================== */
 
 function home(){
 
@@ -317,39 +407,57 @@ function home(){
 
       <div class="actions">
 
-        <button class="primary"
+        <button
+          class="primary"
           onclick="newList()">
+
           ➕ Criar nova lista
+
         </button>
 
-        <button class="light"
+        <button
+          class="light"
           onclick="lists()">
+
           📋 Minhas listas
+
         </button>
 
-        <button class="light"
+        <button
+          class="light"
           onclick="reports()">
+
           📄 Relatório final
+
         </button>
 
-        <button class="danger"
+        <button
+          class="danger"
           onclick="clearData()">
+
           🗑 Limpar dados
+
         </button>
 
       </div>
 
     </section>
 
+
     <section class="card">
 
       <b>Fluxo</b>
 
       <p class="muted">
-        Criar lista → Ler Produto →
-        código de barras → descrição →
-        validade → quantidade →
-        salvar → finalizar.
+
+        Criar lista →
+        código de barras →
+        descrição →
+        validade →
+        quantidade →
+        salvar →
+        finalizar.
+
       </p>
 
     </section>
@@ -359,9 +467,9 @@ function home(){
 }
 
 
-/* =========================
+/* =====================================================
    NOVA LISTA
-========================= */
+===================================================== */
 
 function newList(){
 
@@ -373,12 +481,16 @@ function newList(){
 
         <h2>Nova lista</h2>
 
-        <button class="back"
+        <button
+          class="back"
           onclick="home()">
+
           ← Voltar
+
         </button>
 
       </div>
+
 
       <label>
 
@@ -389,6 +501,7 @@ function newList(){
           placeholder="Ex.: Câmara Fria – 11/09">
 
       </label>
+
 
       <button
         class="primary"
@@ -405,13 +518,16 @@ function newList(){
 }
 
 
-/* =========================
+/* =====================================================
    CRIAR LISTA
-========================= */
+===================================================== */
 
 function createList(){
 
-  const input = document.getElementById("lname");
+  const input =
+    document.getElementById(
+      "lname"
+    );
 
   if(!input){
 
@@ -419,11 +535,14 @@ function createList(){
 
   }
 
-  const name = input.value.trim();
+  const name =
+    input.value.trim();
 
   if(!name){
 
-    alert("Digite o nome da lista.");
+    alert(
+      "Digite o nome da lista."
+    );
 
     return;
 
@@ -435,7 +554,11 @@ function createList(){
 
     name:name,
 
-    created:new Date().toLocaleDateString("pt-BR"),
+    created:
+      new Date()
+      .toLocaleDateString(
+        "pt-BR"
+      ),
 
     products:[]
 
@@ -446,9 +569,9 @@ function createList(){
 }
 
 
-/* =========================
+/* =====================================================
    EDITOR
-========================= */
+===================================================== */
 
 function editor(){
 
@@ -470,10 +593,15 @@ function editor(){
 
         <div>
 
-          <h2>${esc(current.name)}</h2>
+          <h2>
+            ${esc(current.name)}
+          </h2>
 
           <span class="badge">
-            ${current.products.length} produto(s)
+
+            ${current.products.length}
+            produto(s)
+
           </span>
 
         </div>
@@ -491,27 +619,50 @@ function editor(){
 
       <div class="camera">
 
-        <div id="cammsg">
-          A câmera será aberta para ler o código de barras.
+        <div
+          id="cammsg"
+          class="camera-title">
+
+          A câmera será aberta para
+          ler o código de barras.
+
         </div>
 
-        <video
-          id="video"
-          autoplay
-          playsinline
-          muted
-          class="hidden">
-        </video>
 
-        <div
-          id="scanline"
-          class="scanline hidden">
+        <div class="video-wrap">
+
+          <video
+            id="video"
+            autoplay
+            playsinline
+            muted
+            class="hidden">
+          </video>
+
+
+          <div
+            id="scanarea"
+            class="scan-area hidden">
+
+            <span>
+              Posicione o produto nesta área
+            </span>
+
+          </div>
+
+
+          <div
+            id="scanline"
+            class="scanline hidden">
+          </div>
+
         </div>
 
       </div>
 
 
       <button
+        id="scanbutton"
         class="primary"
         style="margin-top:10px"
         onclick="startScan()">
@@ -599,9 +750,12 @@ function editor(){
       </button>
 
 
-      <div style="margin-top:16px">
+      <div
+        style="margin-top:16px">
 
-        <h3>Produtos desta lista</h3>
+        <h3>
+          Produtos desta lista
+        </h3>
 
         <div id="products"></div>
 
@@ -626,13 +780,16 @@ function editor(){
 }
 
 
-/* =========================
+/* =====================================================
    PRODUTOS
-========================= */
+===================================================== */
 
 function renderProducts(){
 
-  const el = document.getElementById("products");
+  const el =
+    document.getElementById(
+      "products"
+    );
 
   if(!el || !current){
 
@@ -649,58 +806,74 @@ function renderProducts(){
 
   }
 
-  el.innerHTML = current.products.map(
-    function(p,i){
+  el.innerHTML =
+    current.products
+    .map(
+      function(p,i){
 
-      return `
+        return `
 
-        <div class="product">
+          <div class="product">
 
-          <b>
-            ${i+1}. ${esc(p.bar)}
-          </b>
+            <b>
+              ${i+1}.
+              ${esc(p.bar)}
+            </b>
 
-          <br>
+            <br>
 
-          ${esc(p.name)}
+            ${esc(p.name)}
 
-          <br>
+            <br>
 
-          <span class="muted">
+            <span class="muted">
 
-            Validade: ${esc(p.exp)}
-            • Quantidade: ${p.qty}
+              Validade:
+              ${esc(p.exp)}
 
-            ${p.sector
-              ? " • Setor: "+esc(p.sector)
-              : ""}
+              • Quantidade:
+              ${p.qty}
 
-          </span>
+              ${
+                p.sector
+                ? " • Setor: "
+                  + esc(p.sector)
+                : ""
+              }
 
-        </div>
+            </span>
 
-      `;
+          </div>
 
-    }
-  ).join("");
+        `;
+
+      }
+    )
+    .join("");
 
 }
 
 
-/* =========================
-   CÂMERA
-========================= */
+/* =====================================================
+   INICIAR CÂMERA
+===================================================== */
 
 async function startScan(){
 
   const status =
-    document.getElementById("scanstatus");
+    document.getElementById(
+      "scanstatus"
+    );
 
   const video =
-    document.getElementById("video");
+    document.getElementById(
+      "video"
+    );
 
   const cammsg =
-    document.getElementById("cammsg");
+    document.getElementById(
+      "cammsg"
+    );
 
   if(!status || !video){
 
@@ -708,17 +881,27 @@ async function startScan(){
 
   }
 
-  scanStage = "barcode";
+  scanStage =
+    "barcode";
 
-  status.classList.remove("hidden");
+  status.classList.remove(
+    "hidden"
+  );
+
+  status.classList.remove(
+    "processing"
+  );
 
   status.textContent =
     "📷 Abrindo câmera para procurar o código de barras…";
 
+
   try{
 
-    if(!navigator.mediaDevices ||
-       !navigator.mediaDevices.getUserMedia){
+    if(
+      !navigator.mediaDevices ||
+      !navigator.mediaDevices.getUserMedia
+    ){
 
       status.textContent =
         "⚠️ A câmera não está disponível neste aparelho.";
@@ -727,29 +910,68 @@ async function startScan(){
 
     }
 
+
+    stopCam();
+
+
     stream =
-      await navigator.mediaDevices.getUserMedia({
+      await navigator.mediaDevices
+      .getUserMedia({
+
+        audio:false,
 
         video:{
+
           facingMode:{
             ideal:"environment"
+          },
+
+          width:{
+            ideal:1280
+          },
+
+          height:{
+            ideal:720
           }
+
         }
 
       });
 
 
-    video.srcObject = stream;
+    video.srcObject =
+      stream;
 
-    video.classList.remove("hidden");
+    video.classList.remove(
+      "hidden"
+    );
 
 
     const scanline =
-      document.getElementById("scanline");
+      document.getElementById(
+        "scanline"
+      );
+
+    const scanarea =
+      document.getElementById(
+        "scanarea"
+      );
+
 
     if(scanline){
 
-      scanline.classList.remove("hidden");
+      scanline.classList.remove(
+        "hidden"
+      );
+
+    }
+
+
+    if(scanarea){
+
+      scanarea.classList.remove(
+        "hidden"
+      );
 
     }
 
@@ -762,16 +984,21 @@ async function startScan(){
     }
 
 
-    if("BarcodeDetector" in window){
+    if(
+      "BarcodeDetector"
+      in window
+    ){
 
       let formats = [];
+
 
       try{
 
         formats =
-          await BarcodeDetector.getSupportedFormats();
+          await BarcodeDetector
+          .getSupportedFormats();
 
-      }catch(e){
+      }catch(error){
 
         formats = [];
 
@@ -780,14 +1007,17 @@ async function startScan(){
 
       let detector;
 
+
       try{
 
         detector =
           formats.length
-          ? new BarcodeDetector({formats})
+          ? new BarcodeDetector({
+              formats:formats
+            })
           : new BarcodeDetector();
 
-      }catch(e){
+      }catch(error){
 
         detector =
           new BarcodeDetector();
@@ -796,42 +1026,57 @@ async function startScan(){
 
 
       scanTimer =
-        setInterval(async function(){
-
-          if(!video.videoWidth){
-
-            return;
-
-          }
-
-          try{
-
-            const codes =
-              await detector.detect(video);
+        setInterval(
+          async function(){
 
             if(
-              codes &&
-              codes.length &&
-              codes[0].rawValue
+              !video.videoWidth ||
+              !video.videoHeight
             ){
 
-              const input =
-                document.getElementById("pbar");
-
-              if(input){
-
-                input.value =
-                  codes[0].rawValue;
-
-              }
-
-              nextOCR();
+              return;
 
             }
 
-          }catch(e){}
 
-        },500);
+            try{
+
+              const codes =
+                await detector
+                .detect(video);
+
+
+              if(
+                codes &&
+                codes.length &&
+                codes[0].rawValue
+              ){
+
+                const input =
+                  document.getElementById(
+                    "pbar"
+                  );
+
+
+                if(input){
+
+                  input.value =
+                    codes[0].rawValue;
+
+                }
+
+
+                nextOCR();
+
+              }
+
+            }catch(error){
+
+            }
+
+          },
+          500
+        );
 
 
     }else{
@@ -850,7 +1095,10 @@ async function startScan(){
 
   }catch(error){
 
-    console.log("Câmera:",error);
+    console.log(
+      "Erro câmera:",
+      error
+    );
 
     status.textContent =
       "⚠️ Não foi possível abrir a câmera. Verifique a permissão do aplicativo.";
@@ -860,56 +1108,630 @@ async function startScan(){
 }
 
 
-/* =========================
-   OCR
-========================= */
+/* =====================================================
+   PASSOU PARA OCR
+===================================================== */
 
 function nextOCR(){
 
   if(scanTimer){
 
-    clearInterval(scanTimer);
+    clearInterval(
+      scanTimer
+    );
 
     scanTimer = null;
 
   }
 
-  scanStage = "ocr";
+
+  scanStage =
+    "ocr";
+
 
   const status =
-    document.getElementById("scanstatus");
+    document.getElementById(
+      "scanstatus"
+    );
 
   const cammsg =
-    document.getElementById("cammsg");
+    document.getElementById(
+      "cammsg"
+    );
+
+  const scanarea =
+    document.getElementById(
+      "scanarea"
+    );
+
 
   if(status){
 
+    status.classList.remove(
+      "hidden"
+    );
+
+    status.classList.remove(
+      "processing"
+    );
+
     status.textContent =
-      "✅ Código lido! Agora procure a descrição do produto.";
+      "✅ Código lido! Agora aponte para o nome do produto.";
 
   }
+
 
   if(cammsg){
 
     cammsg.textContent =
-      "Aponte a câmera para o nome/descrição do produto.";
+      "Aponte o nome/descrição do produto para a área verde.";
 
   }
 
-  setTimeout(
 
+  if(scanarea){
+
+    scanarea.classList.remove(
+      "hidden"
+    );
+
+  }
+
+
+  setTimeout(
     function(){
 
       ocrMode();
 
     },
-
-    500
-
+    600
   );
 
 }
 
+
+/* =====================================================
+   PREPARAR IMAGEM PARA OCR
+===================================================== */
+
+function prepararImagem(
+  video,
+  modo
+){
+
+  const largura =
+    video.videoWidth;
+
+  const altura =
+    video.videoHeight;
+
+
+  /*
+    Região central da imagem.
+    Evita pegar o restante da embalagem,
+    código de barras e fundo.
+  */
+
+  const cropX =
+    Math.floor(
+      largura * 0.08
+    );
+
+  const cropY =
+    Math.floor(
+      altura * 0.20
+    );
+
+  const cropW =
+    Math.floor(
+      largura * 0.84
+    );
+
+  const cropH =
+    Math.floor(
+      altura * 0.50
+    );
+
+
+  const escala =
+    2.5;
+
+
+  const canvas =
+    document.createElement(
+      "canvas"
+    );
+
+
+  canvas.width =
+    Math.floor(
+      cropW * escala
+    );
+
+  canvas.height =
+    Math.floor(
+      cropH * escala
+    );
+
+
+  const ctx =
+    canvas.getContext(
+      "2d",
+      {
+        willReadFrequently:true
+      }
+    );
+
+
+  if(!ctx){
+
+    return null;
+
+  }
+
+
+  ctx.fillStyle =
+    "#ffffff";
+
+
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  ctx.imageSmoothingEnabled =
+    false;
+
+
+  ctx.drawImage(
+
+    video,
+
+    cropX,
+    cropY,
+    cropW,
+    cropH,
+
+    0,
+    0,
+    canvas.width,
+    canvas.height
+
+  );
+
+
+  const imagem =
+    ctx.getImageData(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+
+  const dados =
+    imagem.data;
+
+
+  for(
+    let i = 0;
+    i < dados.length;
+    i += 4
+  ){
+
+    const r =
+      dados[i];
+
+    const g =
+      dados[i + 1];
+
+    const b =
+      dados[i + 2];
+
+
+    let cinza =
+      (
+        r * 0.299 +
+        g * 0.587 +
+        b * 0.114
+      );
+
+
+    /*
+      Primeiro modo:
+      contraste forte.
+    */
+
+    if(modo === 1){
+
+      cinza =
+        ((cinza - 128) * 1.65)
+        + 128;
+
+    }
+
+
+    /*
+      Segundo modo:
+      preto/branco.
+    */
+
+    if(modo === 2){
+
+      cinza =
+        cinza > 145
+        ? 255
+        : 0;
+
+    }
+
+
+    cinza =
+      Math.max(
+        0,
+        Math.min(
+          255,
+          cinza
+        )
+      );
+
+
+    dados[i] =
+      cinza;
+
+    dados[i + 1] =
+      cinza;
+
+    dados[i + 2] =
+      cinza;
+
+  }
+
+
+  ctx.putImageData(
+    imagem,
+    0,
+    0
+  );
+
+
+  return canvas;
+
+}
+
+
+/* =====================================================
+   LIMPAR TEXTO DO OCR
+===================================================== */
+
+function limparOCR(text){
+
+  let resultado =
+    String(
+      text || ""
+    );
+
+
+  resultado =
+    resultado
+    .replace(/\r/g," ")
+    .replace(/\n+/g," ")
+    .replace(/\s+/g," ")
+    .trim();
+
+
+  /*
+    Remove símbolos claramente estranhos.
+  */
+
+  resultado =
+    resultado.replace(
+      /[^A-Za-zÀ-ÿ0-9\s.,()\/&%+\-ºª°]/g,
+      ""
+    );
+
+
+  resultado =
+    resultado
+    .replace(/\s+/g," ")
+    .trim();
+
+
+  /*
+    Remove caracteres no começo.
+  */
+
+  resultado =
+    resultado.replace(
+      /^[^A-Za-zÀ-ÿ0-9]+/,
+      ""
+    );
+
+
+  return resultado;
+
+}
+
+
+/* =====================================================
+   AVALIAR TEXTO
+===================================================== */
+
+function avaliarTexto(
+  texto,
+  confianca
+){
+
+  const text =
+    limparOCR(texto);
+
+
+  if(!text){
+
+    return {
+      text:"",
+      score:0
+    };
+
+  }
+
+
+  const letras =
+    (
+      text.match(
+        /[A-Za-zÀ-ÿ]/g
+      ) || []
+    ).length;
+
+
+  const numeros =
+    (
+      text.match(
+        /[0-9]/g
+      ) || []
+    ).length;
+
+
+  const palavras =
+    text
+    .split(/\s+/)
+    .filter(
+      x => x.length >= 2
+    )
+    .length;
+
+
+  let score =
+    Number(
+      confianca || 0
+    );
+
+
+  /*
+    Recompensa texto com aparência
+    de descrição de produto.
+  */
+
+  score +=
+    Math.min(
+      letras * 1.5,
+      35
+    );
+
+
+  score +=
+    Math.min(
+      palavras * 3,
+      20
+    );
+
+
+  /*
+    Penaliza excesso de números.
+  */
+
+  if(
+    numeros > letras
+  ){
+
+    score -= 25;
+
+  }
+
+
+  /*
+    Penaliza textos muito curtos.
+  */
+
+  if(
+    text.length < 5
+  ){
+
+    score -= 50;
+
+  }
+
+
+  return {
+
+    text:text.slice(
+      0,
+      100
+    ),
+
+    score:score
+
+  };
+
+}
+
+
+/* =====================================================
+   OCR
+===================================================== */
+
+async function executarOCR(){
+
+  const video =
+    document.getElementById(
+      "video"
+    );
+
+
+  if(
+    !video ||
+    !video.videoWidth
+  ){
+
+    return null;
+
+  }
+
+
+  const resultados = [];
+
+
+  /*
+    PRIMEIRA LEITURA
+  */
+
+  const imagem1 =
+    prepararImagem(
+      video,
+      1
+    );
+
+
+  if(imagem1){
+
+    try{
+
+      const r1 =
+        await Tesseract.recognize(
+
+          imagem1,
+
+          "por",
+
+          {
+
+            logger:function(){},
+
+            tessedit_pageseg_mode:6
+
+          }
+
+        );
+
+
+      resultados.push(
+        avaliarTexto(
+          r1?.data?.text,
+          r1?.data?.confidence
+        )
+      );
+
+    }catch(error){
+
+      console.log(
+        "OCR 1:",
+        error
+      );
+
+    }
+
+  }
+
+
+  /*
+    SEGUNDA LEITURA
+    SOMENTE SE A PRIMEIRA
+    NÃO FOR BOA
+  */
+
+  const melhor =
+    resultados.length
+    ? resultados[0]
+    : null;
+
+
+  if(
+    !melhor ||
+    melhor.score < 70
+  ){
+
+    const imagem2 =
+      prepararImagem(
+        video,
+        2
+      );
+
+
+    if(imagem2){
+
+      try{
+
+        const r2 =
+          await Tesseract.recognize(
+
+            imagem2,
+
+            "por",
+
+            {
+
+              logger:function(){},
+
+              tessedit_pageseg_mode:6
+
+            }
+
+          );
+
+
+        resultados.push(
+          avaliarTexto(
+            r2?.data?.text,
+            r2?.data?.confidence
+          )
+        );
+
+      }catch(error){
+
+        console.log(
+          "OCR 2:",
+          error
+        );
+
+      }
+
+    }
+
+  }
+
+
+  resultados.sort(
+    function(a,b){
+
+      return b.score - a.score;
+
+    }
+  );
+
+
+  return resultados.length
+    ? resultados[0]
+    : null;
+
+}
+
+
+/* =====================================================
+   MODO OCR
+===================================================== */
 
 function ocrMode(){
 
@@ -919,10 +1741,12 @@ function ocrMode(){
 
   }
 
+
   const button =
-    document.querySelector(
-      'button[onclick="startScan()"]'
+    document.getElementById(
+      "scanbutton"
     );
+
 
   if(button){
 
@@ -932,144 +1756,187 @@ function ocrMode(){
   }
 
 
-  if(window.Tesseract){
+  if(!window.Tesseract){
 
     const status =
-      document.getElementById("scanstatus");
+      document.getElementById(
+        "scanstatus"
+      );
+
 
     if(status){
 
       status.textContent =
-        "🔎 Procurando a descrição do produto…";
+        "⚠️ OCR indisponível. Digite a descrição manualmente.";
 
     }
 
 
-    scanTimer =
-      setInterval(async function(){
+    return;
+
+  }
+
+
+  const status =
+    document.getElementById(
+      "scanstatus"
+    );
+
+
+  if(status){
+
+    status.textContent =
+      "🔎 Procurando a descrição do produto…";
+
+  }
+
+
+  ocrProcessing =
+    false;
+
+
+  scanTimer =
+    setInterval(
+      async function(){
+
+        if(ocrProcessing){
+
+          return;
+
+        }
+
 
         const video =
-          document.getElementById("video");
-
-        if(!video || !video.videoWidth){
-
-          return;
-
-        }
+          document.getElementById(
+            "video"
+          );
 
 
-        const canvas =
-          document.createElement("canvas");
-
-        canvas.width =
-          video.videoWidth;
-
-        canvas.height =
-          video.videoHeight;
-
-
-        const context =
-          canvas.getContext("2d");
-
-        if(!context){
+        if(
+          !video ||
+          !video.videoWidth
+        ){
 
           return;
 
         }
 
 
-        context.drawImage(
-          video,
-          0,
-          0
-        );
+        ocrProcessing =
+          true;
+
+
+        if(status){
+
+          status.classList.add(
+            "processing"
+          );
+
+          status.textContent =
+            "🔎 Analisando a embalagem…";
+
+        }
 
 
         try{
 
-          const result =
-            await Tesseract.recognize(
-              canvas,
-              "por",
-              {
-                logger:function(){}
-              }
-            );
+          const resultado =
+            await executarOCR();
 
 
-          const text =
-            String(
-              result?.data?.text || ""
-            )
-            .replace(/\s+/g," ")
-            .trim();
-
-
-          if(text.length >= 4){
+          if(
+            resultado &&
+            resultado.text &&
+            resultado.score >= 45
+          ){
 
             const name =
-              document.getElementById("pname");
+              document.getElementById(
+                "pname"
+              );
+
 
             if(name){
 
               name.value =
-                text.slice(0,80);
+                resultado.text;
 
             }
 
 
             if(status){
 
+              status.classList.remove(
+                "processing"
+              );
+
               status.textContent =
                 "✅ Descrição identificada. Confira e salve.";
 
             }
 
+
             stopCam();
+
+
+          }else{
+
+            if(status){
+
+              status.textContent =
+                "🔎 Aproxime o nome do produto e mantenha a câmera firme…";
+
+            }
 
           }
 
-        }catch(e){}
+        }catch(error){
 
-      },2000);
+          console.log(
+            "Erro OCR:",
+            error
+          );
+
+        }
 
 
-  }else{
+        ocrProcessing =
+          false;
 
-    const status =
-      document.getElementById("scanstatus");
-
-    if(status){
-
-      status.textContent =
-        "Digite a descrição manualmente.";
-
-    }
-
-  }
+      },
+      2800
+    );
 
 }
 
 
-/* =========================
+/* =====================================================
    PARAR CÂMERA
-========================= */
+===================================================== */
 
 function stopCam(){
 
   if(scanTimer){
 
-    clearInterval(scanTimer);
+    clearInterval(
+      scanTimer
+    );
 
-    scanTimer = null;
+    scanTimer =
+      null;
 
   }
 
+
+  ocrProcessing =
+    false;
+
+
   if(stream){
 
-    try{
-
-      stream.getTracks().forEach(
+    stream
+      .getTracks()
+      .forEach(
         function(track){
 
           track.stop();
@@ -1077,18 +1944,17 @@ function stopCam(){
         }
       );
 
-    }catch(e){}
-
-    stream = null;
+    stream =
+      null;
 
   }
 
 }
 
 
-/* =========================
+/* =====================================================
    SALVAR PRODUTO
-========================= */
+===================================================== */
 
 function addProduct(){
 
@@ -1098,25 +1964,58 @@ function addProduct(){
 
   }
 
+
   const name =
-    document.getElementById("pname")?.value.trim() || "";
+    document
+    .getElementById(
+      "pname"
+    )
+    .value
+    .trim();
+
 
   const bar =
-    document.getElementById("pbar")?.value.trim() || "";
+    document
+    .getElementById(
+      "pbar"
+    )
+    .value
+    .trim();
+
 
   const exp =
-    document.getElementById("pexp")?.value || "";
+    document
+    .getElementById(
+      "pexp"
+    )
+    .value;
+
 
   const qty =
     Number(
-      document.getElementById("pqty")?.value || 0
+      document
+      .getElementById(
+        "pqty"
+      )
+      .value || 0
     );
 
+
   const sector =
-    document.getElementById("psector")?.value.trim() || "";
+    document
+    .getElementById(
+      "psector"
+    )
+    .value
+    .trim();
 
 
-  if(!name || !bar || !exp || qty < 1){
+  if(
+    !name ||
+    !bar ||
+    !exp ||
+    qty < 1
+  ){
 
     alert(
       "Preencha descrição, código, validade e quantidade."
@@ -1130,37 +2029,38 @@ function addProduct(){
   current.products.push({
 
     name:name,
+
     bar:bar,
+
     exp:exp,
+
     qty:qty,
+
     sector:sector
 
   });
 
+
+  save();
 
   editor();
 
 }
 
 
-/* =========================
+/* =====================================================
    FINALIZAR LISTA
-========================= */
+===================================================== */
 
 function finishList(){
 
   stopCam();
 
-  if(!current){
 
-    home();
-
-    return;
-
-  }
-
-
-  if(!current.products.length){
+  if(
+    !current ||
+    !current.products.length
+  ){
 
     alert(
       "Cadastre pelo menos um produto antes de finalizar."
@@ -1173,9 +2073,10 @@ function finishList(){
 
   const index =
     db.lists.findIndex(
-      function(x){
+      function(item){
 
-        return x.id === current.id;
+        return item.id ===
+          current.id;
 
       }
     );
@@ -1183,33 +2084,43 @@ function finishList(){
 
   if(index < 0){
 
-    db.lists.push(current);
+    db.lists.push(
+      current
+    );
 
   }else{
 
-    db.lists[index] = current;
+    db.lists[index] =
+      current;
 
   }
 
 
   save();
 
+
   alert(
     "Lista salva no aparelho!"
   );
 
-  current = null;
+
+  current =
+    null;
+
 
   home();
 
 }
 
 
-/* =========================
+/* =====================================================
    MINHAS LISTAS
-========================= */
+===================================================== */
 
 function lists(){
+
+  stopCam();
+
 
   app().innerHTML = `
 
@@ -1233,13 +2144,19 @@ function lists(){
       ${
         db.lists.length
 
-        ? db.lists.map(function(l){
+        ?
+
+        db.lists
+        .map(
+          function(l){
 
             return `
 
               <div class="listbox">
 
-                <b>${esc(l.name)}</b>
+                <b>
+                  ${esc(l.name)}
+                </b>
 
                 <br>
 
@@ -1254,6 +2171,7 @@ function lists(){
 
                 <br>
 
+
                 <button
                   class="light"
                   style="margin-top:8px"
@@ -1267,9 +2185,13 @@ function lists(){
 
             `;
 
-          }).join("")
+          }
+        )
+        .join("")
 
-        : '<p class="muted">Nenhuma lista finalizada.</p>'
+        :
+
+        '<p class="muted">Nenhuma lista finalizada.</p>'
 
       }
 
@@ -1280,20 +2202,20 @@ function lists(){
 }
 
 
-/* =========================
+/* =====================================================
    ABRIR LISTA
-========================= */
+===================================================== */
 
 function openList(id){
 
   current =
     db.lists.find(
-      function(x){
+      function(item){
 
-        return x.id === id;
+        return item.id === id;
 
       }
-    ) || null;
+    );
 
 
   if(current){
@@ -1305,11 +2227,14 @@ function openList(id){
 }
 
 
-/* =========================
+/* =====================================================
    RELATÓRIOS
-========================= */
+===================================================== */
 
 function reports(){
+
+  stopCam();
+
 
   app().innerHTML = `
 
@@ -1331,20 +2256,28 @@ function reports(){
 
 
       <p class="muted">
+
         Cada lista continua independente.
+
       </p>
 
 
       ${
         db.lists.length
 
-        ? db.lists.map(function(l){
+        ?
+
+        db.lists
+        .map(
+          function(l){
 
             return `
 
               <div class="listbox">
 
-                <b>${esc(l.name)}</b>
+                <b>
+                  ${esc(l.name)}
+                </b>
 
                 <br>
 
@@ -1356,6 +2289,53 @@ function reports(){
                   ${esc(l.created)}
 
                 </span>
+
+
+                <div
+                  style="margin-top:10px">
+
+                  ${
+                    l.products
+                    .map(
+                      function(p,i){
+
+                        return `
+
+                          <div class="product">
+
+                            <b>
+
+                              ${i+1}.
+                              ${esc(p.bar)}
+
+                            </b>
+
+                            <br>
+
+                            ${esc(p.name)}
+
+                            <br>
+
+                            <span class="muted">
+
+                              Validade:
+                              ${esc(p.exp)}
+
+                              • Quantidade:
+                              ${p.qty}
+
+                            </span>
+
+                          </div>
+
+                        `;
+
+                      }
+                    )
+                    .join("")
+                  }
+
+                </div>
 
 
                 <button
@@ -1371,9 +2351,13 @@ function reports(){
 
             `;
 
-          }).join("")
+          }
+        )
+        .join("")
 
-        : '<p class="muted">Finalize uma lista para vê-la aqui.</p>'
+        :
+
+        '<p class="muted">Finalize uma lista para vê-la aqui.</p>'
 
       }
 
@@ -1384,23 +2368,23 @@ function reports(){
 }
 
 
-/* =========================
-   PDF
-========================= */
+/* =====================================================
+   GERAR PDF
+===================================================== */
 
 function generatePDF(id){
 
-  const list =
+  const l =
     db.lists.find(
-      function(x){
+      function(item){
 
-        return x.id === id;
+        return item.id === id;
 
       }
     );
 
 
-  if(!list){
+  if(!l){
 
     return;
 
@@ -1418,14 +2402,19 @@ function generatePDF(id){
   }
 
 
-  const jsPDF =
-    window.jspdf.jsPDF;
+  const {
+    jsPDF
+  } =
+    window.jspdf;
+
 
   const doc =
     new jsPDF();
 
 
-  doc.setFontSize(20);
+  doc.setFontSize(
+    20
+  );
 
   doc.text(
     "VALIDADE-",
@@ -1434,16 +2423,23 @@ function generatePDF(id){
   );
 
 
-  doc.setFontSize(13);
+  doc.setFontSize(
+    13
+  );
 
   doc.text(
-    String(list.name).slice(0,70),
+    String(l.name).slice(
+      0,
+      45
+    ),
     14,
     28
   );
 
 
-  doc.setFontSize(9);
+  doc.setFontSize(
+    9
+  );
 
   doc.text(
     "Relatório de vencimentos",
@@ -1453,16 +2449,20 @@ function generatePDF(id){
 
 
   doc.text(
-    "Data: " + list.created,
+    "Data: " + l.created,
     150,
     35
   );
 
 
-  let y = 48;
+  let y =
+    48;
 
 
-  doc.setFontSize(9);
+  doc.setFontSize(
+    8
+  );
+
 
   doc.text(
     "CÓDIGO DE BARRAS",
@@ -1470,17 +2470,20 @@ function generatePDF(id){
     y
   );
 
+
   doc.text(
     "DESCRIÇÃO",
     68,
     y
   );
 
+
   doc.text(
     "VALIDADE",
     142,
     y
   );
+
 
   doc.text(
     "QTD",
@@ -1491,6 +2494,7 @@ function generatePDF(id){
 
   y += 6;
 
+
   doc.line(
     14,
     y,
@@ -1498,11 +2502,11 @@ function generatePDF(id){
     y
   );
 
+
   y += 7;
 
 
-  list.products.forEach(
-
+  l.products.forEach(
     function(p){
 
       if(y > 280){
@@ -1515,14 +2519,16 @@ function generatePDF(id){
 
 
       doc.text(
-        String(p.bar).slice(0,20),
+        String(p.bar)
+          .slice(0,20),
         14,
         y
       );
 
 
       doc.text(
-        String(p.name).slice(0,32),
+        String(p.name)
+          .slice(0,32),
         68,
         y
       );
@@ -1545,11 +2551,11 @@ function generatePDF(id){
       y += 7;
 
     }
-
   );
 
 
   y += 5;
+
 
   doc.line(
     14,
@@ -1561,29 +2567,35 @@ function generatePDF(id){
 
   y += 7;
 
+
   doc.text(
-    "Total de produtos: " +
-    list.products.length,
+    "Total de produtos: "
+    + l.products.length,
     14,
     y
   );
 
 
-  doc.save(
-    "Validade-" +
-    list.name.replace(
+  const nomeArquivo =
+    String(l.name)
+    .replace(
       /[^a-z0-9À-ÿ]+/gi,
       "-"
-    ) +
-    ".pdf"
+    );
+
+
+  doc.save(
+    "Validade-"
+    + nomeArquivo
+    + ".pdf"
   );
 
 }
 
 
-/* =========================
+/* =====================================================
    LIMPAR DADOS
-========================= */
+===================================================== */
 
 function clearData(){
 
@@ -1597,9 +2609,11 @@ function clearData(){
       lists:[]
     };
 
+
     save();
 
-    current = null;
+    current =
+      null;
 
     home();
 
@@ -1608,66 +2622,22 @@ function clearData(){
 }
 
 
-/* =========================
-   INICIALIZAÇÃO SEGURA
-========================= */
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
 
 function iniciarAplicativo(){
 
-  try{
+  loadData();
 
-    loadData();
-
-    home();
-
-  }catch(error){
-
-    console.log(
-      "Erro na inicialização:",
-      error
-    );
-
-
-    const container =
-      document.getElementById("app");
-
-
-    if(container){
-
-      container.innerHTML = `
-
-        <section class="card">
-
-          <h2>Validade-</h2>
-
-          <p>
-            O aplicativo foi carregado,
-            mas ocorreu um erro na inicialização.
-          </p>
-
-          <button
-            class="primary"
-            onclick="location.reload()">
-
-            🔄 Tentar novamente
-
-          </button>
-
-        </section>
-
-      `;
-
-    }
-
-  }
+  home();
 
 }
 
 
-/* Inicia somente depois que a página estiver pronta */
-
 if(
-  document.readyState === "loading"
+  document.readyState ===
+  "loading"
 ){
 
   document.addEventListener(
@@ -1688,9 +2658,11 @@ if(
 src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js">
 </script>
 
+
 <script
 src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js">
 </script>
+
 
 </body>
 </html>
