@@ -135,11 +135,11 @@ label{
 }
 
 .product{
-  border-left:4px solid #1265d8;
-  padding:11px;
+  border:1px solid #dce4ef;
+  padding:12px;
   background:#f7f9fc;
-  border-radius:9px;
-  margin-top:9px;
+  border-radius:12px;
+  margin-top:10px;
 }
 
 .badge{
@@ -212,6 +212,7 @@ video{
   background:#eef7f1;
   color:#17663f;
   font-size:14px;
+  margin-top:10px;
 }
 
 .processing{
@@ -220,7 +221,7 @@ video{
 }
 
 .photo-box{
-  margin-top:12px;
+  margin-top:14px;
   padding:14px;
   background:#f4f8fd;
   border:1px solid #dce6f2;
@@ -238,10 +239,54 @@ video{
   line-height:1.4;
 }
 
+.photo-preview{
+  width:100%;
+  aspect-ratio:2.4/1;
+  object-fit:cover;
+  border-radius:10px;
+  margin-top:12px;
+  border:1px solid #ccd6e4;
+  background:#e9eef5;
+}
+
+.report-photo{
+  width:180px;
+  height:75px;
+  object-fit:cover;
+  border-radius:6px;
+  border:1px solid #ccd6e4;
+  display:block;
+  margin:10px 0;
+}
+
 hr{
   border:0;
   border-top:1px solid #e3e8ef;
   margin:18px 0;
+}
+
+.code-number{
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.step{
+  font-size:13px;
+  color:#68758a;
+  margin-bottom:6px;
+}
+
+@media(max-width:480px){
+
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  video{
+    height:270px;
+  }
+
 }
 </style>
 </head>
@@ -268,7 +313,7 @@ hr{
    BANCO LOCAL
 ===================================================== */
 
-const KEY = "validade_app_v2";
+const KEY = "validade_app_v3";
 
 let db = {
   lists:[]
@@ -277,6 +322,7 @@ let db = {
 let current = null;
 let stream = null;
 let scanTimer = null;
+let currentPhoto = "";
 
 
 /* =====================================================
@@ -342,6 +388,10 @@ function save(){
       error
     );
 
+    alert(
+      "Não foi possível salvar os dados neste aparelho."
+    );
+
   }
 
 }
@@ -388,6 +438,9 @@ function home(){
 
   stopCam();
 
+  current = null;
+  currentPhoto = "";
+
   app().innerHTML = `
 
     <section class="card">
@@ -430,16 +483,17 @@ function home(){
 
     <section class="card">
 
-      <b>Fluxo</b>
+      <b>Fluxo do aplicativo</b>
 
       <p class="muted">
+
         Criar lista →
         código de barras →
-        descrição →
+        foto do produto →
         validade →
         quantidade →
-        salvar →
-        finalizar.
+        salvar.
+
       </p>
 
     </section>
@@ -503,7 +557,8 @@ function createList(){
   const input =
     document.getElementById("lname");
 
-  if(!input) return;
+  if(!input)
+    return;
 
   const name =
     input.value.trim();
@@ -531,6 +586,8 @@ function createList(){
 
   };
 
+  currentPhoto = "";
+
   editor();
 
 }
@@ -551,6 +608,8 @@ function editor(){
     return;
 
   }
+
+  currentPhoto = "";
 
   app().innerHTML = `
 
@@ -581,13 +640,18 @@ function editor(){
 
       <hr>
 
+      <div class="step">
+        ETAPA 1 — Código de barras
+      </div>
+
       <div class="camera">
 
         <div
           id="cammsg"
           class="camera-title">
-          A câmera será aberta para
-          ler o código de barras.
+
+          Aponte a câmera para o código de barras.
+
         </div>
 
         <div class="video-wrap">
@@ -605,7 +669,7 @@ function editor(){
             class="scan-area hidden">
 
             <span>
-              Posicione o produto nesta área
+              Posicione o código nesta área
             </span>
 
           </div>
@@ -624,69 +688,86 @@ function editor(){
         class="primary"
         style="margin-top:10px"
         onclick="startScan()">
+
         📷 Ler código de barras
+
       </button>
 
       <div
         id="scanstatus"
-        class="status hidden"
-        style="margin-top:10px">
+        class="status hidden">
       </div>
 
       <label>
 
-        1️⃣ Código de barras
+        Código de barras
 
         <input
           id="pbar"
           inputmode="numeric"
-          placeholder="Leia o código de barras">
+          pattern="[0-9]*"
+          placeholder="Somente números">
 
       </label>
+
+
+      <div class="step">
+        ETAPA 2 — Foto do produto
+      </div>
 
       <div class="photo-box">
 
         <div class="photo-title">
-          📸 Descrição do produto
+          📸 Foto do produto
         </div>
 
         <div class="photo-help">
+
           Depois de ler o código, fotografe
-          o nome do produto na embalagem.
+          o produto/embalagem.
+
+          <br><br>
+
+          A foto será ajustada automaticamente
+          para o formato horizontal de
+          <b>60 × 25 mm</b>.
+
         </div>
 
         <input
-          id="fotoDescricao"
+          id="fotoProduto"
           type="file"
           accept="image/*"
           capture="environment"
           class="hidden"
-          onchange="processarFotoDescricao(this)">
+          onchange="processarFotoProduto(this)">
 
         <button
           class="primary"
           style="margin-top:10px"
-          onclick="abrirFotoDescricao()">
-          📸 Fotografar descrição
+          onclick="abrirFotoProduto()">
+
+          📸 Fotografar produto
+
         </button>
+
+        <img
+          id="photoPreview"
+          class="photo-preview hidden"
+          alt="Foto do produto">
 
       </div>
 
-      <label>
 
-        2️⃣ Descrição do produto
-
-        <input
-          id="pname"
-          placeholder="Descrição do produto">
-
-      </label>
+      <div class="step">
+        ETAPA 3 — Validade e quantidade
+      </div>
 
       <div class="row">
 
         <label>
 
-          3️⃣ Validade
+          Validade
 
           <input
             id="pexp"
@@ -696,7 +777,7 @@ function editor(){
 
         <label>
 
-          4️⃣ Quantidade
+          Quantidade
 
           <input
             id="pqty"
@@ -708,6 +789,7 @@ function editor(){
 
       </div>
 
+
       <label>
 
         Setor
@@ -718,13 +800,17 @@ function editor(){
 
       </label>
 
+
       <button
         class="green"
         onclick="addProduct()">
+
         💾 Salvar produto
+
       </button>
 
-      <div style="margin-top:16px">
+
+      <div style="margin-top:18px">
 
         <h3>
           Produtos desta lista
@@ -734,11 +820,14 @@ function editor(){
 
       </div>
 
+
       <button
         class="primary"
         style="margin-top:15px"
         onclick="finishList()">
+
         ✅ Finalizar lista
+
       </button>
 
     </section>
@@ -759,7 +848,8 @@ function renderProducts(){
   const el =
     document.getElementById("products");
 
-  if(!el || !current) return;
+  if(!el || !current)
+    return;
 
   if(!current.products.length){
 
@@ -778,33 +868,47 @@ function renderProducts(){
 
           <div class="product">
 
-            <b>
+            <div class="code-number">
+
               ${i+1}.
               ${esc(p.bar)}
-            </b>
 
-            <br>
+            </div>
 
-            ${esc(p.name)}
+            ${
+              p.photo
+              ? `
+                <img
+                  src="${p.photo}"
+                  class="report-photo"
+                  alt="Produto">
+              `
+              : ""
+            }
 
-            <br>
+            <div>
 
-            <span class="muted">
+              <b>Validade:</b>
+              ${esc(formatDate(p.exp))}
 
-              Validade:
-              ${esc(p.exp)}
+            </div>
 
-              • Quantidade:
-              ${p.qty}
+            <div>
 
-              ${
-                p.sector
-                ? " • Setor: " +
-                  esc(p.sector)
-                : ""
-              }
+              <b>Quantidade:</b>
+              ${esc(p.qty)}
 
-            </span>
+            </div>
+
+            ${
+              p.sector
+              ? `
+                <div class="muted">
+                  Setor: ${esc(p.sector)}
+                </div>
+              `
+              : ""
+            }
 
           </div>
 
@@ -817,7 +921,33 @@ function renderProducts(){
 
 
 /* =====================================================
-   INICIAR CÂMERA
+   FORMATA DATA
+===================================================== */
+
+function formatDate(value){
+
+  if(!value)
+    return "";
+
+  const parts =
+    String(value).split("-");
+
+  if(parts.length !== 3)
+    return value;
+
+  return (
+    parts[2] +
+    "/" +
+    parts[1] +
+    "/" +
+    parts[0]
+  );
+
+}
+
+
+/* =====================================================
+   INICIAR CÂMERA DO CÓDIGO
 ===================================================== */
 
 async function startScan(){
@@ -859,7 +989,7 @@ async function startScan(){
     ){
 
       status.textContent =
-        "⚠️ A câmera não está disponível neste aparelho.";
+        "⚠️ A câmera não está disponível.";
 
       return;
 
@@ -934,16 +1064,18 @@ async function startScan(){
     status.textContent =
       "🔎 Procurando código de barras...";
 
+
     if(
       !("BarcodeDetector" in window)
     ){
 
       status.textContent =
-        "⚠️ Leitor automático indisponível. Digite o código manualmente.";
+        "⚠️ O leitor automático não está disponível. Digite o código manualmente.";
 
       return;
 
     }
+
 
     let formats = [];
 
@@ -958,6 +1090,7 @@ async function startScan(){
       formats = [];
 
     }
+
 
     let detector;
 
@@ -976,6 +1109,7 @@ async function startScan(){
         new BarcodeDetector();
 
     }
+
 
     scanTimer =
       setInterval(
@@ -1003,8 +1137,27 @@ async function startScan(){
               codes[0].rawValue
             ){
 
-              const codigo =
-                codes[0].rawValue;
+              let codigo =
+                String(
+                  codes[0].rawValue
+                );
+
+              /*
+                IMPORTANTE:
+                guardar somente números
+              */
+
+              codigo =
+                codigo.replace(
+                  /\D/g,
+                  ""
+                );
+
+              if(!codigo){
+
+                return;
+
+              }
 
               const input =
                 document.getElementById(
@@ -1024,6 +1177,8 @@ async function startScan(){
 
               scanTimer = null;
 
+              stopCameraTracksOnly();
+
               status.textContent =
                 "✅ Código lido: " +
                 codigo;
@@ -1031,7 +1186,7 @@ async function startScan(){
               if(cammsg){
 
                 cammsg.textContent =
-                  "Código lido. Agora fotografe a descrição.";
+                  "Código lido. Agora fotografe o produto.";
 
               }
 
@@ -1047,7 +1202,7 @@ async function startScan(){
           }
 
         },
-        500
+        350
       );
 
   }catch(error){
@@ -1058,7 +1213,7 @@ async function startScan(){
     );
 
     status.textContent =
-      "⚠️ Não foi possível abrir a câmera. Verifique a permissão do aplicativo.";
+      "⚠️ Não foi possível abrir a câmera. Verifique a permissão.";
 
   }
 
@@ -1066,10 +1221,10 @@ async function startScan(){
 
 
 /* =====================================================
-   FOTO DA DESCRIÇÃO
+   ABRIR FOTO
 ===================================================== */
 
-function abrirFotoDescricao(){
+function abrirFotoProduto(){
 
   const codigo =
     document.getElementById(
@@ -1091,7 +1246,7 @@ function abrirFotoDescricao(){
 
   const input =
     document.getElementById(
-      "fotoDescricao"
+      "fotoProduto"
     );
 
   if(input){
@@ -1106,10 +1261,10 @@ function abrirFotoDescricao(){
 
 
 /* =====================================================
-   CARREGAR IMAGEM
+   LER ARQUIVO COMO IMAGEM
 ===================================================== */
 
-function carregarImagemOCR(
+function carregarImagem(
   arquivo
 ){
 
@@ -1154,348 +1309,11 @@ function carregarImagemOCR(
 
 
 /* =====================================================
-   PREPARAR FOTO
+   PREPARAR FOTO 60 x 25 MM
+   PROPORÇÃO 2.4 : 1
 ===================================================== */
 
-function prepararFotoParaOCR(
-  imagem,
-  modo
-){
-
-  const maxWidth =
-    1600;
-
-  let largura =
-    imagem.width;
-
-  let altura =
-    imagem.height;
-
-  if(largura > maxWidth){
-
-    const escala =
-      maxWidth / largura;
-
-    largura =
-      Math.floor(
-        largura * escala
-      );
-
-    altura =
-      Math.floor(
-        altura * escala
-      );
-
-  }
-
-  const canvas =
-    document.createElement(
-      "canvas"
-    );
-
-  canvas.width =
-    largura;
-
-  canvas.height =
-    altura;
-
-  const ctx =
-    canvas.getContext(
-      "2d",
-      {
-        willReadFrequently:true
-      }
-    );
-
-  if(!ctx)
-    return null;
-
-  ctx.drawImage(
-    imagem,
-    0,
-    0,
-    largura,
-    altura
-  );
-
-  const dados =
-    ctx.getImageData(
-      0,
-      0,
-      largura,
-      altura
-    );
-
-  for(
-    let i=0;
-    i<dados.data.length;
-    i+=4
-  ){
-
-    const r =
-      dados.data[i];
-
-    const g =
-      dados.data[i+1];
-
-    const b =
-      dados.data[i+2];
-
-    let cinza =
-      r*0.299 +
-      g*0.587 +
-      b*0.114;
-
-    if(modo === 1){
-
-      cinza =
-        (cinza-128)*1.5+128;
-
-    }
-
-    if(modo === 2){
-
-      cinza =
-        cinza > 145
-        ? 255
-        : 0;
-
-    }
-
-    cinza =
-      Math.max(
-        0,
-        Math.min(
-          255,
-          cinza
-        )
-      );
-
-    dados.data[i] =
-      cinza;
-
-    dados.data[i+1] =
-      cinza;
-
-    dados.data[i+2] =
-      cinza;
-
-  }
-
-  ctx.putImageData(
-    dados,
-    0,
-    0
-  );
-
-  return canvas;
-
-}
-
-
-/* =====================================================
-   LIMPAR OCR
-===================================================== */
-
-function limparTextoProduto(
-  text
-){
-
-  let resultado =
-    String(text || "");
-
-  resultado =
-    resultado
-      .replace(/\r/g," ")
-      .replace(/\n+/g," ")
-      .replace(/\s+/g," ")
-      .trim();
-
-  resultado =
-    resultado.replace(
-      /[^A-Za-zÀ-ÿ0-9\s.,()\/&%+\-ºª°]/g,
-      ""
-    );
-
-  resultado =
-    resultado
-      .replace(/\s+/g," ")
-      .trim();
-
-  return resultado.slice(
-    0,
-    120
-  );
-
-}
-
-
-/* =====================================================
-   PONTUAR OCR
-===================================================== */
-
-function pontuarDescricao(
-  texto,
-  confianca
-){
-
-  const limpo =
-    limparTextoProduto(
-      texto
-    );
-
-  if(!limpo){
-
-    return {
-      text:"",
-      score:0
-    };
-
-  }
-
-  const letras =
-    (
-      limpo.match(
-        /[A-Za-zÀ-ÿ]/g
-      ) || []
-    ).length;
-
-  const numeros =
-    (
-      limpo.match(
-        /[0-9]/g
-      ) || []
-    ).length;
-
-  const palavras =
-    limpo
-      .split(/\s+/)
-      .filter(function(x){
-
-        return x.length >= 2;
-
-      }).length;
-
-  let score =
-    Number(
-      confianca || 0
-    );
-
-  score +=
-    Math.min(
-      letras*1.5,
-      35
-    );
-
-  score +=
-    Math.min(
-      palavras*3,
-      20
-    );
-
-  if(numeros > letras){
-
-    score -= 25;
-
-  }
-
-  if(limpo.length < 5){
-
-    score -= 50;
-
-  }
-
-  return {
-    text:limpo,
-    score:score
-  };
-
-}
-
-
-/* =====================================================
-   EXECUTAR OCR
-===================================================== */
-
-async function executarOCROnFoto(
-  imagem
-){
-
-  if(!window.Tesseract){
-
-    return null;
-
-  }
-
-  const resultados = [];
-
-  for(
-    let modo=0;
-    modo<=2;
-    modo++
-  ){
-
-    const canvas =
-      prepararFotoParaOCR(
-        imagem,
-        modo
-      );
-
-    if(!canvas)
-      continue;
-
-    try{
-
-      const resultado =
-        await Tesseract.recognize(
-          canvas,
-          "por",
-          {
-            logger:function(){},
-
-            tessedit_pageseg_mode:6
-
-          }
-        );
-
-      resultados.push(
-        pontuarDescricao(
-          resultado?.data?.text,
-          resultado?.data?.confidence
-        )
-      );
-
-    }catch(error){
-
-      console.log(
-        "Erro OCR:",
-        error
-      );
-
-    }
-
-  }
-
-  resultados.sort(
-    function(a,b){
-
-      return b.score-a.score;
-
-    }
-  );
-
-  return resultados.length
-    ? resultados[0]
-    : null;
-
-}
-
-
-/* =====================================================
-   PROCESSAR FOTO
-===================================================== */
-
-async function processarFotoDescricao(
+async function processarFotoProduto(
   input
 ){
 
@@ -1514,11 +1332,6 @@ async function processarFotoDescricao(
       "scanstatus"
     );
 
-  const name =
-    document.getElementById(
-      "pname"
-    );
-
   if(status){
 
     status.classList.remove(
@@ -1530,67 +1343,152 @@ async function processarFotoDescricao(
     );
 
     status.textContent =
-      "🔎 Analisando a foto da descrição...";
+      "📸 Preparando foto do produto...";
 
   }
 
   try{
 
     const imagem =
-      await carregarImagemOCR(
+      await carregarImagem(
         input.files[0]
       );
 
-    const resultado =
-      await executarOCROnFoto(
-        imagem
+
+    /*
+      Proporção física:
+      60 / 25 = 2.4
+    */
+
+    const ratio =
+      60 / 25;
+
+
+    let largura =
+      imagem.naturalWidth ||
+      imagem.width;
+
+    let altura =
+      imagem.naturalHeight ||
+      imagem.height;
+
+
+    /*
+      Recorte central para 2.4:1
+    */
+
+    let cropWidth =
+      largura;
+
+    let cropHeight =
+      Math.round(
+        largura / ratio
       );
 
-    if(
-      resultado &&
-      resultado.text &&
-      resultado.score >= 40
-    ){
 
-      if(name){
+    if(cropHeight > altura){
 
-        name.value =
-          resultado.text;
+      cropHeight =
+        altura;
 
-      }
-
-      if(status){
-
-        status.classList.remove(
-          "processing"
+      cropWidth =
+        Math.round(
+          altura * ratio
         );
-
-        status.textContent =
-          "✅ Descrição encontrada. Confira antes de salvar.";
-
-      }
-
-    }else{
-
-      if(status){
-
-        status.classList.remove(
-          "processing"
-        );
-
-        status.textContent =
-          "⚠️ Não consegui identificar bem a descrição. Tire outra foto mais próxima e nítida.";
-
-      }
 
     }
 
-  }catch(error){
 
-    console.log(
-      "Erro ao processar foto:",
-      error
+    const sx =
+      Math.round(
+        (largura - cropWidth) / 2
+      );
+
+    const sy =
+      Math.round(
+        (altura - cropHeight) / 2
+      );
+
+
+    /*
+      Tamanho interno de boa qualidade.
+      A proporção continua exatamente 2.4:1.
+    */
+
+    const outputWidth =
+      1200;
+
+    const outputHeight =
+      500;
+
+
+    const canvas =
+      document.createElement(
+        "canvas"
+      );
+
+    canvas.width =
+      outputWidth;
+
+    canvas.height =
+      outputHeight;
+
+
+    const ctx =
+      canvas.getContext(
+        "2d"
+      );
+
+    if(!ctx){
+
+      throw new Error(
+        "Canvas indisponível."
+      );
+
+    }
+
+
+    ctx.drawImage(
+      imagem,
+      sx,
+      sy,
+      cropWidth,
+      cropHeight,
+      0,
+      0,
+      outputWidth,
+      outputHeight
     );
+
+
+    /*
+      JPEG comprimido para não
+      deixar o armazenamento pesado.
+    */
+
+    currentPhoto =
+      canvas.toDataURL(
+        "image/jpeg",
+        0.82
+      );
+
+
+    const preview =
+      document.getElementById(
+        "photoPreview"
+      );
+
+    if(preview){
+
+      preview.src =
+        currentPhoto;
+
+      preview.classList.remove(
+        "hidden"
+      );
+
+    }
+
 
     if(status){
 
@@ -1599,9 +1497,52 @@ async function processarFotoDescricao(
       );
 
       status.textContent =
-        "⚠️ Não foi possível analisar a foto.";
+        "✅ Foto preparada no formato 60 × 25 mm.";
 
     }
+
+  }catch(error){
+
+    console.log(
+      "Erro ao preparar foto:",
+      error
+    );
+
+    currentPhoto = "";
+
+    if(status){
+
+      status.classList.remove(
+        "processing"
+      );
+
+      status.textContent =
+        "⚠️ Não foi possível preparar a foto.";
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   PARAR SOMENTE OS TRACKS
+===================================================== */
+
+function stopCameraTracksOnly(){
+
+  if(stream){
+
+    stream
+      .getTracks()
+      .forEach(function(track){
+
+        track.stop();
+
+      });
+
+    stream = null;
 
   }
 
@@ -1624,19 +1565,7 @@ function stopCam(){
 
   }
 
-  if(stream){
-
-    stream
-      .getTracks()
-      .forEach(function(track){
-
-        track.stop();
-
-      });
-
-    stream = null;
-
-  }
+  stopCameraTracksOnly();
 
 }
 
@@ -1650,53 +1579,108 @@ function addProduct(){
   if(!current)
     return;
 
-  const bar =
+
+  const barInput =
     document.getElementById(
       "pbar"
-    ).value.trim();
+    );
 
-  const name =
-    document.getElementById(
-      "pname"
-    ).value.trim();
-
-  const exp =
+  const expInput =
     document.getElementById(
       "pexp"
-    ).value;
+    );
+
+  const qtyInput =
+    document.getElementById(
+      "pqty"
+    );
+
+  const sectorInput =
+    document.getElementById(
+      "psector"
+    );
+
+
+  /*
+    Código:
+    somente números
+  */
+
+  const bar =
+    String(
+      barInput?.value || ""
+    )
+    .replace(
+      /\D/g,
+      ""
+    );
+
+
+  const exp =
+    expInput?.value || "";
+
 
   const qty =
     Number(
-      document.getElementById(
-        "pqty"
-      ).value || 0
+      qtyInput?.value || 0
     );
 
-  const sector =
-    document.getElementById(
-      "psector"
-    ).value.trim();
 
-  if(
-    !bar ||
-    !name ||
-    !exp ||
-    qty < 1
-  ){
+  const sector =
+    String(
+      sectorInput?.value || ""
+    ).trim();
+
+
+  if(!bar){
 
     alert(
-      "Preencha código, descrição, validade e quantidade."
+      "Leia o código de barras."
     );
 
     return;
 
   }
 
+
+  if(!currentPhoto){
+
+    alert(
+      "Fotografe o produto antes de salvar."
+    );
+
+    return;
+
+  }
+
+
+  if(!exp){
+
+    alert(
+      "Informe a validade."
+    );
+
+    return;
+
+  }
+
+
+  if(qty < 1){
+
+    alert(
+      "Informe uma quantidade válida."
+    );
+
+    return;
+
+  }
+
+
   current.products.push({
 
     bar:bar,
 
-    name:name,
+    photo:currentPhoto,
 
     exp:exp,
 
@@ -1706,7 +1690,10 @@ function addProduct(){
 
   });
 
+
   save();
+
+  currentPhoto = "";
 
   editor();
 
@@ -1734,6 +1721,7 @@ function finishList(){
 
   }
 
+
   const index =
     db.lists.findIndex(
       function(item){
@@ -1742,6 +1730,7 @@ function finishList(){
 
       }
     );
+
 
   if(index < 0){
 
@@ -1756,6 +1745,7 @@ function finishList(){
 
   }
 
+
   save();
 
   alert(
@@ -1763,6 +1753,7 @@ function finishList(){
   );
 
   current = null;
+  currentPhoto = "";
 
   home();
 
@@ -1794,6 +1785,7 @@ function lists(){
       </div>
 
       ${
+
         db.lists.length
 
         ?
@@ -1826,7 +1818,9 @@ function lists(){
                   class="light"
                   style="margin-top:8px"
                   onclick="openList(${l.id})">
+
                   Abrir lista
+
                 </button>
 
               </div>
@@ -1892,12 +1886,15 @@ function reports(){
         <button
           class="back"
           onclick="home()">
+
           ← Início
+
         </button>
 
       </div>
 
       ${
+
         db.lists.length
 
         ?
@@ -1924,7 +1921,7 @@ function reports(){
 
                 </span>
 
-                <div style="margin-top:10px">
+                <div style="margin-top:12px">
 
                   ${
                     l.products
@@ -1934,33 +1931,47 @@ function reports(){
 
                           <div class="product">
 
-                            <b>
+                            <div class="code-number">
+
                               ${i+1}.
                               ${esc(p.bar)}
-                            </b>
 
-                            <br>
+                            </div>
 
-                            ${esc(p.name)}
+                            ${
+                              p.photo
+                              ? `
+                                <img
+                                  src="${p.photo}"
+                                  class="report-photo"
+                                  alt="Foto do produto">
+                              `
+                              : ""
+                            }
 
-                            <br>
+                            <div>
 
-                            <span class="muted">
+                              <b>Validade:</b>
+                              ${esc(formatDate(p.exp))}
 
-                              Validade:
-                              ${esc(p.exp)}
+                            </div>
 
-                              • Quantidade:
-                              ${p.qty}
+                            <div>
 
-                              ${
-                                p.sector
-                                ? " • Setor: " +
-                                  esc(p.sector)
-                                : ""
-                              }
+                              <b>Quantidade:</b>
+                              ${esc(p.qty)}
 
-                            </span>
+                            </div>
+
+                            ${
+                              p.sector
+                              ? `
+                                <div class="muted">
+                                  Setor: ${esc(p.sector)}
+                                </div>
+                              `
+                              : ""
+                            }
 
                           </div>
 
@@ -1976,7 +1987,9 @@ function reports(){
                   class="primary"
                   style="margin-top:10px"
                   onclick="generatePDF(${l.id})">
+
                   📄 Gerar PDF desta lista
+
                 </button>
 
               </div>
@@ -2017,6 +2030,7 @@ function generatePDF(id){
   if(!l)
     return;
 
+
   if(!window.jspdf){
 
     alert(
@@ -2027,11 +2041,18 @@ function generatePDF(id){
 
   }
 
+
   const jsPDF =
     window.jspdf.jsPDF;
 
+
   const doc =
-    new jsPDF();
+    new jsPDF({
+      orientation:"portrait",
+      unit:"mm",
+      format:"a4"
+    });
+
 
   doc.setFontSize(20);
 
@@ -2041,6 +2062,7 @@ function generatePDF(id){
     18
   );
 
+
   doc.setFontSize(13);
 
   doc.text(
@@ -2049,66 +2071,44 @@ function generatePDF(id){
       45
     ),
     14,
-    28
+    27
   );
+
 
   doc.setFontSize(9);
 
   doc.text(
     "Relatório de vencimentos",
     14,
-    35
+    34
   );
 
   doc.text(
     "Data: " + l.created,
     150,
-    35
+    34
   );
 
-  let y = 48;
 
-  doc.setFontSize(8);
+  let y = 44;
 
-  doc.text(
-    "CÓDIGO DE BARRAS",
-    14,
-    y
-  );
-
-  doc.text(
-    "DESCRIÇÃO",
-    68,
-    y
-  );
-
-  doc.text(
-    "VALIDADE",
-    142,
-    y
-  );
-
-  doc.text(
-    "QTD",
-    182,
-    y
-  );
-
-  y += 6;
-
-  doc.line(
-    14,
-    y,
-    196,
-    y
-  );
-
-  y += 7;
 
   l.products.forEach(
-    function(p){
+    function(p,index){
 
-      if(y > 280){
+      /*
+        Cada produto ocupa uma área.
+        A foto é inserida fisicamente em
+        exatamente 60 x 25 mm.
+      */
+
+      const blockHeight =
+        45;
+
+
+      if(
+        y + blockHeight > 285
+      ){
 
         doc.addPage();
 
@@ -2116,58 +2116,134 @@ function generatePDF(id){
 
       }
 
+
+      doc.setFontSize(10);
+
       doc.text(
-        String(p.bar).slice(
-          0,
-          20
-        ),
+        String(index + 1) +
+        ". Código: " +
+        String(p.bar),
         14,
         y
       );
 
+
+      y += 5;
+
+
+      if(p.photo){
+
+        try{
+
+          doc.addImage(
+            p.photo,
+            "JPEG",
+            14,
+            y,
+            60,
+            25
+          );
+
+        }catch(error){
+
+          console.log(
+            "Erro ao inserir foto:",
+            error
+          );
+
+        }
+
+      }
+
+
+      const infoX =
+        82;
+
+
+      doc.setFontSize(9);
+
       doc.text(
-        String(p.name).slice(
-          0,
-          32
-        ),
-        68,
-        y
+        "Validade:",
+        infoX,
+        y + 6
       );
 
       doc.text(
-        String(p.exp),
-        142,
-        y
+        String(
+          formatDate(p.exp)
+        ),
+        infoX + 22,
+        y + 6
+      );
+
+
+      doc.text(
+        "Quantidade:",
+        infoX,
+        y + 13
       );
 
       doc.text(
         String(p.qty),
-        182,
+        infoX + 25,
+        y + 13
+      );
+
+
+      if(p.sector){
+
+        doc.text(
+          "Setor:",
+          infoX,
+          y + 20
+        );
+
+        doc.text(
+          String(
+            p.sector
+          ).slice(
+            0,
+            30
+          ),
+          infoX + 15,
+          y + 20
+        );
+
+      }
+
+
+      y += 33;
+
+
+      doc.setDrawColor(
+        210,
+        218,
+        230
+      );
+
+      doc.line(
+        14,
+        y,
+        196,
         y
       );
 
-      y += 7;
+
+      y += 8;
 
     }
   );
 
-  y += 5;
 
-  doc.line(
-    14,
-    y,
-    196,
-    y
-  );
-
-  y += 7;
+  doc.setFontSize(9);
 
   doc.text(
     "Total de produtos: " +
     l.products.length,
     14,
-    y
+    Math.min(y,285)
   );
+
 
   const nomeArquivo =
     String(l.name)
@@ -2175,6 +2251,7 @@ function generatePDF(id){
         /[^a-z0-9À-ÿ]+/gi,
         "-"
       );
+
 
   doc.save(
     "Validade-" +
@@ -2205,6 +2282,8 @@ function clearData(){
 
     current = null;
 
+    currentPhoto = "";
+
     home();
 
   }
@@ -2224,6 +2303,7 @@ function iniciarAplicativo(){
 
 }
 
+
 if(
   document.readyState === "loading"
 ){
@@ -2241,12 +2321,10 @@ if(
 
 </script>
 
+
+<!-- PDF -->
 <script
 src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js">
-</script>
-
-<script
-src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js">
 </script>
 
 </body>
