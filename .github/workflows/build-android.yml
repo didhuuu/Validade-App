@@ -27,6 +27,10 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
+      - name: Adicionar suporte nativo para compartilhamento
+        run: |
+          npm install @capacitor/share@^7.4.3 @capacitor/filesystem@^7.4.3
+
       - name: Preparar arquivos web
         run: |
           mkdir -p www
@@ -58,6 +62,11 @@ jobs:
 
       - name: Sincronizar aplicativo
         run: npx cap sync android
+
+      - name: Verificar plugins nativos
+        run: |
+          echo "Plugins Capacitor instalados:"
+          npx cap ls
 
       - name: Gerar APK
         working-directory: android
