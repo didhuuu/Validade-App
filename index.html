@@ -1084,14 +1084,56 @@ function generatePDF(id){
 
 
 /* =====================================================
-   ENVIAR PDF PELO WHATSAPP
+   CONVERTER BLOB PARA BASE64
 ===================================================== */
 
-function sharePDFWhatsApp(id){
+function blobToBase64(blob){
 
- loadPDF()
+ return new Promise(function(resolve,reject){
 
- .then(function(jsPDF){
+  var reader=new FileReader();
+
+  reader.onloadend=function(){
+
+   try{
+
+    var result=String(reader.result||"");
+
+    var comma=result.indexOf(",");
+
+    if(comma>=0)
+     result=result.substring(comma+1);
+
+    resolve(result);
+
+   }catch(e){
+    reject(e);
+   }
+  };
+
+  reader.onerror=function(){
+   reject(reader.error||new Error("Erro ao ler PDF"));
+  };
+
+  reader.readAsDataURL(blob);
+ });
+}
+
+
+/* =====================================================
+   COMPARTILHAR PDF NATIVAMENTE NO ANDROID
+===================================================== */
+
+async function sharePDFWhatsApp(id){
+
+ var status=document.getElementById("pdfStatus-"+id);
+
+ try{
+
+  if(status)
+   status.textContent="⏳ Preparando PDF para WhatsApp...";
+
+  var jsPDF=await loadPDF();
 
   var l=db.lists.find(function(x){
    return x.id===id;
@@ -1100,32 +1142,173 @@ function sharePDFWhatsApp(id){
   if(!l)
    throw new Error("Lista não encontrada.");
 
-  var blob=createPDF(id,jsPDF).output("blob");
+  var doc=createPDF(id,jsPDF);
 
-  var file=new File(
-   [blob],
-   pdfFileName(l),
-   {
-    type:"application/pdf"
-   }
-  );
+  var blob=doc.output("blob");
 
   /*
-   * PRIMEIRA TENTATIVA:
-   * compartilhamento nativo do Android/WebView.
-   *
-   * Não usamos canShare() como bloqueio,
-   * porque em alguns Android/WebViews ele retorna
-   * false mesmo quando navigator.share consegue
-   * abrir o compartilhamento de arquivos.
+   * Capacitor disponibiliza os plugins nativos
+   * através de window.Capacitor.Plugins.
    */
 
-  if(
-   navigator.share&&
-   typeof navigator.share==="function"
-  ){
+  var cap=window.Capacitor;
 
-   return navigator.share({
+  if(
+   !cap||
+   !cap.Plugins
+  ){
+   throw new Error(
+    "Suporte nativo do aplicativo não encontrado."
+   );
+  }
+
+  var Filesystem=cap.Plugins.Filesystem;
+  var Share=cap.Plugins.Share;
+
+  if(
+   !Filesystem||
+   !Share
+  ){
+   throw new Error(
+    "Plugins nativos de compartilhamento não encontrados."
+   );
+  }
+
+  if(status)
+   status.textContent="⏳ Salvando PDF no aparelho...";
+
+  var base64=await blobToBase64(blob);
+
+  var filename=pdfFileName(l);
+
+  /*
+   * O arquivo é gravado no Cache do aplicativo.
+   * Isso permite que o Android gere uma URI
+   * compartilhável para outros aplicativos.
+   */
+
+  await Filesystem.writeFile({
+   path:filename,
+   data:base64,
+   directory:"CACHE",
+   recursive:true
+  });
+
+  var uriResult=await Filesystem.getUri({
+   path:filename,
+   directory:"CACHE"
+  });
+
+  var uri=uriResult&&uriResult.uri;
+
+  if(!uri){
+   throw new Error(
+    "Não foi possível obter a URI do PDF."
+   );
+  }
+
+  if(status)
+   status.textContent="📲 Abrindo compartilhamento do Android...";
+
+  /*
+   * O Share nativo recebe o arquivo PDF.
+   * O Android então apresenta WhatsApp e os
+   * demais aplicativos compatíveis.
+   */
+
+  await Share.share({
+
+   title:"Validade- - "+l.name,
+
+   text:"Relatório de validade - "+l.name,
+
+   files:[uri]
+
+  });
+
+  if(status)
+   status.textContent="✅ PDF enviado para o compartilhamento.";
+
+ }catch(e){
+
+  console.error(
+   "Erro ao compartilhar PDF:",
+   e
+  );
+
+  if(e&&(
+   e.name==="AbortError"||
+   e.code==="ERR_CANCELED"
+  )){
+   if(status)
+    status.textContent="";
+
+   return;
+  }
+
+  /*
+   * Fallback somente se o compartilhamento nativo
+   * não estiver disponível.
+   */
+
+  try{
+
+   var jsPDF2=await loadPDF();
+
+   var l2=db.lists.find(function(x){
+    return x.id===id;
+   });
+
+   if(!l2)
+    throw new Error("Lista não encontrada.");
+
+   var blob2=createPDF(id,jsPDF2).output("blob");
+
+   compartilharPDFAlternativo(blob2,l2);
+
+  }catch(e2){
+
+   console.error(e2);
+
+   if(status)
+    status.textContent="";
+
+   alert(
+    "Não foi possível enviar o PDF. Tente gerar o PDF primeiro."
+   );
+  }
+ }
+}
+
+
+/* =====================================================
+   ALTERNATIVA PARA NAVEGADOR
+===================================================== */
+
+function compartilharPDFAlternativo(blob,l){
+
+ /*
+  * Esta alternativa é usada apenas quando o
+  * compartilhamento nativo do Android não estiver
+  * disponível.
+  */
+
+ if(
+  navigator.share&&
+  typeof navigator.share==="function"
+ ){
+
+  try{
+
+   var file=new File(
+    [blob],
+    pdfFileName(l),
+    {
+     type:"application/pdf"
+    }
+   );
+
+   navigator.share({
 
     title:"Validade- - "+l.name,
 
@@ -1133,65 +1316,35 @@ function sharePDFWhatsApp(id){
 
     files:[file]
 
-   })
+   }).catch(function(e){
 
-   .then(function(){
-
-    var status=document.getElementById(
-     "pdfStatus-"+id
-    );
-
-    if(status)
-     status.textContent="✅ PDF enviado para compartilhamento.";
-
-   })
-
-   .catch(function(e){
-
-    /*
-     * Se o usuário cancelar, não fazemos nada.
-     */
-
-    if(e&&e.name==="AbortError"){
+    if(e&&e.name==="AbortError")
      return;
-    }
-
-    /*
-     * Se o WebView não aceitar arquivo,
-     * seguimos para o método alternativo.
-     */
 
     console.log(
-     "Compartilhamento nativo não aceitou o arquivo:",
+     "Share Web indisponível:",
      e
     );
 
-    compartilharPDFAlternativo(blob,l);
+    baixarPDFEAbrirWhatsApp(blob,l);
+
    });
 
+   return;
+
+  }catch(e){
+
+   console.log(
+    "Erro no Share Web:",
+    e
+   );
   }
+ }
 
-  compartilharPDFAlternativo(blob,l);
-
- })
-
- .catch(function(e){
-
-  console.error(e);
-
-  alert(
-   "Não foi possível preparar o PDF para envio."
-  );
-
- });
+ baixarPDFEAbrirWhatsApp(blob,l);
 }
 
-
-/* =====================================================
-   ALTERNATIVA
-===================================================== */
-
-function compartilharPDFAlternativo(blob,l){
+function baixarPDFEAbrirWhatsApp(blob,l){
 
  var url=URL.createObjectURL(blob);
 
@@ -1213,10 +1366,6 @@ function compartilharPDFAlternativo(blob,l){
 
  },5000);
 
- /*
-  * Abre o WhatsApp depois de salvar o PDF.
-  */
-
  setTimeout(function(){
 
   var texto=
@@ -1230,7 +1379,6 @@ function compartilharPDFAlternativo(blob,l){
   window.location.href=whatsappUrl;
 
  },700);
-
 }
 
 
