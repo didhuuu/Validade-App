@@ -1,0 +1,8 @@
+{
+  "appId": "com.didhuuu.validade",
+  "appName": "Validade-",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
