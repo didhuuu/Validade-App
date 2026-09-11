@@ -35,6 +35,27 @@ jobs:
       - name: Criar projeto Android
         run: npx cap add android
 
+      - name: Adicionar permissão da câmera
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          manifest = Path("android/app/src/main/AndroidManifest.xml")
+
+          text = manifest.read_text()
+
+          permission = '<uses-permission android:name="android.permission.CAMERA" />'
+
+          if permission not in text:
+              text = text.replace(
+                  '<application',
+                  permission + '\n    <application',
+                  1
+              )
+
+          manifest.write_text(text)
+          PY
+
       - name: Sincronizar aplicativo
         run: npx cap sync android
 
